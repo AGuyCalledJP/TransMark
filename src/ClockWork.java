@@ -121,6 +121,11 @@ public class ClockWork {
                                     }
                                 }
                             }
+                            else {
+                                D.incurredCost(0);
+                                D.logPrice(0);
+                                D.logRevenue(0);
+                            }
                         }
                         S.moveLocalTime();
                     }
@@ -204,7 +209,9 @@ public class ClockWork {
                                 double price = T.getRate();
                                 D.setRate(T.getRate());
                                 D.incurredCost((price * (mWh)));
+                                double rev = D.getProfit() - D.getTotalCost();
                                 D.logPrice(price * mWh);
+                                D.logRevenue(rev);
                                 tPrice += price * mWh;
 
                                 //Offload any completed work
@@ -214,6 +221,11 @@ public class ClockWork {
                                 D.moveAlong();
 
                                 D.tick();
+                            }
+                            else {
+                                D.logRevenue(0);
+                                D.incurredCost(0);
+                                D.logPrice(0);
                             }
                         }
                         S.moveLocalTime();
@@ -305,7 +317,9 @@ public class ClockWork {
                                     double price = T.getRate();
                                     D.setRate(T.getRate());
                                     D.incurredCost((price * (mWh)));
+                                    double rev = D.getProfit() - D.getTotalCost();
                                     D.logPrice(price * mWh);
+                                    D.logRevenue(rev);
                                     tPrice += price * mWh;
 
                                     //Offload any completed work
@@ -322,6 +336,11 @@ public class ClockWork {
                                 }
 
                                 D.tick();
+                            }
+                            else {
+                                D.incurredCost(0);
+                                D.logPrice(0);
+                                D.logRevenue(0);
                             }
                         }
                         S.moveLocalTime();
@@ -351,6 +370,7 @@ public class ClockWork {
                         str += "Center: " + d.getId();
                         str += d.getPriceLog() + "\n";
                         str += d.getEnergyLog() + "\n";
+                        str += d.getRevenueLog() + "\n";
                     }
                 }
             }

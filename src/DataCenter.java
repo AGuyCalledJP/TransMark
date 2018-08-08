@@ -48,6 +48,7 @@ public class DataCenter {
     private MarketHistory transactions = new MarketHistory();
     private ArrayList<Double> priceLog = new ArrayList<>();
     private ArrayList<Double> energyLog = new ArrayList<>();
+    private ArrayList<Double> revenueLog = new ArrayList<>();
 
     public DataCenter(int id, int numClust){
         speed = Progress.standardSpeed;
@@ -744,6 +745,10 @@ public class DataCenter {
         energyLog.add(expended);
     }
 
+    public void logRevenue(double gain) {
+        revenueLog.add(gain);
+    }
+
     //Getters
     public boolean isBuyer() {
         return buying;
@@ -888,6 +893,10 @@ public class DataCenter {
 
     public ArrayList<Double> getEnergyLog() {
         return energyLog;
+    }
+
+    public ArrayList<Double> getRevenueLog() {
+        return revenueLog;
     }
 
     @Override

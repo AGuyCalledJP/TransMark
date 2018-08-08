@@ -23,20 +23,20 @@ public class Progress {
     public static void main(String[]args){
         long startTime = System.currentTimeMillis();
        ClockWork c = new ClockWork();
-       c.VIP();
+       c.motion();
        Stats s = new Stats(c);
        System.out.println(s.results());
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println(elapsedTime);
         try {
-            write(c.dataDump(), "outPut data controlled market");
+            write(c.dataDump(), "outPutDataM");
         }
         catch (IOException writeError){
             System.out.println("Unable to write");
         }
         try {
-            write(c.centerDump(), "Centers involved controlled market");
+            write(c.centerDump(), "centersInvolvedM");
         }
         catch (IOException writeError){
             System.out.println("Unable to write");
