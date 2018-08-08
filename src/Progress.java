@@ -23,23 +23,79 @@ public class Progress {
     public static void main(String[]args){
         long startTime = System.currentTimeMillis();
        ClockWork c = new ClockWork();
-       c.motion();
+       int select = 0;
+       if (select == 0) {
+           c.motion();
+       }
+       else if (select == 1) {
+           c.lessMotion();
+       }
+       else if (select == 2) {
+           c.VIP();
+       }
+       else {
+           c.ultimatum();
+       }
        Stats s = new Stats(c);
        System.out.println(s.results());
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println(elapsedTime);
-        try {
-            write(c.dataDump(), "outPutDataM");
+        if (select == 0) {
+            try {
+                write(c.dataDump(), "outPutDataM");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
+            try {
+                write(c.centerDump(), "centersInvolvedM");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
         }
-        catch (IOException writeError){
-            System.out.println("Unable to write");
+        else if (select == 1) {
+            try {
+                write(c.dataDump(), "outPutDataNM");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
+            try {
+                write(c.centerDump(), "centersInvolvedNM");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
         }
-        try {
-            write(c.centerDump(), "centersInvolvedM");
+        else if (select == 2) {
+            try {
+                write(c.dataDump(), "outPutDataC");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
+            try {
+                write(c.centerDump(), "centersInvolvedC");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
         }
-        catch (IOException writeError){
-            System.out.println("Unable to write");
+        else {
+            try {
+                write(c.dataDump(), "outPutDataU");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
+            try {
+                write(c.centerDump(), "centersInvolvedU");
+            }
+            catch (IOException writeError){
+                System.out.println("Unable to write");
+            }
         }
     }
 
