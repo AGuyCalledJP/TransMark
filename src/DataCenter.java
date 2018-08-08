@@ -53,7 +53,7 @@ public class DataCenter {
     public DataCenter(int id, int numClust){
         speed = Progress.standardSpeed;
         this.id = id;
-        participation = 60; //set this so centers will be in stride for now
+        participation = rand.nextInt(10) + 60; //set this so centers will be in stride for now
         SETPART = participation;
         for(int x = 0; x < numClust; x++){
             clusters.add(new Cluster(Progress.idCluster));
