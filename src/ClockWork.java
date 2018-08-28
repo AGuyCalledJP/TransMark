@@ -94,6 +94,7 @@ public class ClockWork {
                                 D.incurredCost((price * (mWh)));
                                 D.logPrice(price * mWh);
                                 tPrice += price * mWh;
+                                D.logRevenue(D.getRevenue() - D.getTotalCost());
 
                                 //Offload any completed work
                                 D.cleanHouse();
@@ -507,7 +508,6 @@ public class ClockWork {
             for (IsoRegion j : i.getIsoRegions()) {
                 for (State s : j.getStates()) {
                     for (DataCenter d : s.getClientele()) {
-                        str += "Center: " + d.getId();
                         str += d.getPriceLog() + "\n";
                         str += d.getEnergyLog() + "\n";
                         str += d.getRevenueLog() + "\n";
@@ -516,6 +516,22 @@ public class ClockWork {
             }
         }
         return str;
+    }
+
+    public ArrayList<ArrayList<Double>> collection() {
+        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
+        for (Interconnection i : powerGrid) {
+            for (IsoRegion j : i.getIsoRegions()) {
+                for (State s : j.getStates()) {
+                    for (DataCenter d : s.getClientele()) {
+                        holster.add(d.getPriceLog());
+                        holster.add(d.getEnergyLog());
+                        holster.add(d.getRevenueLog());
+                    }
+                }
+            }
+        }
+        return holster;
     }
 
     public String centerDump() {

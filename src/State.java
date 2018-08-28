@@ -24,7 +24,7 @@ public class State {
         Random rand = new Random();
         numClients = 1;//rand.nextInt(10) + 1; //set bound for number of data centers in a juridction
         for(int j = 0; j < numClients; j++){
-            int numClust = rand.nextInt(5) + 1;
+            int numClust = 1; //rand.nextInt(5) + 1;
             DataCenter D = new DataCenter(Progress.idDataCenter, numClust);
             Progress.idDataCenter++;
             clientele.add(D);

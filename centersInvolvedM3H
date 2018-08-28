@@ -1,0 +1,400 @@
+Center: 1
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.047168556400000006
+Cost Ratio: 0.0
+Jobs rejected: 15440
+Miscalculations: 3159
+Total jobs taken on: 23246
+Jobs done: 1422
+budget: 549.0
+Total Cost incurred: 398.881656774824
+Total Revenue: 6378.513963812241
+Profit: 5979.6323070374165
+Failed transfers: 0.3297997644287397
+Center: 2
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.0336015855
+Cost Ratio: 0.0
+Jobs rejected: 3612
+Miscalculations: 1535
+Total jobs taken on: 10122
+Jobs done: 625
+budget: 180.0
+Total Cost incurred: 180.00185115789083
+Total Revenue: 2155.9883333333305
+Profit: 1975.9864821754397
+Failed transfers: 0.0
+Center: 3
+Num clusters: 5
+Arrival Rate: 0.0
+Per: 0.5
+Looking to sell right now 
+Max Cost Right Now: 1.2691775705
+Cost Ratio: 0.0
+Jobs rejected: 5439
+Miscalculations: 2360
+Total jobs taken on: 10353
+Jobs done: 1837
+budget: 462.0
+Total Cost incurred: 462.1035728972722
+Total Revenue: 4665.81166666667
+Profit: 4203.708093769398
+Failed transfers: 0.0
+Center: 4
+Num clusters: 5
+Arrival Rate: 0.0
+Per: 0.5
+Looking to sell right now 
+Max Cost Right Now: 0.13260229675000001
+Cost Ratio: 0.0
+Jobs rejected: 5664
+Miscalculations: 1959
+Total jobs taken on: 11079
+Jobs done: 2088
+budget: 464.0
+Total Cost incurred: 464.0132004201138
+Total Revenue: 4692.488786777211
+Profit: 4228.475586357097
+Failed transfers: 0.05242463958060288
+Center: 5
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.047168556400000006
+Cost Ratio: 0.0
+Jobs rejected: 16336
+Miscalculations: 3573
+Total jobs taken on: 23217
+Jobs done: 1504
+budget: 544.0
+Total Cost incurred: 399.58287273601434
+Total Revenue: 5646.5596400232935
+Profit: 5246.9767672872795
+Failed transfers: 0.1946564885496183
+Center: 6
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.0874874
+Cost Ratio: 0.0
+Jobs rejected: 2393
+Miscalculations: 1469
+Total jobs taken on: 8489
+Jobs done: 516
+budget: 177.0
+Total Cost incurred: 177.01113880397568
+Total Revenue: 1867.6999999999975
+Profit: 1690.688861196022
+Failed transfers: 0.0
+Center: 7
+Num clusters: 5
+Arrival Rate: 0.0
+Per: 0.5
+Looking to sell right now 
+Max Cost Right Now: 0.39201084999999997
+Cost Ratio: 0.0
+Jobs rejected: 12533
+Miscalculations: 4255
+Total jobs taken on: 21759
+Jobs done: 3928
+budget: 1140.0
+Total Cost incurred: 1140.0193067776117
+Total Revenue: 11052.014356878146
+Profit: 9911.995050100533
+Failed transfers: 0.0
+Center: 8
+Num clusters: 1
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.039231675
+Cost Ratio: 0.0
+Jobs rejected: 17504
+Miscalculations: 2405
+Total jobs taken on: 24333
+Jobs done: 716
+budget: 301.0
+Total Cost incurred: 231.86921932503418
+Total Revenue: 2893.915320806542
+Profit: 2662.046101481508
+Failed transfers: 0.4204655674102813
+Center: 9
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.07846335
+Cost Ratio: 0.0
+Jobs rejected: 16641
+Miscalculations: 2591
+Total jobs taken on: 22276
+Jobs done: 1579
+budget: 517.0
+Total Cost incurred: 466.44640247729774
+Total Revenue: 5351.703916435837
+Profit: 4885.257513958539
+Failed transfers: 0.29850746268656714
+Center: 10
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.05656091
+Cost Ratio: 0.0
+Jobs rejected: 1943
+Miscalculations: 1126
+Total jobs taken on: 8787
+Jobs done: 609
+budget: 184.0
+Total Cost incurred: 184.00166544308496
+Total Revenue: 1817.443333333332
+Profit: 1633.4416678902471
+Failed transfers: 0.0
+Center: 11
+Num clusters: 4
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.12811092000000002
+Cost Ratio: 0.0
+Jobs rejected: 5568
+Miscalculations: 2556
+Total jobs taken on: 11332
+Jobs done: 1281
+budget: 383.0
+Total Cost incurred: 383.01450104648546
+Total Revenue: 3297.2666666666514
+Profit: 2914.252165620166
+Failed transfers: 0.22996357012750454
+Center: 12
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.11769502499999998
+Cost Ratio: 0.0
+Jobs rejected: 14935
+Miscalculations: 3818
+Total jobs taken on: 21845
+Jobs done: 2149
+budget: 766.0
+Total Cost incurred: 698.9807910514788
+Total Revenue: 7530.8950000000505
+Profit: 6831.914208948571
+Failed transfers: 0.0
+Center: 13
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.07846335
+Cost Ratio: 0.0
+Jobs rejected: 4566
+Miscalculations: 2819
+Total jobs taken on: 22101
+Jobs done: 1217
+budget: 508.0
+Total Cost incurred: 466.9651994343046
+Total Revenue: 5555.201666666674
+Profit: 5088.236467232369
+Failed transfers: 0.0
+Center: 14
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.088971015
+Cost Ratio: 0.0
+Jobs rejected: 11578
+Miscalculations: 4839
+Total jobs taken on: 29181
+Jobs done: 1417
+budget: 266.0
+Total Cost incurred: 266.00197238401574
+Total Revenue: 2873.469994100301
+Profit: 2607.468021716285
+Failed transfers: 0.2010612198322588
+Center: 15
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.10824271499999999
+Cost Ratio: 0.0
+Jobs rejected: 5361
+Miscalculations: 3643
+Total jobs taken on: 21851
+Jobs done: 6654
+budget: 729.0
+Total Cost incurred: 485.2136484431219
+Total Revenue: 15885.949210550087
+Profit: 15400.735562106966
+Failed transfers: 0.20654911838790932
+Center: 16
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.07216181
+Cost Ratio: 0.0
+Jobs rejected: 8849
+Miscalculations: 4922
+Total jobs taken on: 22131
+Jobs done: 2896
+budget: 544.0
+Total Cost incurred: 315.73944565852304
+Total Revenue: 16275.734801198865
+Profit: 15959.995355540343
+Failed transfers: 0.3620037807183365
+Center: 17
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.07488431999999999
+Cost Ratio: 0.0
+Jobs rejected: 7841
+Miscalculations: 2187
+Total jobs taken on: 11636
+Jobs done: 1017
+budget: 266.0
+Total Cost incurred: 266.00775441072034
+Total Revenue: 3849.9083333333183
+Profit: 3583.900578922598
+Failed transfers: 0.0
+Center: 18
+Num clusters: 1
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.030987670000000002
+Cost Ratio: 0.0
+Jobs rejected: 930
+Miscalculations: 720
+Total jobs taken on: 11606
+Jobs done: 410
+budget: 87.0
+Total Cost incurred: 87.00156179294967
+Total Revenue: 1312.5383333333336
+Profit: 1225.536771540384
+Failed transfers: 0.0
+Center: 19
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.10824271499999999
+Cost Ratio: 0.0
+Jobs rejected: 15794
+Miscalculations: 3777
+Total jobs taken on: 22499
+Jobs done: 2154
+budget: 763.0
+Total Cost incurred: 511.16074674755373
+Total Revenue: 7311.616666666729
+Profit: 6800.455919919175
+Failed transfers: 0.0
+Center: 20
+Num clusters: 4
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.14432362
+Cost Ratio: 0.0
+Jobs rejected: 9418
+Miscalculations: 6735
+Total jobs taken on: 23635
+Jobs done: 4417
+budget: 914.0
+Total Cost incurred: 661.2167149427712
+Total Revenue: 19892.411329227394
+Profit: 19231.194614284625
+Failed transfers: 0.4805510534846029
+Center: 21
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to sell right now 
+Max Cost Right Now: 0.10278239999999998
+Cost Ratio: 0.0
+Jobs rejected: 7397
+Miscalculations: 1998
+Total jobs taken on: 11337
+Jobs done: 1066
+budget: 265.0
+Total Cost incurred: 265.01154718668164
+Total Revenue: 3626.5433333333262
+Profit: 3361.5317861466447
+Failed transfers: 0.0
+Center: 22
+Num clusters: 3
+Arrival Rate: 0.0
+Per: 0.3
+Looking to buy right now 
+Max Cost Right Now: 0.10824271499999999
+Cost Ratio: 0.0
+Jobs rejected: 6010
+Miscalculations: 4986
+Total jobs taken on: 21830
+Jobs done: 5750
+budget: 748.0
+Total Cost incurred: 480.6278884758768
+Total Revenue: 18423.952471851575
+Profit: 17943.3245833757
+Failed transfers: 0.5573770491803278
+Center: 23
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to buy right now 
+Max Cost Right Now: 0.07216181
+Cost Ratio: 0.0
+Jobs rejected: 2944
+Miscalculations: 1702
+Total jobs taken on: 21214
+Jobs done: 6769
+budget: 500.0
+Total Cost incurred: 314.4361476475806
+Total Revenue: 11200.80184370951
+Profit: 10886.36569606193
+Failed transfers: 0.3389830508474576
+Center: 24
+Num clusters: 2
+Arrival Rate: 0.0
+Per: 0.1
+Looking to sell right now 
+Max Cost Right Now: 0.06723682
+Cost Ratio: 0.0
+Jobs rejected: 6134
+Miscalculations: 4465
+Total jobs taken on: 20418
+Jobs done: 4480
+budget: 516.0
+Total Cost incurred: 171.9152769941261
+Total Revenue: 16821.29714510776
+Profit: 16649.381868113636
+Failed transfers: 0.0
+Center: 25
+Num clusters: 5
+Arrival Rate: 0.0
+Per: 0.5
+Looking to sell right now 
+Max Cost Right Now: 0.2263039023
+Cost Ratio: 0.0
+Jobs rejected: 5775
+Miscalculations: 2514
+Total jobs taken on: 17568
+Jobs done: 1882
+budget: 464.0
+Total Cost incurred: 464.00670861200274
+Total Revenue: 3826.3165426811693
+Profit: 3362.3098340691668
+Failed transfers: 0.08891468369123622

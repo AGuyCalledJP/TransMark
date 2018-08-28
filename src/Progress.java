@@ -43,13 +43,13 @@ public class Progress {
         System.out.println(elapsedTime);
         if (select == 0) {
             try {
-                write(c.dataDump(), "outPutDataM");
+                write(c.dataDump(), "outPutDataM3H");
             }
             catch (IOException writeError){
                 System.out.println("Unable to write");
             }
             try {
-                write(c.centerDump(), "centersInvolvedM");
+                write(c.centerDump(), "centersInvolvedM3H");
             }
             catch (IOException writeError){
                 System.out.println("Unable to write");
