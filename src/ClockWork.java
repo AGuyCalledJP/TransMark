@@ -236,6 +236,7 @@ public class ClockWork {
             t++;
         }
     }
+
     //Run the simulation
     public void VIP(){
         double tPrice = 0;
@@ -498,6 +499,103 @@ public class ClockWork {
         }
     }
 
+    //Run the simulation
+    public void minimalist(){
+        double tPrice = 0;
+        Calendar C = new Calendar();
+        Market market = new Market();
+        int lTrans = 0;
+        int tTransfer = 0;
+        int tJobs = 0;
+        for (int i = 0; i < 44640; i++) { //44640 one month
+            int hour = C.getHour(i);
+            if ((i % 60) == 0) {
+                System.out.println("Hour " + hour);
+            }
+            if ((i % 1440) == 0) {
+                //W.setExtremes();
+                //temp = W.temperature();
+                //System.out.println("Day extremes: " + W.getDayHigh() + " high, " + W.getDayLow());
+                int month = C.getMonth(i);
+                int day = C.getDay(i);
+                System.out.println("Month " + month + " Day " + day);
+                System.out.println("total transfers today: " + (tTransfer - lTrans));
+                System.out.println("total transfers: " + tTransfer);
+                System.out.println("total jobs in system: " + tJobs);
+                lTrans = tTransfer;
+                tTransfer = 0;
+                tJobs = 0;
+            }
+            Interconnection I = powerGrid.get(0);
+            IsoRegion P = I.getIsoRegions().get(0);
+            ISO T = P.getAuthority();
+            State S = P.getStates().get(0);
+            DataCenter D = S.getClientele().get(0);
+//                            System.out.println(lambda);
+            double[] temp = new double[]{0};
+            //Set short job percentage threshold
+            if ((i % 1439) == 0) {
+//                                System.out.println(D);
+//                                System.out.println("Usage: " + D.completeUsage());
+//                                System.out.println("Rev last day: " + D.getRevAtm());
+//                                System.out.println("Total revenue: " + D.getRevenue());
+//                                System.out.println("Current Price: " + T.getRate());
+//                                System.out.print("\n");
+                tPrice = 0;
+                D.setRevAtm();
+                tTransfer += D.jobsTransfere();
+                tJobs += D.getTotalJobs();
+            }
+            if (D.getBudget() > D.incurredCost()) {
+                JobMaster jobMast = D.getMaster();
+                jobMast.setLambda();
+
+//                                jobMast.simArrival(S.getLocalTime());
+                Queue<Job> hold = jobMast.genJobs();
+                D.addJobs(hold);
+
+                //Move jobs into clusters
+                D.reganomics();
+
+                //execute tasks for this minute
+                D.setProcesses();
+
+                D.wash();
+
+                //Calculate cost incurred this minute
+                double mWh = D.powerUsage();
+                double currentT = temp[0];
+                S.setTotalEnergy(mWh);
+                D.logEnergyUse(mWh);
+//                                D.logEnergyUse(mWh + (mWh * .33)); //include cost of cooling
+                //System.out.println(currentT);
+                mWh += D.coolingCost(mWh);
+                double price = T.getRate();
+                D.setRate(T.getRate());
+                D.incurredCost((price * (mWh)));
+                double rev = D.getProfit() - D.getTotalCost();
+                D.logPrice(price * mWh);
+                D.logRevenue(rev);
+                tPrice += price * mWh;
+
+                //Offload any completed work
+                D.cleanHouse();
+
+                //Remove any jobs that are over their rented time limit
+                D.moveAlong();
+
+                D.tick();
+            }
+            else {
+                D.logRevenue(0);
+                D.incurredCost(0);
+                D.logPrice(0);
+            }
+            S.moveLocalTime();
+            t++;
+        }
+    }
+
     public ArrayList<Interconnection> getPowerGrid() {
         return powerGrid;
     }
@@ -531,6 +629,18 @@ public class ClockWork {
                 }
             }
         }
+        return holster;
+    }
+
+    public ArrayList<ArrayList<Double>> collectionSingle() {
+        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
+        Interconnection i = powerGrid.get(0);
+        IsoRegion j = i.getIsoRegions().get(0);
+        State s = j.getStates().get(0);
+        DataCenter d = s.getClientele().get(0);
+        holster.add(d.getPriceLog());
+        holster.add(d.getEnergyLog());
+        holster.add(d.getRevenueLog());
         return holster;
     }
 

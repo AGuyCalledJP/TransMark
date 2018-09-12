@@ -12,4 +12,8 @@ public class ISO {
     public double getRate() {
         return rates[(ClockWork.t % 60)];
     }
+
+    public ISOVal getIso() {
+        return iso;
+    }
 }

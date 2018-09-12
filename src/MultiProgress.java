@@ -2,15 +2,16 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MultiProgress {
 
     public static void main(String[]args){
         ArrayList<ArrayList<ArrayList<Double>>> average = new ArrayList<>();
-        int avg = 2;
+        int avg = 5;
         long startTime = System.currentTimeMillis();
         ClockWork c = new ClockWork();
-        int select = 0;
+        int select = 2;
         for (int i = 0; i < avg; i++) {
             if (select == 0) {
                 c.motion();
@@ -18,8 +19,11 @@ public class MultiProgress {
                 c.lessMotion();
             } else if (select == 2) {
                 c.VIP();
-            } else {
+            } else if (select == 3) {
                 c.ultimatum();
+            }
+            else {
+                c.minimalist();
             }
             average.add(c.collection());
             Stats s = new Stats(c);
@@ -72,23 +76,41 @@ public class MultiProgress {
     }
 
     public static String condense(ArrayList<ArrayList<ArrayList<Double>>> average) {
-        Double[] E = new Double[average.get(0).get(0).size()];
-        Double[] C = new Double[average.get(0).get(0).size()];
-        Double[] R = new Double[average.get(0).get(0).size()];
-        System.out.println(E.length);
-        System.out.println(C.length);
-        System.out.println(R.length);
+        int winner = 0;
+        //System.out.println(average);
         for (int i = 0; i < average.size(); i++) {
             for (int j = 0; j < average.get(i).size(); j++) {
-                for (int k = 0; j < average.get(i).get(j).size(); k++) {
+                if (average.get(i).get(j).size() > winner) {
+                    winner = average.get(i).get(j).size();
+                }
+            }
+        }
+        System.out.println("winner: " + winner);
+        Double[] E = new Double[winner];
+        Double[] C = new Double[winner];
+        Double[] R = new Double[winner];
+        for (int x = 0; x < E.length; x++) {
+            E[x] = 0.0;
+            C[x] = 0.0;
+            R[x] = 0.0;
+        }
+        System.out.println(E[0]);
+        System.out.println(C[0]);
+        System.out.println(R[0]);
+        for (int i = 0; i < average.size() - 1; i++) {
+            for (int j = 0; j < average.get(i).size() - 1; j++) {
+                for (int k = 0; k < average.get(i).get(j).size() - 1; k++) {
                     if (j % 3 == 0) {
-                       E[k] = E[k] + average.get(i).get(j).get(k);
+                        double total = E[k] + average.get(i).get(j).get(k);
+                        E[k] = total;
                     }
                     else if (j % 3 == 1) {
-                        C[k] = C[k] + average.get(i).get(j).get(k);
+                        double total = C[k] + average.get(i).get(j).get(k);
+                        C[k] = total;
                     }
                     else {
-                        R[k] = R[k] + average.get(i).get(j).get(k);
+                        double total = R[k] + average.get(i).get(j).get(k);
+                        R[k] = total;
                     }
                 }
             }
@@ -98,13 +120,13 @@ public class MultiProgress {
             C[l] = C[l] / average.size();
             R[l] = R[l] / average.size();
         }
-        System.out.println(E.length);
-        System.out.println(C.length);
-        System.out.println(R.length);
+//        System.out.println(E.length);
+//        System.out.println(C.length);
+//        System.out.println(R.length);
         String str = "";
-        str += E.toString() + "\n";
-        str += C.toString() + "\n";
-        str += R.toString() + "\n";
+        str += Arrays.toString(E) + "\n";
+        str += Arrays.toString(C) + "\n";
+        str += Arrays.toString(R) + "\n";
         return str;
     }
 }

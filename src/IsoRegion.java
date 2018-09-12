@@ -31,6 +31,18 @@ public class IsoRegion {
         }
     }
 
+    public ArrayList<ArrayList<Double>> compileStats() {
+        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
+        for (State S : states) {
+            for (DataCenter d : S.getClientele()) {
+                holster.add(d.getPriceLog());
+                holster.add(d.getEnergyLog());
+                holster.add(d.getRevenueLog());
+            }
+        }
+        return holster;
+    }
+
     public String toString(){
         return "working on it";
     }
