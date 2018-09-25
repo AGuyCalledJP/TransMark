@@ -19,14 +19,14 @@ public class ClockWork {
     }
 
     //Run the simulation
-    public void motion(){
+    public void motion(int duration){
         double tPrice = 0;
         Calendar C = new Calendar();
         Market market = new Market();
         int lTrans = 0;
         int tTransfer = 0;
         int tJobs = 0;
-        for (int i = 0; i < 44640; i++) { //44640 one month
+        for (int i = 0; i < duration; i++) { //44640 one month //525600 in one year
             int hour = C.getHour(i);
             if ((i % 60) == 0) {
                 System.out.println("Hour " + hour);
@@ -36,6 +36,7 @@ public class ClockWork {
                 //temp = W.temperature();
                 //System.out.println("Day extremes: " + W.getDayHigh() + " high, " + W.getDayLow());
                 int month = C.getMonth(i);
+
                 int day = C.getDay(i);
                 System.out.println("Month " + month + " Day " + day);
                 System.out.println("total transfers today: " + (tTransfer - lTrans));
@@ -48,6 +49,7 @@ public class ClockWork {
             for (Interconnection I : powerGrid) {
                 for (IsoRegion P : I.getIsoRegions()) {
                     ISO T = P.getAuthority();
+                    T.giveMonth(month);
                     for (State S : P.getStates()) {
                         for (DataCenter D : S.getClientele()) {
 //                            System.out.println(lambda);
@@ -137,14 +139,14 @@ public class ClockWork {
     }
 
     //Run the simulation
-    public void lessMotion(){
+    public void lessMotion(int duration){
         double tPrice = 0;
         Calendar C = new Calendar();
         Market market = new Market();
         int lTrans = 0;
         int tTransfer = 0;
         int tJobs = 0;
-        for (int i = 0; i < 44640; i++) { //44640 one month
+        for (int i = 0; i < duration; i++) { //44640 one month
             int hour = C.getHour(i);
             if ((i % 60) == 0) {
                 System.out.println("Hour " + hour);
@@ -238,7 +240,7 @@ public class ClockWork {
     }
 
     //Run the simulation
-    public void VIP(){
+    public void VIP(int duration){
         double tPrice = 0;
         Calendar C = new Calendar();
         ArrayList<Integer> clustSizeList = new ArrayList<>();
@@ -258,7 +260,7 @@ public class ClockWork {
         int lTrans = 0;
         int tTransfer = 0;
         int tJobs = 0;
-        for (int i = 0; i < 44640; i++) { //44640 one month
+        for (int i = 0; i < duration; i++) { //44640 one month
             //do work
             int hour = C.getHour(i);
             if ((i % 60) == 0) {
@@ -359,7 +361,7 @@ public class ClockWork {
         }
     }
 
-    public void ultimatum(){
+    public void ultimatum(int duration){
         double tPrice = 0;
         Market market = new Market();
         Calendar C = new Calendar();
@@ -380,7 +382,7 @@ public class ClockWork {
         int lTrans = 0;
         int tTransfer = 0;
         int tJobs = 0;
-        for (int i = 0; i < 44640; i++) { //44640 one month
+        for (int i = 0; i < duration; i++) { //44640 one month
             //do work
             int hour = C.getHour(i);
             if ((i % 60) == 0) {

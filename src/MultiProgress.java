@@ -12,15 +12,17 @@ public class MultiProgress {
         long startTime = System.currentTimeMillis();
         ClockWork c = new ClockWork();
         int select = 2;
+        int month = 44640;
+        int year = 525600;
         for (int i = 0; i < avg; i++) {
             if (select == 0) {
-                c.motion();
+                c.motion(month);
             } else if (select == 1) {
-                c.lessMotion();
+                c.lessMotion(month);
             } else if (select == 2) {
-                c.VIP();
+                c.VIP(month);
             } else if (select == 3) {
-                c.ultimatum();
+                c.ultimatum(month);
             }
             else {
                 c.minimalist();

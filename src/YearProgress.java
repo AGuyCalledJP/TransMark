@@ -4,43 +4,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Progress {
-    public static int idCell = 1;
-    public static int idCluster = 1;
-    public static int idDataCenter = 1;
-    public static int idJob = 1;
-    public static int idMachine = 1;
-    public static int idTask = 1;
-    public static int idTSO = 1;
-    public static int standardSpeed = 1200;
-    public static int standardIdle = 161;
-    public static int standardMax = 230;
-    public static int standardNumCores = 10;
-    public static int standardNumCells = 5;
-    public static double maxInternetSpeed = 2; //2 gb per second internet
-    public static double halfInternetSpeed = 1; //2 gb per second internet
-    public static double quarterInternetSpeed = .5; //2 gb per second internet
-    public final static double EPSILON = .000001;
-
+public class YearProgress {
     public static void main(String[]args){
         long startTime = System.currentTimeMillis();
-       ClockWork c = new ClockWork();
-       int select = 1;
-       int month = 44640;
-       if (select == 0) {
-           c.motion(month);
-       }
-       else if (select == 1) {
-           c.lessMotion(month);
-       }
-       else if (select == 2) {
-           c.VIP(month);
-       }
-       else {
-           c.ultimatum(month);
-       }
-       Stats s = new Stats(c);
-       System.out.println(s.results());
+        ClockWork c = new ClockWork();
+        int select = 1;
+        int year = 525600;
+        if (select == 0) {
+            c.motion(year);
+        }
+        else if (select == 1) {
+            c.lessMotion(year);
+        }
+        else if (select == 2) {
+            c.VIP(year);
+        }
+        else {
+            c.ultimatum(year);
+        }
+        Stats s = new Stats(c);
+        System.out.println(s.results());
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println(elapsedTime);
@@ -169,9 +152,9 @@ public class Progress {
     }
 
     public static void write(String str, String name)
-      throws IOException {
+            throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(name));
         writer.write(str);
         writer.close();
-        }
+    }
 }

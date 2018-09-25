@@ -2,11 +2,13 @@
 public class ISO {
     private ISOVal iso;
     private double[] rates;
+    private int month;
 
     public ISO(ISOVal iso) {
         this.iso = iso;
         rateData r = new rateData(iso);
-        rates = r.getData();
+        month = 0;
+        rates = r.getData(month);
     }
 
     public double getRate() {
@@ -15,5 +17,9 @@ public class ISO {
 
     public ISOVal getIso() {
         return iso;
+    }
+
+    public void giveMonth(int month) {
+        this.month = month;
     }
 }
