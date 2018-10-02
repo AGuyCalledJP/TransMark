@@ -8,7 +8,7 @@ public class ISO {
         this.iso = iso;
         rateData r = new rateData(iso);
         month = 0;
-        rates = r.getData(month);
+        rates = r.genData(month);
     }
 
     public double getRate() {

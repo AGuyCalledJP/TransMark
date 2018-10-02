@@ -37,7 +37,7 @@ public class Progress {
            c.VIP(month);
        }
        else {
-           c.ultimatum(month);
+           c.minimalist(month);
        }
        Stats s = new Stats(c);
        System.out.println(s.results());

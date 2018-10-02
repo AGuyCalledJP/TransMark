@@ -20,7 +20,7 @@ public class YearProgress {
             c.VIP(year);
         }
         else {
-            c.ultimatum(year);
+            c.minimalist(year);
         }
         Stats s = new Stats(c);
         System.out.println(s.results());

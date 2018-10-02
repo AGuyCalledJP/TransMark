@@ -1,5 +1,5 @@
 public class Calendar {
-    private int[] daysInMonth = new int[]{31,28,31,30,31,30,31,31,30,31,30,31};
+    private int[] daysInMonth = new int[]{31,28,31,30,31,30,31,31,30,31,30,31,0};
 
     public Calendar() {}
 
@@ -14,6 +14,29 @@ public class Calendar {
             months++;
         }
         return (months % 12);
+    }
+
+    public int getDayInMonth(int currentT) {
+        int hold = 0;
+        int month = 0;
+        int day = 0;
+        int totalDays = 0;
+        while(totalDays < (currentT / 1440)){
+            hold = daysInMonth[month];
+            if (day % hold == 0) {
+                day = 1;
+                month++;
+            }
+            else {
+                day++;
+            }
+            totalDays++;
+        }
+        return day;
+    }
+
+    private int days(int month){
+        return daysInMonth[month];
     }
 
     public int getWeek(int currentT){

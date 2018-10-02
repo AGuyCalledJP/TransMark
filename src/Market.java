@@ -32,9 +32,6 @@ public class Market {
             for (DataCenter S : sellers) {
                 ArrayList<Double> avail = S.getOnLoad();
                 if (avail.size() > 0) {
-//                    System.out.println("Avail: " + avail);
-//                    System.out.println("Offload: " + offload);
-//                    System.out.println(D.projectedRevenue());
                     double weight = 0;
                     if (avail.get(cpu) > offload.get(cpu)) {
                         weight = avail.get(cpu) - offload.get(cpu);
@@ -52,15 +49,6 @@ public class Market {
                 }
                 index++;
             }
-//            System.out.println("Where");
-//            for (int d : where) {
-//                System.out.println(d);
-//            }
-//            System.out.println("diff");
-//            for (double e : diff) {
-//                System.out.println(e);
-//            }
-//            System.out.println(commit);
             if (commit) {
                 exchange(D, where, diff);
             }
@@ -71,7 +59,6 @@ public class Market {
         int i = 0;
         ArrayList<Integer> send = new ArrayList<>();
         ArrayList<Double> offload = D.getOffLoad();
-//        System.out.println("offload: " + offload);
         while (offload.get(0) > 0 && offload.get(1) > 0 && offload.get(2) > 0 && i < where.length) {
             boolean hit = false;
             double max = 0;
@@ -90,16 +77,9 @@ public class Market {
                 offload.set(1, (offload.get(1) - sellers.get(where[indMax]).getOnLoad().get(1)));
                 offload.set(2, (offload.get(2) - sellers.get(where[indMax]).getOnLoad().get(2)));
                 diff[indMax] = 0;
-//                System.out.println("after commit: " + offload);
             }
             i++;
         }
-//        System.out.println("options");
-//        for (int d : where) {
-//            System.out.println(d);
-//        }
-//        System.out.println(send);
-//        System.out.println(offload);
         completeTheTrade(D, send);
     }
 
@@ -107,20 +87,12 @@ public class Market {
         ArrayList<Job> jobs = D.getInProgress();
         int[] available = D.getMu();
         int jindex = 0;
-//        for (int i : available) {
-//            System.out.println(i);
-//        }
         for (int where : send) {
             boolean moreRoom = true;
             DataCenter S = sellers.get(where);
-//            System.out.println(check(available));
-//            System.out.println(jindex < available.length);
-//            System.out.println(moreRoom);
             ArrayList<Job> sendEr = new ArrayList<>();
             while (check(available) && jindex < (available.length - 1) && jindex < (jobs.size()) && moreRoom) {
-//                System.out.println("aqui?");
                 if (available[jindex] == 1) {
-//                    System.out.println("What about here");
                     if (S.canTake(jobs.get(jindex))) {
                         //Split revenue
                         int start = jobs.get(jindex).getEstCompleteionTime();
@@ -132,7 +104,6 @@ public class Market {
                         D.addRev(stay);
                         jobs.get(jindex).setRevenue(sen);
                         sendEr.add(jobs.get(jindex));
-//                        S.transfer(jobs.get(jindex));
                         jobs.get(jindex).setTransfered();
                         D.quaretine(jobs.get(jindex).getId());
 

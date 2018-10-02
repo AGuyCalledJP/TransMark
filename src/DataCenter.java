@@ -49,6 +49,8 @@ public class DataCenter {
     private ArrayList<Double> priceLog = new ArrayList<>();
     private ArrayList<Double> energyLog = new ArrayList<>();
     private ArrayList<Double> revenueLog = new ArrayList<>();
+    private ArrayList<Double> failureLog = new ArrayList<>();
+    private ArrayList<Double> jobThroughput = new ArrayList<>();
 
     public DataCenter(int id, int numClust){
         speed = Progress.standardSpeed;
@@ -118,6 +120,10 @@ public class DataCenter {
                 budget = rand.nextInt(150) + 1000;
             }
         }
+    }
+
+    public void newMonth() {
+        setBudget();
     }
 
     /*
@@ -210,6 +216,7 @@ public class DataCenter {
                 }
             }
         }
+        jobThroughput.add((double)total);
         if(total > 0) {
             jobsProcessed += total;
         }
@@ -236,7 +243,6 @@ public class DataCenter {
             per = per - 0.1;
         }
         while(!rejected && !jobs.isEmpty()) {
-//            System.out.println("Christ");
             if (jobs.isEmpty()) {
                 System.out.println("No jobs waiting to execute");
                 rejected = true;
@@ -291,6 +297,7 @@ public class DataCenter {
                 }
             }
         }
+        failureLog.add((double)(hold2.size()));
         for (Job j2 : hold2) {
             if (j2.getTransfered()) {
                 transferedFail++;
@@ -397,12 +404,6 @@ public class DataCenter {
     //maximum percentage of weight that a given type of job could take in this center
     public void setJobWeights() {
         maxL = ((Job.MAXCOREL +  Job.MAXRAML + Job.MAXDISKL)/(totalCPU + totalRAM + totalDisk));
-        //maxM = ((Job.MAXCORES +  Job.MAXRAMS + Job.MAXDISKSL)/(totalCPU + totalRAM + totalDisk));
-        //maxS = ((Job.MAXCORES +  Job.MAXRAMS + Job.MAXDISKSL)/(totalCPU + totalRAM + totalDisk));
-//        System.out.println("Center: " + id + " cpu " + totalCPU + " ram " + totalRAM + " disk " + totalDisk);
-//        System.out.println("MaxL: " + maxL);
-//        System.out.println("MaxM: " + maxM);
-//        System.out.println("MaxS: " + maxS);
     }
 
     //determine the total weight this job would require during execution in this center
@@ -432,8 +433,6 @@ public class DataCenter {
     //Calculate the total cost of running for a given time interval
     public double projectedCost(int interval) {
         double stress = completeUsage();
-//        System.out.println(completeUsage());
-//        System.out.println(centerStress());
         int project = interval;
         double totalPrice = 0;
         int index = 0;
@@ -456,7 +455,6 @@ public class DataCenter {
             totalPrice += inProgress.get(index).getRelCost();
             index++;
         }
-//        System.out.println(totalPrice / 2);
         return ((totalPrice / accountForFail) * interval);
     }
 
@@ -493,13 +491,6 @@ public class DataCenter {
             double conv = budget / 43200; //monthly budget split by minute
             double budge = conv * n;
             double room = 0.1;
-//            System.out.println("Time: " + ClockWork.t);
-//            System.out.println(numCluster());
-//            System.out.println(budget);
-//            System.out.println(participation);
-//            System.out.println("avail to spend: " + budge);
-//            System.out.println("Spending right now: " + cost);
-//            System.out.println(centerStress());
             if (Math.abs(cost) > Progress.EPSILON) {
                 if (cost > (budge + (budge * room))) {
 //                    System.out.println("buy");
@@ -524,23 +515,14 @@ public class DataCenter {
         MergeSortSlack ob = new MergeSortSlack(candidates);
         ob.sortGivenArray();
         ArrayList<Job> slack = ob.getSortedArray();
-//        System.out.println("Slack: " + slack);
         MergeSortMig obj = new MergeSortMig(candidates);
         obj.sortGivenArray();
         ArrayList<Job> mig = obj.getSortedArray();
-//        System.out.println("Mig: " + mig);
         int iter = 0;
         double searchPer = 0;
-//        System.out.println("Current: " + (cost - total));
-//        System.out.println("Target: " + ceiling);
         while (aggregate && iter < 12) {
-//            System.out.println(offLoad.size());
             for (int i = slack.size() - 1; i > 0; i = i - 1) {
                 Job j = slack.get(i);
-//                System.out.println("Testing " + j);
-//                System.out.println(offload);
-//                System.out.println(offload.size());
-//                System.out.println(mig.size());
                 if (!offload.contains(j)) {
                     if ((cost - total) > ceiling) {
                         if (iter == 0) {
@@ -602,10 +584,6 @@ public class DataCenter {
         tuple.add(ram);
         tuple.add(ld);
         tuple.add(costToMe);
-//        System.out.println("Current: " + (cost - total));
-//        System.out.println("Target: " + ceiling);
-//        System.out.println("going: " + offload);
-//        System.out.println("Out: " + tuple);
         offLoad = tuple;
     }
 
@@ -643,9 +621,7 @@ public class DataCenter {
         hold.add(ram);
         hold.add(ld);
         hold.add(projectedCost);
-//        hold.add(projectedCost  + (projectedCost * charge));
         onLoad = hold;
-//        System.out.println("in: " + onLoad);
         buying = true;
     }
 
@@ -678,10 +654,8 @@ public class DataCenter {
         hold.add(ram);
         hold.add(ld);
         hold.add(projectedCost);
-//        hold.add(projectedCost  + (projectedCost * charge));
         onLoad = hold;
         costRatio = (projectedCost /  (cpu + ram + ld));
-//        System.out.println("in: " + onLoad);
         available = true;
     }
 
@@ -899,7 +873,47 @@ public class DataCenter {
         return revenueLog;
     }
 
-    @Override
+    public ArrayList<Double> getJobThroughput() {
+        return jobThroughput;
+    }
+
+    public ArrayList<Double> getFailureLog() {
+        return failureLog;
+    }
+
+    public double throughput(){
+        double total = 0;
+        for (double d : jobThroughput) {
+            total += d;
+        }
+        return total / jobThroughput.size();
+    }
+
+    public double failureRate() {
+        double totalF = 0;
+        double totalJ = 0;
+        for (int i = 0; i < failureLog.size(); i++) {
+            totalF += failureLog.get(i);
+            totalJ += failureLog.get(i) + jobThroughput.get(i);
+        }
+        totalF = totalF / failureLog.size();
+        totalJ = totalJ / jobThroughput.size();
+        return (totalF / (totalF + totalJ));
+    }
+
+    public void noThrough() {
+        jobThroughput.add(0.0);
+    }
+
+    public void noFails() {
+        failureLog.add(0.0);
+    }
+
+    public void tock() {
+        jobThroughput.add(throughput());
+        failureLog.add(failureRate());
+    }
+
     public String toString() {
         int key = 1;
         String str = "Center: " + id + "\n";
@@ -936,40 +950,10 @@ public class DataCenter {
         str += "Profit: " + (revenue - totalCost) + "\n";
 //        str += "log of energy usage: " + energyLog + "\n";
 //        str += "log of cost: " + priceLog + "\n";
-        str += "Failed transfers: " + transactions.failPer();
+        str += "Failed transfers: " + transactions.failPer() + "\n";
+        str += "Avg Failure Rate: " + failureRate() + "\n";
+        str += "Avg Job Throughput: " + throughput();
         return str;
     }
 }
-
-/*
-GRAVEYARD
- */
-//    //Identify the jobs that should be left on the server and the jobs that should be offloaded
-//    public void offLoad(double conv, int interval, double cost) {
-//        ArrayList<Job> candidates = new ArrayList<>();
-//        double stress = completeUsage();
-//        double strain = 0.0;
-//        int inIndex = 0;
-////        while (strain < stress && inIndex < inProgress.size()) {
-////            candidates.add(inProgress.get(inIndex));
-////            strain += candidates.get(inIndex).getCenterWeight();
-//////            totalPossCost += candidates.get(inIndex).getRelCost();
-////            inIndex++;
-////        }
-////        for (Job j : candidates) {
-////            if (j.timeLeft() - interval <= 0) {
-////                strain = strain - j.getCenterWeight();
-////            }
-////        }
-////        while (strain < stress && inIndex < inProgress.size()) {
-////            candidates.add(inProgress.get(inIndex));
-////            strain += candidates.get(inIndex).getCenterWeight();
-//////            totalPossCost += candidates.get(inIndex).getRelCost();
-////            inIndex++;
-////        }
-//        double ceiling = conv; //as much as I can spend right now
-////        System.out.println(inProgress);
-////        System.out.println(candidates);
-//        offLoad = balance(ceiling, inProgress, cost);
-//    }
 
