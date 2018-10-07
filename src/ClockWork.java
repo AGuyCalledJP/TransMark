@@ -10,7 +10,9 @@ public class ClockWork {
     private Random rand = new Random();
     public static Calendar calendar = new Calendar();
 
-    public ClockWork() {
+    public ClockWork(ArrayList<ArrayList> theWorld) {
+        ArrayList<ArrayList> hold = theWorld.get(0);
+        System.out.println(hold.get(0).get(0));
         IntCon[] C = new IntCon[]{IntCon.EASTERN, IntCon.WESTERN, IntCon.TEXAS};
         String[] S = new String[]{"Eastern Interconnection", "Western Interconnection", "ERCOT"};
         for (int i = 0; i < C.length; i++) {

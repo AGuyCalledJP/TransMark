@@ -1,8 +1,7 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class MultiProgress {
 
@@ -10,7 +9,8 @@ public class MultiProgress {
         ArrayList<ArrayList<ArrayList<Double>>> average = new ArrayList<>();
         int avg = 5;
         long startTime = System.currentTimeMillis();
-        ClockWork c = new ClockWork();
+        ArrayList<ArrayList> bigDeal = loadConfig();
+        ClockWork c = new ClockWork(bigDeal);
         int select = 2;
         int month = 44640;
         int year = 525600;
@@ -128,5 +128,170 @@ public class MultiProgress {
         str += Arrays.toString(C) + "\n";
         str += Arrays.toString(R) + "\n";
         return str;
+    }
+
+    public static ArrayList<ArrayList> loadConfig() {
+        String path = System.getProperty("user.dir") + "/config/exampleConfig";
+        File file = new File(path);
+        String save = "";
+        ArrayList<ArrayList> bigDeal = new ArrayList<>();
+        try {
+            Scanner inputFile = new Scanner(file);
+            while (inputFile.hasNextLine()) {
+                String line = inputFile.nextLine();
+                ArrayList<ArrayList> connections = new ArrayList<>();
+                if (line.equals("//INTERCONNECTION")) {
+                    boolean connecting = true;
+                    while (connecting) {
+                        ArrayList<ArrayList> connection = new ArrayList<>();
+                        String start = inputFile.nextLine();
+                        ArrayList<String> con = new ArrayList<>();
+                        con.add(start);
+                        String l = inputFile.nextLine();
+                        if (l.equals("//ISO REGION")) {
+                            boolean regioning = true;
+                            ArrayList<ArrayList> region = new ArrayList<>();
+                            while (regioning) {
+                                ArrayList<String> authority = new ArrayList<>();
+                                ArrayList<ArrayList> states = new ArrayList<>();
+                                String str = inputFile.nextLine();
+                                authority.add(str);
+                                String s = inputFile.nextLine();
+                                if (s.equals("//STATE")) {
+                                    boolean stating = true;
+                                    while (stating) {
+                                        ArrayList<ArrayList> state = new ArrayList<>();
+                                        ArrayList<String> stateName = new ArrayList<>();
+                                        stateName.add(inputFile.nextLine());
+                                        state.add(stateName);
+                                        if (inputFile.nextLine().equals("//DATA CENTER")) {
+                                            boolean collecting = true;
+                                            while (collecting) {
+                                                ArrayList<ArrayList> center = new ArrayList<>();
+                                                ArrayList<Integer> specs = new ArrayList<>();
+                                                String spec = inputFile.nextLine();
+                                                if (spec.contains("Budget:")) {
+                                                    String[] hold = spec.split(": ");
+                                                    specs.add(Integer.parseInt(hold[1]));
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                spec = inputFile.nextLine();
+                                                if (spec.contains("Num Clusters:")) {
+                                                    String[] hold = spec.split(": ");
+                                                    specs.add(Integer.parseInt(hold[1]));
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                spec = inputFile.nextLine();
+                                                if (spec.contains("Band Width Speed:")) {
+                                                    String[] hold = spec.split(": ");
+                                                    specs.add(Integer.parseInt(hold[1]));
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                center.add(specs);
+                                                if (inputFile.nextLine().equals("//CLUSTER")) {
+                                                    boolean clustering = true;
+                                                    while (clustering) {
+                                                        ArrayList<ArrayList> clusterSpecs = new ArrayList<>();
+                                                        String numCell = inputFile.nextLine();
+                                                        if (numCell.contains("Total Cells:")) {
+                                                            String[] hold = numCell.split(": ");
+                                                            ArrayList<Integer> holster = new ArrayList<>();
+                                                            holster.add(Integer.parseInt(hold[1]));
+                                                            clusterSpecs.add(holster);
+                                                        }
+                                                        if (inputFile.nextLine().equals("//CELL")) {
+                                                            boolean cells = true;
+                                                            while (cells) {
+                                                                ArrayList<Integer> cellSpecs = new ArrayList<>();
+                                                                String cellSpec = inputFile.nextLine();
+                                                                if (cellSpec.contains("Speed:")) {
+                                                                    String[] hold = cellSpec.split(": ");
+                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
+                                                                }
+                                                                cellSpec = inputFile.nextLine();
+                                                                if (cellSpec.contains("Number of Cores:")) {
+                                                                    String[] hold = cellSpec.split(": ");
+                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
+                                                                }
+                                                                cellSpec = inputFile.nextLine();
+                                                                if (cellSpec.contains("Idle Power Consumption:")) {
+                                                                    String[] hold = cellSpec.split(": ");
+                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
+                                                                }
+                                                                cellSpec = inputFile.nextLine();
+                                                                if (cellSpec.contains("Max Power Consumption:")) {
+                                                                    String[] hold = cellSpec.split(": ");
+                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
+                                                                }
+                                                                save = inputFile.nextLine();
+                                                                if (!save.equals("//CELL")) {
+                                                                    cells = false;
+                                                                    clusterSpecs.add(cellSpecs);
+                                                                } else {
+                                                                    clusterSpecs.add(cellSpecs);
+                                                                }
+                                                            }
+                                                        }
+                                                        if (!save.equals("//CLUSTER")) {
+                                                            clustering = false;
+                                                            center.add(clusterSpecs);
+                                                        } else {
+                                                            center.add(clusterSpecs);
+                                                        }
+                                                    }
+                                                }
+                                                if (!save.equals("//DATA CENTER")) {
+                                                    collecting = false;
+                                                    state.add(center);
+                                                } else {
+                                                    state.add(center);
+                                                }
+                                            }
+                                        }
+                                        if (!save.equals("//STATE")) {
+                                            stating = false;
+                                            states.add(state);
+                                        } else {
+                                            states.add(state);
+                                        }
+                                    }
+                                }
+                                if (!save.equals("//ISO REGION")) {
+                                    regioning = false;
+                                    ArrayList<ArrayList> inbetween = new ArrayList<>();
+                                    inbetween.add(authority);
+                                    inbetween.add(states);
+                                    region.add(inbetween);
+                                    connection.add(region);
+                                } else {
+                                    ArrayList<ArrayList> inbetween = new ArrayList<>();
+                                    inbetween.add(authority);
+                                    inbetween.add(states);
+                                    region.add(inbetween);
+                                }
+                            }
+                        }
+                        if (save.equals("%")) {
+                            connecting = false;
+                            ArrayList<ArrayList> conn = new ArrayList<>();
+                            conn.add(con);
+                            conn.add(connection);
+                            connections.add(conn);
+                            bigDeal.add(connections);
+                        } else {
+                            connections.add(connection);
+                        }
+                    }
+                }
+            }
+            inputFile.close();
+        }
+        catch (FileNotFoundException message) {
+            System.out.println(message);
+        }
+        return bigDeal;
     }
 }

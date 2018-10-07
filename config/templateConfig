@@ -1,0 +1,24 @@
+//INTERCONNECTION
+//Eastern Interconnection, Western Interconnection, ERCOT
+
+//ISO REGION
+//ENERGY AUTHORITY + STATES SERVED:
+//CAISO: California
+//MISO: Minnesota, Iowa, Montana, Arkansas, Louisiana, Mississippi, Illinois, Indiana, Wisconsisn, Michigan
+//PJM: Ohio, Kentucky, West Virginia, Virginia, Pennsylvania, New Jersey, Deleware, Maryland
+//SPP: Oklahoma, Kansas, Nebraska, South Dakota, North Dakota
+//NYISO: New York
+
+//CENTERS IN EACH STATE, CLIENTS:
+
+//DATA CENTER -> ADD AS MANY AS DESIRED
+//Id: 0
+//Num Clusters: n -> ADD AS MANY AS DESIRED
+//Band Width Speed: m -> Gb/s -> DEFAULT IS 1 Gb/s
+    //CLUSTER SPECS
+    //Total Cells: y -> ADD AS MANY AS DESIRED 
+        //CELL -> y -> ADD AS MANY AS DESIRED
+        //CPU Speed: x -> NUMBER OF OPERATIONS THAT CAN BE COMPLETED IN 1 MINUTE
+        //Number of Cores: w
+        //Idle Power Consumption: y -> (watt hours)
+        //Max Power Consumption: z -> (watt hours)

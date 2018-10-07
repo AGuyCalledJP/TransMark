@@ -1,0 +1,67 @@
+//INTERCONNECTION
+Western Interconnection
+//ISO REGION
+CAISO
+//STATE
+California
+//DATA CENTER
+Budget: 300
+Num Clusters: 2
+Band Width Speed: 2
+//CLUSTER
+Total Cells: 2
+//CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 150
+Max Power Consumption: 200
+//CELL
+Speed: 2400
+Number of Cores: 10
+Idle Power Consumption: 210
+Max Power Consumption: 250
+//CLUSTER
+Total Cells: 3
+//CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 150
+Max Power Consumption: 220
+//CELL
+Speed: 2400
+Number of Cores: 10
+Idle Power Consumption: 210
+Max Power Consumption: 250
+//ISO REGION
+PALSO
+//STATE
+Arizona
+//DATA CENTER
+Budget: 300
+Num Clusters: 2
+Band Width Speed: 2
+//CLUSTER
+Total Cells: 2
+//CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 150
+Max Power Consumption: 200
+//CELL
+Speed: 2400
+Number of Cores: 10
+Idle Power Consumption: 210
+Max Power Consumption: 250
+//CLUSTER
+Total Cells: 3
+//CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 150
+Max Power Consumption: 220
+//CELL
+Speed: 2400
+Number of Cores: 10
+Idle Power Consumption: 210
+Max Power Consumption: 250
+%
