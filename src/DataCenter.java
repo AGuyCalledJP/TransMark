@@ -52,30 +52,32 @@ public class DataCenter {
     private ArrayList<Double> failureLog = new ArrayList<>();
     private ArrayList<Double> jobThroughput = new ArrayList<>();
 
-    public DataCenter(int id, int numClust){
-        speed = Progress.standardSpeed;
+    public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, double arrival, ArrayList theWorld){
+        String[] a = theWorld.get(1).toString().split("],");
+        ArrayList<String[]> clusterSpecs = new ArrayList<>();
+        for (int x = 0; x < a.length; x++) {
+            String s = a[x];
+            s = s.replace("[","");
+            s = s.replace("]","");
+            s = s.replace(" ","");
+            clusterSpecs.add(s.split(","));
+        }
         this.id = id;
-        participation = rand.nextInt(170) + 10; //set this so centers will be in stride for now
+        this.budget = budget;
+        this.bandwidth = bandwidth;
+        this.participation = participation;
         SETPART = participation;
         for(int x = 0; x < numClust; x++){
-            clusters.add(new Cluster(Progress.idCluster));
+            clusters.add(new Cluster(Progress.idCluster, clusterSpecs));
             Progress.idCluster++;
             totalRAM += clusters.get(x).getMaxRam();
             totalCPU += clusters.get(x).getMaxCPUSpace();
             totalDisk += clusters.get(x).getMaxLocalDiskSpace();
+            speed += clusters.get(x).getAvgSpeed();
             maxWh += Progress.standardMax * 5;
             maxCost = maxCost();
         }
-        double band = rand.nextDouble();
-        if (band < .25) {
-            bandwidth = Progress.quarterInternetSpeed;
-        }
-        else if (band < .5) {
-            bandwidth = Progress.halfInternetSpeed;
-        }
-        else {
-            bandwidth = Progress.maxInternetSpeed;
-        }
+        speed = speed / clusters.size();
         //1 - per gives the load capacity the server is being allowed to run at
         if (clusters.size() == 1 || clusters.size() == 2) {
             per = 0.1;
@@ -86,7 +88,50 @@ public class DataCenter {
         else {
             per = 0.5;
         }
-        setBudget();
+        setJobWeights();
+        double perShort = 0.9;
+        master = new JobMaster(speed, perShort, numClust, arrival);
+    }
+
+    public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, ArrayList theWorld){
+        String[] a = theWorld.get(1).toString().split("],");
+        ArrayList<String[]> clusterSpecs = new ArrayList<>();
+        for (int x = 0; x < a.length; x++) {
+            String s = a[x];
+            s = s.replace("[","");
+            s = s.replace("]","");
+            s = s.replace(" ","");
+            clusterSpecs.add(s.split(","));
+        }
+
+        this.id = id;
+        this.budget = budget;
+        this.bandwidth = bandwidth;
+        this.participation = participation;
+        SETPART = participation;
+
+        for(int x = 0; x < numClust; x++){
+            clusters.add(new Cluster(Progress.idCluster, clusterSpecs));
+            Progress.idCluster++;
+            totalRAM += clusters.get(x).getMaxRam();
+            totalCPU += clusters.get(x).getMaxCPUSpace();
+            totalDisk += clusters.get(x).getMaxLocalDiskSpace();
+            speed += clusters.get(x).getAvgSpeed();
+            maxWh += Progress.standardMax * 5;
+            maxCost = maxCost();
+        }
+        speed = speed / clusters.size();
+
+        //1 - per gives the load capacity the server is being allowed to run at
+        if (clusters.size() == 1 || clusters.size() == 2) {
+            per = 0.1;
+        }
+        else if(clusters.size() > 2 && clusters.size() <= 4) {
+            per = 0.3;
+        }
+        else {
+            per = 0.5;
+        }
         setJobWeights();
         double perShort = 0.9;
         master = new JobMaster(speed, perShort, numClust);

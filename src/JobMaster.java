@@ -24,6 +24,13 @@ public class JobMaster {
         arrivalsNow = p.poisson(lambda);
     }
 
+    public JobMaster(int speed, double taskSplit, int numClust, double lambda){
+        this.lambda = lambda;
+        this.speed = speed;
+        this.taskSplit = taskSplit;
+        arrivalsNow = p.poisson(lambda);
+    }
+
     public Queue<Job> genJobs(){
         Queue<Job> jobs = new LinkedList<>();
         arrivalsNow = p.poisson(lambda);
@@ -78,66 +85,6 @@ public class JobMaster {
             }
         }
         this.lambda = lambda;
-    }
-
-    public void simArrival(int time) {
-        int globalTime = cal.getHour(ClockWork.t);
-        int localTime = (((globalTime +  time) % 24) + 24) % 24; //convert whatever time it is locally to UTC
-        int localMin = ClockWork.t % 60;
-        lambda =  detL(localTime, localMin);
-//        System.out.println(lambda);
-    }
-
-    public double detL(int localT, int localM) {
-        double scale = 1.0;
-        double mins = 60;
-        double maxArrivalRate = 0;
-        if (numClust == 1) {
-            maxArrivalRate = 1.0;
-        }
-        else if (numClust == 2) {
-            maxArrivalRate = 1.5;
-        }
-        else if (numClust == 3) {
-            maxArrivalRate = 2;
-        }
-        else if (numClust == 4) {
-            maxArrivalRate = 2.5;
-        }
-        else {
-            maxArrivalRate = 3;
-        }
-        if (localT < 8 || localT >= 20 ) {
-            localT = (((localT - 12) % 12) + 12) % 12;
-        }
-        if (localT > 8 && localT < 20) {
-            scale = (scale / 12);
-            double minScale = (scale / mins);
-            double mult = 0;
-            for (int j = 0; j < localT; j++) {
-                mult += scale;
-            }
-            for (int k = 0; k < localM; k++) {
-                mult += minScale;
-            }
-            return (maxArrivalRate * mult);
-        }
-        else if (localT == 8) {
-            return maxArrivalRate;
-        }
-        else {
-            scale = (scale / 12);
-            double minScale = (scale / mins);
-            double mult = 0;
-            for (int i = 0; i < localT; i++) {
-                mult += scale;
-            }
-            for (int l = 0; l < localM; l++) {
-                mult += minScale;
-            }
-            mult = 1 - mult;
-            return  (maxArrivalRate * mult);
-        }
     }
 
     public double getLambda() {

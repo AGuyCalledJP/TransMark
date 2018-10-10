@@ -4,21 +4,30 @@
 //ISO REGION
 //ENERGY AUTHORITY + STATES SERVED:
 //CAISO: California
+//ABBREVIATIONS: CA
 //MISO: Minnesota, Iowa, Montana, Arkansas, Louisiana, Mississippi, Illinois, Indiana, Wisconsisn, Michigan
+//ABBREVIATIONS: MN, IA, MO, AR, LA, MS, IL, IN, WI, MI
 //PJM: Ohio, Kentucky, West Virginia, Virginia, Pennsylvania, New Jersey, Deleware, Maryland
+//ABBREVIATIONS: OH, KY, WV, VA, PA, NJ, DE, MD
 //SPP: Oklahoma, Kansas, Nebraska, South Dakota, North Dakota
+//ABBREVIATIONS: OK, KS, NE, SD, ND
 //NYISO: New York
+//ABBREVIATIONS: NY
 
 //CENTERS IN EACH STATE, CLIENTS:
 
 //DATA CENTER -> ADD AS MANY AS DESIRED
-//Id: 0
+//Budget: tight: [100,200,300,400,500] lavish: [300,500,700,900,1000] -> adjust according to nunmber of clusters and cpus per cluster
 //Num Clusters: n -> ADD AS MANY AS DESIRED
 //Band Width Speed: m -> Gb/s -> DEFAULT IS 1 Gb/s
-    //CLUSTER SPECS
-    //Total Cells: y -> ADD AS MANY AS DESIRED 
-        //CELL -> y -> ADD AS MANY AS DESIRED
-        //CPU Speed: x -> NUMBER OF OPERATIONS THAT CAN BE COMPLETED IN 1 MINUTE
-        //Number of Cores: w
-        //Idle Power Consumption: y -> (watt hours)
-        //Max Power Consumption: z -> (watt hours)
+//Participation Rate: 1 minute to 24 hours. However often you would like your center to participate in the market
+//Arrival Rate: x -> Average number of jobs coming into the center on a minute by minute basis. Set to null if unknown
+
+//CLUSTER SPECS
+//Total Cells: y -> ADD AS MANY AS DESIRED 
+
+//CELL -> y -> ADD AS MANY AS DESIRED
+//CPU Speed: x -> NUMBER OF OPERATIONS THAT CAN BE COMPLETED IN 1 MINUTE BY EACH CORE
+//Number of Cores: w
+//Idle Power Consumption: y -> (watt hours)
+//Max Power Consumption: z -> (watt hours)

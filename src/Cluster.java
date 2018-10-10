@@ -14,23 +14,26 @@ public class Cluster {
     private double availRAM;
     private double availLocalDiskSpace;
     private double availCPUSpace;
+    private double avgSpeed;
     private int id;
     private int jobsDone = 0;
 
-    public Cluster(int id) {
-        int r = 5;
+    public Cluster(int id, ArrayList<String[]> specs) {
+        int r = Integer.parseInt(specs.get(0)[0]);
         for (int i = 0; i < r; i++) {
-            clusterCells.add(new Cell(Progress.idCell));
+            clusterCells.add(new Cell(Progress.idCell, specs.get(i + 1)));
             Progress.idCell++;
             maxCPUTasks += clusterCells.get(i).getMaxTasks();
             maxCPUSpace += clusterCells.get(i).getTotalCPU();
             RAM += clusterCells.get(i).getTotalRam();
+            avgSpeed += clusterCells.get(i).getSpeed();
         }
         this.id = id;
         localDiskSpace = 1;
         availRAM = RAM;
         availLocalDiskSpace = localDiskSpace;
         availCPUSpace = maxCPUSpace;
+        avgSpeed = avgSpeed / clusterCells.size();
 
     }
 
@@ -281,6 +284,10 @@ public class Cluster {
                 m.setProcUsed();
             }
         }
+    }
+
+    public double getAvgSpeed() {
+        return avgSpeed;
     }
 
     public double getRAM() {

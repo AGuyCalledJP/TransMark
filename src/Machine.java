@@ -17,11 +17,6 @@ public class Machine {
     private int processesDone = 0;
 
     public Machine(int totalPower, int idle, int max, int id) {
-        Random rand = new Random();
-//        int hold1 = rand.nextInt(75) + 25;
-//        int hold2 = rand.nextInt(75) + 25;
-//        double transition1 = (double)(hold1);
-//        double transition2 = (double)(hold2);
         capacityCPU = 1.0;
         capacityRAM = 1.0;
         percentageUsed = 0;

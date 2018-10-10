@@ -1,3 +1,4 @@
+import javax.swing.plaf.TableHeaderUI;
 import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,18 +15,26 @@ public class State {
     private Weather weather;
     private double totalEnergy = 0;
     //constructor to generate random price signals
-    public State(StateVal s){
+    public State(StateVal s, ArrayList<ArrayList> theWorld){
         this.s = s;
         //Set timezone info
         DetZone dz = new DetZone(s);
         zone = dz.detZone();
         DetTime dt = new DetTime(zone);
         localTime = dt.convTime(); //subtract this value from time in hours to get the time zone
-        Random rand = new Random();
-        numClients = 1;//rand.nextInt(10) + 1; //set bound for number of data centers in a juridction
-        for(int j = 0; j < numClients; j++){
-            int numClust = rand.nextInt(5) + 1;
-            DataCenter D = new DataCenter(Progress.idDataCenter, numClust);
+        for(int j = 1; j < theWorld.size(); j++){
+            ArrayList center = theWorld.get(j);
+            String a = center.get(0).toString();
+            a = a.replace("[","");
+            a = a.replace("]","");
+            String[] split = a.split(", ");
+            DataCenter D;
+            if (!split[4].equals("null")) {
+                D = new DataCenter(Progress.idDataCenter, Integer.parseInt(split[0]), Integer.parseInt(split[1]), Double.parseDouble(split[2]), Integer.parseInt(split[3]), Double.parseDouble(split[4]), theWorld.get(j));
+            }
+            else {
+                D = new DataCenter(Progress.idDataCenter, Integer.parseInt(split[0]), Integer.parseInt(split[1]), Double.parseDouble(split[2]), Integer.parseInt(split[3]), theWorld.get(j));
+            }
             Progress.idDataCenter++;
             clientele.add(D);
         }

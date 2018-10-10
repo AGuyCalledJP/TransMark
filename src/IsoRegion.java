@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 public class IsoRegion {
@@ -5,13 +6,20 @@ public class IsoRegion {
     private ISO authority;
     private ArrayList<State> states = new ArrayList<>();
 
-    public IsoRegion(ISOVal iso) {
+    public IsoRegion(ISOVal iso, ArrayList<ArrayList<ArrayList>> theWorld) {
         this.iso = iso;
         authority = new ISO(iso);
         IsoRegions i = new IsoRegions(iso);
         StateVal[] stateVals = i.region();
-        for (StateVal s : stateVals) {
-            states.add(new State(s));
+        for (int k = 0; k < theWorld.size(); k++) {
+            String s =theWorld.get(k).get(0).get(0).toString();
+            s = s.replace("[","");
+            s = s.replace("]","");
+            for (StateVal S : stateVals) {
+                if (s.equals(S.toString())) {
+                    states.add(new State(S,theWorld.get(k)));
+                }
+            }
         }
     }
 

@@ -13,32 +13,15 @@ public class Cell {
     private Random rand = new Random();
     private int id;
 
-    public Cell(int id) {
-      int theoMax = (Progress.standardSpeed * 10); //max tasks per minute
-      int numMachines = 10;
+    public Cell(int id, String[] specs) {
+        int speed = Integer.parseInt(specs[0]);
+        int theoMax = (speed * 10); //max tasks per minute
+        maxTasks = speed;
+        int numMachines = Integer.parseInt(specs[1]);
 
         //Idle wattage vs max wattage
-        basePowerUse = 161;
-        maxPowerUse = 230;
-      //How close am I to being able to do the maximum work load
-//      int r = rand.nextInt(numMachines);
-//        double modifier;
-//        switch (r) {
-//            case 1:  modifier = .0765;
-//                break;
-//            case 2:  modifier = .01;
-//                break;
-//            case 3:  modifier = .05;
-//                break;
-//            case 4:  modifier = .0625;
-//                break;
-//            case 5:  modifier = .0325;
-//                break;
-//            default: modifier = 0;
-//                break;
-//        }
-//        maxTasks = (int)(theoMax - (theoMax * modifier));
-//        maxPowerUse = (int)(maxPowerUse - (maxPowerUse * modifier));
+        basePowerUse = Integer.parseInt(specs[2]);
+        maxPowerUse = Integer.parseInt(specs[3]);
 
         //total measures of performance for the machines of the cpu
         int machinePower = (theoMax/numMachines);
@@ -53,6 +36,10 @@ public class Cell {
             totalRam += machines.get(i).getCapacityRAM();
         }
 
+        this.id = id;
+    }
+
+    public Cell(int id) {
         this.id = id;
     }
 
@@ -240,6 +227,10 @@ public class Cell {
     //Getters
     public int getNumMachines(){
         return machines.size();
+    }
+
+    public int getSpeed() {
+        return maxTasks;
     }
 
     public int getMaxTasks(){

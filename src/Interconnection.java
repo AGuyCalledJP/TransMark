@@ -7,14 +7,19 @@ public class Interconnection {
     StateVal[][] served;
     ArrayList<IsoRegion> isoRegions = new ArrayList<>();
 
-    public Interconnection(IntCon con, String name, int time){
+    public Interconnection(IntCon con, String name, int time, ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>> theWorld){ //, ArrayList theWorld
         this.con = con;
         this.name = name;
         this.time = time;
          IntConIsos i = new IntConIsos(con);
          ISOVal[] isos = i.detISO();
-         for(ISOVal j : isos){
-             isoRegions.add(new IsoRegion(j));
+         for (int k = 0; k < theWorld.get(0).size(); k++) {
+             String locale = theWorld.get(0).get(k).get(0).get(0).get(0).get(0).toString();
+             for(ISOVal j : isos){
+                 if (j.toString().equals(locale)) {
+                     isoRegions.add(new IsoRegion(j, theWorld.get(0).get(k).get(1)));
+                 }
+             }
          }
     }
 

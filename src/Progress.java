@@ -1,4 +1,5 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -24,9 +25,9 @@ public class Progress {
 
     public static void main(String[]args){
         long startTime = System.currentTimeMillis();
-        ArrayList<ArrayList> bigDeal = loadConfig();
+        ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = loadConfig();
        ClockWork c = new ClockWork(bigDeal);
-       int select = 1;
+       int select = 0;
        int month = 44640;
        if (select == 0) {
            c.motion(month);
@@ -176,30 +177,33 @@ public class Progress {
         writer.close();
         }
 
-    public static ArrayList<ArrayList> loadConfig() {
+    //Add lamda arrival rate for each center
+    //Add participation rate for each center
+    //Percentage short jobs vs long jobs
+    //Im so sorry
+    public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
         String path = System.getProperty("user.dir") + "/config/exampleConfig";
         File file = new File(path);
         String save = "";
-        ArrayList<ArrayList> bigDeal = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = new ArrayList<>();
         try {
             Scanner inputFile = new Scanner(file);
             while (inputFile.hasNextLine()) {
                 String line = inputFile.nextLine();
-                ArrayList<ArrayList> connections = new ArrayList<>();
                 if (line.equals("//INTERCONNECTION")) {
                     boolean connecting = true;
                     while (connecting) {
-                        ArrayList<ArrayList> connection = new ArrayList<>();
+                        ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>> connection = new ArrayList<>();
                         String start = inputFile.nextLine();
                         ArrayList<String> con = new ArrayList<>();
                         con.add(start);
                         String l = inputFile.nextLine();
                         if (l.equals("//ISO REGION")) {
                             boolean regioning = true;
-                            ArrayList<ArrayList> region = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>> region = new ArrayList<>();
                             while (regioning) {
                                 ArrayList<String> authority = new ArrayList<>();
-                                ArrayList<ArrayList> states = new ArrayList<>();
+                                ArrayList<ArrayList<ArrayList>> states = new ArrayList<>();
                                 String str = inputFile.nextLine();
                                 authority.add(str);
                                 String s = inputFile.nextLine();
@@ -209,12 +213,14 @@ public class Progress {
                                         ArrayList<ArrayList> state = new ArrayList<>();
                                         ArrayList<String> stateName = new ArrayList<>();
                                         stateName.add(inputFile.nextLine());
-                                        state.add(stateName);
+                                        ArrayList<ArrayList> dd = new ArrayList<>();
+                                        dd.add(stateName);
+                                        state.add(dd);
                                         if (inputFile.nextLine().equals("//DATA CENTER")) {
                                             boolean collecting = true;
                                             while (collecting) {
                                                 ArrayList<ArrayList> center = new ArrayList<>();
-                                                ArrayList<Integer> specs = new ArrayList<>();
+                                                ArrayList specs = new ArrayList<>();
                                                 String spec = inputFile.nextLine();
                                                 if (spec.contains("Budget:")) {
                                                     String[] hold = spec.split(": ");
@@ -232,11 +238,32 @@ public class Progress {
                                                 spec = inputFile.nextLine();
                                                 if (spec.contains("Band Width Speed:")) {
                                                     String[] hold = spec.split(": ");
+                                                    specs.add(Double.parseDouble(hold[1]));
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                spec = inputFile.nextLine();
+                                                if (spec.contains("Participation Rate:")) {
+                                                    String[] hold = spec.split(": ");
                                                     specs.add(Integer.parseInt(hold[1]));
                                                 } else {
                                                     specs.add(null);
                                                 }
-                                                center.add(specs);
+                                                spec = inputFile.nextLine();
+                                                if (spec.contains("Arrival Rate:")) {
+                                                    String[] hold = spec.split(": ");
+                                                    if (!hold[1].equals("null")) {
+                                                        specs.add(Double.parseDouble(hold[1]));
+                                                    }
+                                                    else {
+                                                        specs.add(null);
+                                                    }
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                ArrayList<ArrayList> holdSpecs = new ArrayList();
+                                                holdSpecs.add(specs);
+                                                center.add(holdSpecs);
                                                 if (inputFile.nextLine().equals("//CLUSTER")) {
                                                     boolean clustering = true;
                                                     while (clustering) {
@@ -307,14 +334,22 @@ public class Progress {
                                 }
                                 if (!save.equals("//ISO REGION")) {
                                     regioning = false;
-                                    ArrayList<ArrayList> inbetween = new ArrayList<>();
-                                    inbetween.add(authority);
+                                    ArrayList<ArrayList<ArrayList<ArrayList>>> inbetween = new ArrayList<>();
+                                    ArrayList<ArrayList> dd = new ArrayList<>();
+                                    ArrayList<ArrayList<ArrayList>> ddd = new ArrayList<>();
+                                    dd.add(authority);
+                                    ddd.add(dd);
+                                    inbetween.add(ddd);
                                     inbetween.add(states);
                                     region.add(inbetween);
                                     connection.add(region);
                                 } else {
-                                    ArrayList<ArrayList> inbetween = new ArrayList<>();
-                                    inbetween.add(authority);
+                                    ArrayList<ArrayList<ArrayList<ArrayList>>> inbetween = new ArrayList<>();
+                                    ArrayList<ArrayList> dd = new ArrayList<>();
+                                    ArrayList<ArrayList<ArrayList>> ddd = new ArrayList<>();
+                                    dd.add(authority);
+                                    ddd.add(dd);
+                                    inbetween.add(ddd);
                                     inbetween.add(states);
                                     region.add(inbetween);
                                 }
@@ -322,13 +357,35 @@ public class Progress {
                         }
                         if (save.equals("%")) {
                             connecting = false;
-                            ArrayList<ArrayList> conn = new ArrayList<>();
-                            conn.add(con);
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>> conn = new ArrayList<>();
+                            ArrayList<ArrayList> dd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList>> ddd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList>>> dddd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>> ddddd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>> dddddd = new ArrayList<>();
+                            dd.add(con);
+                            ddd.add(dd);
+                            dddd.add(ddd);
+                            ddddd.add(dddd);
+                            dddddd.add(ddddd);
+                            conn.add(dddddd);
                             conn.add(connection);
-                            connections.add(conn);
-                            bigDeal.add(connections);
+                            bigDeal.add(conn);
                         } else {
-                            connections.add(connection);
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>> conn = new ArrayList<>();
+                            ArrayList<ArrayList> dd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList>> ddd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList>>> dddd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>> ddddd = new ArrayList<>();
+                            ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>> dddddd = new ArrayList<>();
+                            dd.add(con);
+                            ddd.add(dd);
+                            dddd.add(ddd);
+                            ddddd.add(dddd);
+                            dddddd.add(ddddd);
+                            conn.add(dddddd);
+                            conn.add(connection);
+                            bigDeal.add(conn);
                         }
                     }
                 }

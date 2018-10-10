@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Random;
+import java.util.Arrays;
 
 public class ClockWork {
 
@@ -10,13 +11,13 @@ public class ClockWork {
     private Random rand = new Random();
     public static Calendar calendar = new Calendar();
 
-    public ClockWork(ArrayList<ArrayList> theWorld) {
-        ArrayList<ArrayList> hold = theWorld.get(0);
-        System.out.println(hold.get(0).get(0));
+    public ClockWork(ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> theWorld) {
         IntCon[] C = new IntCon[]{IntCon.EASTERN, IntCon.WESTERN, IntCon.TEXAS};
-        String[] S = new String[]{"Eastern Interconnection", "Western Interconnection", "ERCOT"};
-        for (int i = 0; i < C.length; i++) {
-            powerGrid.add(new Interconnection(C[i], S[i], t));
+        ArrayList<String> S = new ArrayList<>(Arrays.asList("Eastern Interconnection", "Western Interconnection", "ERCOT"));
+        for (int i = 0; i < theWorld.size(); i++) {
+            String con = theWorld.get(i).get(0).get(0).get(0).get(0).get(0).get(0).get(0).toString();
+            int ind = S.indexOf(con);
+            powerGrid.add(new Interconnection(C[ind], S.get(ind), t, theWorld.get(i).get(1)));
         }
     }
 
@@ -63,10 +64,9 @@ public class ClockWork {
                             if (giveNewMonth) {
                                 D.newMonth();
                             }
-//                            System.out.println(lambda);
                             double[] temp = new double[]{0};
                             //Set short job percentage threshold
-                            if (giveNewMonth) {
+                            if (i % 1439 == 0) {
                                 System.out.println(D);
                                 System.out.println("Usage: " + D.completeUsage());
                                 System.out.println("Rev last day: " + D.getRevAtm());
