@@ -2,15 +2,25 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class IsoRegion {
+    //Enum val for the ISO in control of this territory
     private ISOVal iso;
+    //Instance of ISO class generated with respect to ISOVal
     private ISO authority;
+    //All states served by the enumerated authority
     private ArrayList<State> states = new ArrayList<>();
 
+    /*
+    IsoRegion exists to associate a major Regional Transmissions Operator (ISO), with the set of states that receive energy
+    rate data from said ISO.
+     */
     public IsoRegion(ISOVal iso, ArrayList<ArrayList<ArrayList>> theWorld) {
+        //Receive and create the associated ISO for this region
         this.iso = iso;
         authority = new ISO(iso);
+        //Get list of all states serviced by said ISO
         IsoRegions i = new IsoRegions(iso);
         StateVal[] stateVals = i.region();
+        //Create instances of States, based off list of state vals
         for (int k = 0; k < theWorld.size(); k++) {
             String s =theWorld.get(k).get(0).get(0).toString();
             s = s.replace("[","");
@@ -23,22 +33,22 @@ public class IsoRegion {
         }
     }
 
+    //Get all states in region
     public ArrayList<State> getStates() {
         return states;
     }
 
+    //Get enum rep of ISO in area
+    public ISOVal getIso() {
+        return iso;
+    }
+
+    //Retrieve ISO Object
     public ISO getAuthority() {
         return authority;
     }
 
-    public void giveRate() {
-        for (State s : states) {
-            for (DataCenter d : s.getClientele()) {
-                d.setRate(authority.getRate());
-            }
-        }
-    }
-
+    //Compile usage stats for all centers across the region
     public ArrayList<ArrayList<Double>> compileStats() {
         ArrayList<ArrayList<Double>> holster = new ArrayList<>();
         for (State S : states) {
@@ -49,9 +59,5 @@ public class IsoRegion {
             }
         }
         return holster;
-    }
-
-    public String toString(){
-        return "working on it";
     }
 }

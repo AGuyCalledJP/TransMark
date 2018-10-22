@@ -6,46 +6,52 @@ import java.util.Scanner;
 import java.util.SortedSet;
 
 public class Progress {
+    /*
+     * Identification values for the major classes participating in the simulation
+     */
     public static int idCell = 1;
     public static int idCluster = 1;
     public static int idDataCenter = 1;
     public static int idJob = 1;
     public static int idMachine = 1;
     public static int idTask = 1;
-    public static int idTSO = 1;
-    public static int standardSpeed = 1200;
-    public static int standardIdle = 161;
-    public static int standardMax = 230;
-    public static int standardNumCores = 10;
-    public static int standardNumCells = 5;
-    public static double maxInternetSpeed = 2; //2 gb per second internet
-    public static double halfInternetSpeed = 1; //2 gb per second internet
-    public static double quarterInternetSpeed = .5; //2 gb per second internet
+    /*
+    Global metric used for comparing doubles to zero
+     */
     public final static double EPSILON = .000001;
-
+    /*
+    Main method for running the simulation once over a month long period
+     */
     public static void main(String[]args){
+        //Track progress of the simulation
         long startTime = System.currentTimeMillis();
+        //Read in information from config file
         ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = loadConfig();
-       ClockWork c = new ClockWork(bigDeal);
-       int select = 0;
-       int month = 44640;
-       if (select == 0) {
+        //Create ClockWork Module
+        ClockWork c = new ClockWork(bigDeal);
+        int select = 0;
+        int month = 44640;
+        //Choose which version of simulation to run
+        if (select == 0) {
            c.motion(month);
-       }
-       else if (select == 1) {
+        }
+        else if (select == 1) {
            c.lessMotion(month);
-       }
-       else if (select == 2) {
-           c.VIP(month);
-       }
-       else {
-           c.minimalist(month);
-       }
-       Stats s = new Stats(c);
-       System.out.println(s.results());
+        }
+//        else if (select == 2) {
+//           c.VIP(month);
+//        }
+//        else {
+//           c.minimalist(month);
+//        }
+        //Collect statistical dump
+        Stats s = new Stats(c);
+        System.out.println(s.results());
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
+        //Total execution time
         System.out.println(elapsedTime);
+        //Compile stats on revenue, cost, etc
         ArrayList<ArrayList<ArrayList<Double>>> regionData = new ArrayList<>();
         ArrayList<ISOVal> regions = new ArrayList<>();
         for (Interconnection I : c.getPowerGrid()) {
@@ -55,6 +61,7 @@ public class Progress {
             }
         }
         ArrayList<String> yump = gridLock(regionData);
+        //Write data to txt file
         if (select == 0) {
             for (String str : yump) {
                 try {
@@ -121,6 +128,9 @@ public class Progress {
         }
     }
 
+    /*
+    Take 3d Arraylist of values and aggregate into a 1d arraylist of string values
+     */
     public static ArrayList<String> gridLock(ArrayList<ArrayList<ArrayList<Double>>> data) {
         ArrayList<String> holders = new ArrayList<>();
         for (int i = 0; i < data.size() - 1; i++) {
@@ -158,9 +168,6 @@ public class Progress {
                 C[l] = C[l] / data.get(i).size();
                 R[l] = R[l] / data.get(i).size();
             }
-//        System.out.println(E.length);
-//        System.out.println(C.length);
-//        System.out.println(R.length);
             String str = "";
             str += Arrays.toString(E) + "\n";
             str += Arrays.toString(C) + "\n";
@@ -177,10 +184,9 @@ public class Progress {
         writer.close();
         }
 
-    //Add lamda arrival rate for each center
-    //Add participation rate for each center
-    //Percentage short jobs vs long jobs
-    //Im so sorry
+    /*
+    Read config file into 8d arraylist
+     */
     public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
         String path = System.getProperty("user.dir") + "/config/exampleConfig";
         File file = new File(path);

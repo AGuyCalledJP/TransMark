@@ -286,6 +286,10 @@ public class Cluster {
         }
     }
 
+    public ArrayList<Cell> getClusterCells() {
+        return clusterCells;
+    }
+
     public double getAvgSpeed() {
         return avgSpeed;
     }

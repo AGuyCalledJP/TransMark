@@ -74,10 +74,12 @@ public class DataCenter {
             totalCPU += clusters.get(x).getMaxCPUSpace();
             totalDisk += clusters.get(x).getMaxLocalDiskSpace();
             speed += clusters.get(x).getAvgSpeed();
-            maxWh += Progress.standardMax * 5;
-            maxCost = maxCost();
+            for (int y = 0; y < clusters.get(x).getClusterCells().size(); y++) {
+                maxWh += clusters.get(x).accessCell(y).getMaxPowerUse();
+            }
         }
-        speed = speed / clusters.size();
+        speed = speed / clusters.size();;
+        maxCost = maxCost();
         //1 - per gives the load capacity the server is being allowed to run at
         if (clusters.size() == 1 || clusters.size() == 2) {
             per = 0.1;
@@ -117,10 +119,12 @@ public class DataCenter {
             totalCPU += clusters.get(x).getMaxCPUSpace();
             totalDisk += clusters.get(x).getMaxLocalDiskSpace();
             speed += clusters.get(x).getAvgSpeed();
-            maxWh += Progress.standardMax * 5;
-            maxCost = maxCost();
+            for (int y = 0; y < clusters.get(x).getClusterCells().size(); y++) {
+                maxWh += clusters.get(x).accessCell(y).getMaxPowerUse();
+            }
         }
         speed = speed / clusters.size();
+        maxCost = maxCost();
 
         //1 - per gives the load capacity the server is being allowed to run at
         if (clusters.size() == 1 || clusters.size() == 2) {
