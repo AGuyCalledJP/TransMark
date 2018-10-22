@@ -16,12 +16,12 @@ public class YearProgress {
         else if (select == 1) {
             c.lessMotion(year);
         }
-        else if (select == 2) {
-            c.VIP(year);
-        }
-        else {
-            c.minimalist(year);
-        }
+//        else if (select == 2) {
+//            c.VIP(year);
+//        }
+//        else {
+//            c.minimalist(year);
+//        }
         Stats s = new Stats(c);
         System.out.println(s.results());
         long stopTime = System.currentTimeMillis();

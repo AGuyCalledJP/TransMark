@@ -1,57 +1,100 @@
-import java.util.*;
-//NEXT STEP -> Offload all jobs whos finihsedTasks.size() == totalTasks and collect the revenue for completing the task
-//DataCenter object. These are the centers that exist within the Market.
+import java.util.Random;
+import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
+import java.util.Arrays;
+/*
+
+ */
 public class DataCenter {
+    //Utility
     private Random rand = new Random();
-    private PriorityQueue<Job> jobs = new PriorityQueue<>(); //waiting jobs
-    private ArrayList<Job> inProgress = new ArrayList<>(); //jobs being worked on
+    //Accepted Jobs waiting to get into system schedule,
+    private PriorityQueue<Job> jobs = new PriorityQueue<>();
+    //Jobs currently in a cluster
+    private ArrayList<Job> inProgress = new ArrayList<>();
+    //Clusters in the system
     private ArrayList<Cluster> clusters = new ArrayList<>();
+    //Job provider
     private JobMaster master;
+    //Monthly budget
+    private final double BUDGET;
     private double budget;
+    //Jobs available to offload
     private int[] mu;
-    private int balk;
-    private int[] gone;
+    //looping index for participation rate
     private int participation;
+    //set interval to enter market
     private final int SETPART;
+    //Track total revenue
     private double revenue;
+    //Who am I?
     private int id;
+    //Total jobs completed
     private int jobsProcessed;
+    //Total jobs accepted
     private int totalJobs;
+    //Accrued cost
     private double totalCost;
+    //Set extra wattage to account for cooling
     private final double coolingPer = .33;
+    //Total jobs Rejected or canceled by an end user
     private int jobsRejected = 0;
+    //Jobs killed by the system scheduler
     private int forcedOut = 0;
+    //Fee for flavor of cluster
     private double standardRate = 0.10;
+    //Track energy rate for center
     private double currentRate = 0;
-    private double maxL = 0;
+    //Total jobs that balk -----------> not registering for some reason
+    private int balk = 0;
+    //Total RAM in house
     private double totalRAM;
+    //Total CPU in house
     private double totalCPU;
+    //Total Local Disk in house
     private double totalDisk;
+    //Maximum watt house possible achieveable by this data center
     private double maxWh;
+    //Max cost possible based off max wattage
     private double maxCost;
+    //Average speed of a cpu in house
     private int speed;
+    //Revenue made in the last minute
     private double revAtm = 0;
+    //Current cost available to bring on
     private double bringOn = 0;
+    //Projected cost over participation rate
     private double projectedCost = 0;
+    //Total jobs recieved from market
     private int jobsRecieved = 0;
+    //Total jobs sent to market
     private int jobsSent = 0;
+    //Market Flags
     private boolean buying = false;
     private boolean selling = false;
     private boolean available = false;
+    //Notation Array <C,R,LD> for market
     private ArrayList<Double> offLoad = new ArrayList<>();
     private ArrayList<Double> onLoad = new ArrayList<>();
+    //Total failed transferred jobs
     private int transferedFail = 0;
+    //Arrival Rate
     private double lambda = 0;
-    private double per = 0;
+    //Ceiling for job scheduler
+    private double per;
+    //Bandwidth available to house
     private double bandwidth;
-    private double costRatio;
-    private MarketHistory transactions = new MarketHistory();
+    //Tracking statistics
     private ArrayList<Double> priceLog = new ArrayList<>();
     private ArrayList<Double> energyLog = new ArrayList<>();
     private ArrayList<Double> revenueLog = new ArrayList<>();
     private ArrayList<Double> failureLog = new ArrayList<>();
     private ArrayList<Double> jobThroughput = new ArrayList<>();
+    private MarketHistory transactions = new MarketHistory();
 
+    //Constructor for pre-calculated arrival rate
     public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, double arrival, ArrayList theWorld){
         String[] a = theWorld.get(1).toString().split("],");
         ArrayList<String[]> clusterSpecs = new ArrayList<>();
@@ -62,11 +105,14 @@ public class DataCenter {
             s = s.replace(" ","");
             clusterSpecs.add(s.split(","));
         }
+        //Set External Parameters
         this.id = id;
         this.budget = budget;
+        BUDGET = this.budget;
         this.bandwidth = bandwidth;
         this.participation = participation;
         SETPART = participation;
+        //Createe and spec out clusters
         for(int x = 0; x < numClust; x++){
             clusters.add(new Cluster(Progress.idCluster, clusterSpecs));
             Progress.idCluster++;
@@ -78,9 +124,10 @@ public class DataCenter {
                 maxWh += clusters.get(x).accessCell(y).getMaxPowerUse();
             }
         }
-        speed = speed / clusters.size();;
+        //Calc average cluster speed
+        speed = speed / clusters.size();
         maxCost = maxCost();
-        //1 - per gives the load capacity the server is being allowed to run at
+        //(1 - per) -> load capacity the server is being allowed to run at
         if (clusters.size() == 1 || clusters.size() == 2) {
             per = 0.1;
         }
@@ -92,9 +139,11 @@ public class DataCenter {
         }
         setJobWeights();
         double perShort = 0.9;
+        //Job delivery factory
         master = new JobMaster(speed, perShort, numClust, arrival);
     }
 
+    //Second constructor for non-calculated arrival rate
     public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, ArrayList theWorld){
         String[] a = theWorld.get(1).toString().split("],");
         ArrayList<String[]> clusterSpecs = new ArrayList<>();
@@ -108,6 +157,7 @@ public class DataCenter {
 
         this.id = id;
         this.budget = budget;
+        BUDGET = this.budget;
         this.bandwidth = bandwidth;
         this.participation = participation;
         SETPART = participation;
@@ -123,10 +173,10 @@ public class DataCenter {
                 maxWh += clusters.get(x).accessCell(y).getMaxPowerUse();
             }
         }
+
         speed = speed / clusters.size();
         maxCost = maxCost();
 
-        //1 - per gives the load capacity the server is being allowed to run at
         if (clusters.size() == 1 || clusters.size() == 2) {
             per = 0.1;
         }
@@ -141,67 +191,42 @@ public class DataCenter {
         master = new JobMaster(speed, perShort, numClust);
     }
 
-    public void setBudget() {
-     double flip = rand.nextDouble();
-        if (flip < .5) {
-            if (numCluster() == 1) {
-                budget = rand.nextInt(10) + 85;
-            } else if (numCluster() == 2) {
-                budget = rand.nextInt(10) + 175;
-            } else if (numCluster() == 3) {
-                budget = rand.nextInt(10) + 265;
-            } else if (numCluster() == 4) {
-                budget = rand.nextInt(10) + 375;
-            } else {
-                budget = rand.nextInt(10) + 455;
-            }
-        }
-        else {
-            if (numCluster() == 1) {
-                budget = rand.nextInt(25) + 300;
-            } else if (numCluster() == 2) {
-                budget = rand.nextInt(50) + 500;
-            } else if (numCluster() == 3) {
-                budget = rand.nextInt(75) + 700;
-            } else if (numCluster() == 4) {
-                budget = rand.nextInt(100) + 900;
-            } else {
-                budget = rand.nextInt(150) + 1000;
-            }
-        }
-    }
-
+    //Reset budget on turn of month
     public void newMonth() {
-        setBudget();
+        budget = BUDGET;
     }
 
     /*
     DATACENTER OPERATIONS
     */
-    //Add new jobs to the data center
+
+    /*
+    Add jobs the Data Center. Jobs balk according to usage percentage of the Center
+     */
     public void addJobs(Queue<Job> newJobs){
         Queue<Job> hold = new LinkedList<>();
-        double stress = 0;
-        int determine = 0;
-        int timeNeeeded = 0;
+        double stress;
+        double determine;
+        int timeNeeeded;
         while (!newJobs.isEmpty()) {
             stress = centerStress();
             Job j = newJobs.poll();
             timeNeeeded = j.getEstCompleteionTime();
             j.timeRented(timeNeeeded, standardRate);
             //Whether job balks or not
-            determine = rand.nextInt(99) + 1;
+            determine = rand.nextDouble();
             detWeight(j);
+            int balk = 0;
             if (stress >= 0 && stress <= .3) {
                 hold.add(j);
             } else if (stress > .3 && stress <= .6) {
-                if (determine <= 33 && determine >= 0) {
-                    balk++;
+                if (determine >= 0 && determine <= .6) {
+                    balk += 1;
                 } else {
                     hold.add(j);
                 }
             } else {
-                if (determine <= 66 && determine >= 0) {
+                if (determine >= 0 && determine <= .3) {
                     balk++;
                 } else {
                     hold.add(j);
@@ -451,25 +476,16 @@ public class DataCenter {
     WEIGHTING JOBS AND THE TOTAL POWER OF THE CENTER
      */
     //maximum percentage of weight that a given type of job could take in this center
-    public void setJobWeights() {
-        maxL = ((Job.MAXCOREL +  Job.MAXRAML + Job.MAXDISKL)/(totalCPU + totalRAM + totalDisk));
+    public double setJobWeights() {
+        return ((Job.MAXCOREL +  Job.MAXRAML + Job.MAXDISKL)/(totalCPU + totalRAM + totalDisk));
     }
 
     //determine the total weight this job would require during execution in this center
     public void detWeight(Job j) {
-        double totalPer = 1 * maxL;
+        double totalPer = 1 * setJobWeights();
         j.setCenterWeight((j.getWeight() * totalPer));
     }
 
-    public double compCost(Job j) {
-        double per = 1 * maxL;
-        return (maxCost * (j.getWeight() * per));
-    }
-
-    public double compWeight(Job j) {
-        double per = 1 * maxL;
-        return (j.getWeight() * per);
-    }
 
     //max cost the center could incur given the current rates this minute
     public double maxCost() {
@@ -506,26 +522,6 @@ public class DataCenter {
         }
         return ((totalPrice / accountForFail) * interval);
     }
-
-    public double projectedRevenue() {
-        double totalRev = 0;
-        if (mu.length < inProgress.size()) {
-            for (int i = 0; i < mu.length - 1; i++) {
-                if (mu[i] == 1) {
-                    totalRev += inProgress.get(i).getRevenue();
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < inProgress.size() - 1; i++) {
-                if (mu[i] == 1) {
-                    totalRev += inProgress.get(i).getRevenue();
-                }
-            }
-        }
-        return totalRev;
-    }
-
     /*
     SETTING WHICH JOBS SHOULD BE OFFLOADED
      */
@@ -675,40 +671,6 @@ public class DataCenter {
     }
 
     /*
-    Market V2
-     */
-
-    public void uberEverywhere() {
-        buying = false;
-        selling = false;
-        participation = SETPART;
-        int n = participation;
-        double cost = projectedCost(n);
-        double conv = budget / 43200; //monthly budget split by minute
-        double budge = conv * n;
-        pool(cost, budge, n);
-    }
-
-    public void pool(double cost, double ceiling, int interval) {
-        onLoad = new ArrayList<>();
-        double canTake = (ceiling)/ maxCost;
-        double currentlyTaking = cost / maxCost;
-        bringOn = canTake - currentlyTaking;
-        projectedCost = maxCost * bringOn;
-        double cpu = totalCPU * bringOn;
-        double ram = totalRAM * bringOn;
-        double ld = totalDisk * bringOn;
-        ArrayList<Double> hold = new ArrayList<>();
-        hold.add(cpu);
-        hold.add(ram);
-        hold.add(ld);
-        hold.add(projectedCost);
-        onLoad = hold;
-        costRatio = (projectedCost /  (cpu + ram + ld));
-        available = true;
-    }
-
-    /*
     MISC
     */
     public void tick() {
@@ -724,14 +686,6 @@ public class DataCenter {
         return participation;
     }
 
-    public int processesDone() {
-        int total = 0;
-        for (Cluster c : clusters) {
-            total += c.collectProcesses();
-        }
-        return total;
-    }
-
     public void setProcesses() {
         for (Cluster c : clusters) {
             c.reset();
@@ -742,15 +696,6 @@ public class DataCenter {
         return budget;
     }
 
-    //given an input in kWh, calculate an integer value for how many servers I can use in that amount of power or less
-    public int extraSpace(double x){
-        return 0;
-    }
-
-    //calculate which bids to accept based on needing to offload excess
-    public void whereTo(){
-        System.out.println("send me somewhere");
-    }
 
     public void collectRev(Job j) {
         double collect = j.getRevenue();
@@ -775,10 +720,6 @@ public class DataCenter {
     //Getters
     public boolean isBuyer() {
         return buying;
-    }
-
-    public int[] getGone() {
-        return gone;
     }
 
     public boolean isSeller() {
@@ -813,16 +754,8 @@ public class DataCenter {
         return revAtm;
     }
 
-    public int getClustSpeed() {
-        return speed;
-    }
-
     public int numCluster() {
         return clusters.size();
-    }
-
-    public double getBringOn() {
-        return bringOn;
     }
 
     public int jobsTransfere() {
@@ -865,27 +798,6 @@ public class DataCenter {
         return id;
     }
 
-    public boolean isAvailable() {
-        return available;
-    }
-
-    public double getCostRatio() {
-        return costRatio;
-    }
-
-    public double getProjectedCost() {
-        return projectedCost;
-    }
-
-    public double tFailRate() {
-        if (jobsRecieved > 0) {
-            return (double)(transferedFail / jobsRecieved);
-        }
-        else {
-            return 0;
-        }
-    }
-
     public void setRate(double rate) {
         currentRate = rate;
         maxCost = maxCost();
@@ -920,14 +832,6 @@ public class DataCenter {
 
     public ArrayList<Double> getRevenueLog() {
         return revenueLog;
-    }
-
-    public ArrayList<Double> getJobThroughput() {
-        return jobThroughput;
-    }
-
-    public ArrayList<Double> getFailureLog() {
-        return failureLog;
     }
 
     public double throughput(){
@@ -983,7 +887,6 @@ public class DataCenter {
             str += "Looking to sell right now \n";
         }
         str += "Max Cost Right Now: " + maxCost() + "\n";
-        str += "Cost Ratio: " + costRatio + "\n";
 //        str += "balking rate: " + balk + "\n";
         str += "Jobs rejected: " + jobsRejected + "\n";
         str += "Miscalculations: " + forcedOut + "\n";

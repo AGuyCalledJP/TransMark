@@ -1,5 +1,7 @@
 import java.util.Random;
-
+/*
+Generate a Poisson arrival rate
+ */
 public class Poisson {
     public int poisson(double mean) {
         Random random = new Random();

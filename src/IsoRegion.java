@@ -1,6 +1,8 @@
-import java.awt.*;
 import java.util.ArrayList;
-
+/*
+IsoRegion exists to associate a major Regional Transmissions Operator (ISO), with the set of states that receive energy
+rate data from said ISO.
+ */
 public class IsoRegion {
     //Enum val for the ISO in control of this territory
     private ISOVal iso;
@@ -9,10 +11,6 @@ public class IsoRegion {
     //All states served by the enumerated authority
     private ArrayList<State> states = new ArrayList<>();
 
-    /*
-    IsoRegion exists to associate a major Regional Transmissions Operator (ISO), with the set of states that receive energy
-    rate data from said ISO.
-     */
     public IsoRegion(ISOVal iso, ArrayList<ArrayList<ArrayList>> theWorld) {
         //Receive and create the associated ISO for this region
         this.iso = iso;

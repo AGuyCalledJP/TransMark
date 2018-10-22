@@ -1,7 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
-
+/*
+Generate monthly energy rate arrays, given the ISO and current month
+Data was curated from CAISO, PJM, SPP, NYISO, and MISO
+ */
 public class rateData {
     private ISOVal iso;
     public rateData(ISOVal iso) {

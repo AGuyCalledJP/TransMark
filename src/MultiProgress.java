@@ -19,12 +19,13 @@ public class MultiProgress {
                 c.motion(month);
             } else if (select == 1) {
                 c.lessMotion(month);
-            } else if (select == 2) {
-                c.VIP(month);
             }
-            else {
-                c.minimalist(month);
-            }
+// else if (select == 2) {
+//                c.VIP(month);
+//            }
+//            else {
+//                c.minimalist(month);
+//            }
             average.add(c.collection());
             Stats s = new Stats(c);
             System.out.println(s.results());

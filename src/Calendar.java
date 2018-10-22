@@ -1,8 +1,12 @@
 public class Calendar {
+    //List of total number of days for a given month in the year
     private int[] daysInMonth = new int[]{31,28,31,30,31,30,31,31,30,31,30,31,0};
 
     public Calendar() {}
 
+    /*
+    Get month of the year given a random integer from 0-n
+     */
     public int getMonth(int currentT){
         int hold = 0;
         int months = 0;
@@ -16,6 +20,9 @@ public class Calendar {
         return (months % 12);
     }
 
+    /*
+    Get day of the week in the current month given a random integer from 1 - n
+     */
     public int getDayInMonth(int currentT) {
         int hold = 0;
         int month = 0;
@@ -35,10 +42,9 @@ public class Calendar {
         return day;
     }
 
-    private int days(int month){
-        return daysInMonth[month];
-    }
-
+    /*
+    Calculate week in the current month given a random integer from 1 - n
+     */
     public int getWeek(int currentT){
         double[] weeksInMo = new double[]{4,4.3,4.4};
         double[] minsInMo = new double[]{40320.0,43200.0, 44640.0};
@@ -62,6 +68,9 @@ public class Calendar {
         return ((weeks % 52));
     }
 
+    /*
+    Calculate the day in the current month given an integer from 1 - n
+     */
     public int getDay(int currentT){
         int hold = 0;
         int days = 0;
@@ -72,6 +81,9 @@ public class Calendar {
         return ((days % 365));
     }
 
+    /*
+    Calculate the hour in the current day given an integer from 1 - n
+    */
     public int getHour(int currentT){
         int hold = 0;
         int hours = 0;

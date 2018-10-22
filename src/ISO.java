@@ -1,4 +1,6 @@
-//ISO Class: serves the same function as the TSO class but uses real data
+/*
+ISO models a major Regional Transmissions Operator, taking in a time value, and returning the given energy rate according to that time
+ */
 public class ISO {
     //Enum for associated ISO
     private ISOVal iso;
@@ -9,9 +11,6 @@ public class ISO {
     //Data retrieval tool
     private rateData r;
 
-    /*
-    ISO models a major Regional Transmissions Operator, taking in a time value, and returning the given energy rate according to that time
-     */
     public ISO(ISOVal iso) {
         //Which ISO am I modeling
         this.iso = iso;

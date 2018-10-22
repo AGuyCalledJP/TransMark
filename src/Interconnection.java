@@ -1,17 +1,16 @@
 import java.util.ArrayList;
-
+/*
+Interconnections are modeled after their name sake in the nations power grid. These are large networks of states that are serviced by a group of RTOs and ISOs.
+This clustering of ISOs is held in conjunction with all of the states that are contained in each of these major regions.
+ */
 public class Interconnection {
     IntCon con;
     String name;
     int time;
     //All regions contained within this Interconnection
     ArrayList<IsoRegion> isoRegions = new ArrayList<>();
-
-    /*
-    Interconnections are modeled after their name sake in the nations power grid. These are large networks of states that are serviced by a group of RTOs and ISOs.
-    This clustering of ISOs is held in conjunction with all of the states that are contained in each of these major regions.
-     */
-    public Interconnection(IntCon con, String name, int time, ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>> theWorld){ //, ArrayList theWorld
+    //Create an Interconnection
+    public Interconnection(IntCon con, String name, int time, ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>> theWorld){
         this.con = con;
         this.name = name;
         this.time = time;
@@ -29,6 +28,10 @@ public class Interconnection {
         }
     }
 
+    public ArrayList<IsoRegion> getIsoRegions() {
+        return isoRegions;
+    }
+
     public String toString(){
         int tot = 0;
         String str = "";
@@ -36,7 +39,6 @@ public class Interconnection {
         for(int i = 0; i < isoRegions.size(); i++){
             for (int j = 0; j < isoRegions.get(i).getStates().size(); j++) {
                 str += isoRegions.get(i).getStates().get(j).getStateName() + ", ";
-                tot += isoRegions.get(i).getStates().get(j).getNumClients();
             }
         }
         str += "containing " + tot + " Data Centers. \n";
@@ -50,9 +52,5 @@ public class Interconnection {
             }
         }
         return str;
-    }
-
-    public ArrayList<IsoRegion> getIsoRegions() {
-        return isoRegions;
     }
 }
