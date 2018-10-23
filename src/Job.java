@@ -38,7 +38,6 @@ public class Job implements Comparable<Job>{
     private boolean failed = false;
 
     public Job(int currentTime, int id, TaskTypes t, int speed){
-        //penalty = ((int)(rand.nextDouble() * (double)(reqCoreSpace)));
         double split = rand.nextDouble();
         if (split > .7) {
             timeSensitive = 1;

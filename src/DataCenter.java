@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.util.Arrays;
+import java.util.Collections;
 /*
 
  */
-public class DataCenter {
+public class  DataCenter {
     //Utility
     private Random rand = new Random();
     //Accepted Jobs waiting to get into system schedule,
-    private PriorityQueue<Job> jobs = new PriorityQueue<>();
+    private PriorityQueue<Job> jobs = new PriorityQueue<>(new JobComparator());
     //Jobs currently in a cluster
     private ArrayList<Job> inProgress = new ArrayList<>();
     //Clusters in the system
@@ -237,6 +238,9 @@ public class DataCenter {
         totalJobs += hold.size();
     }
 
+    /*
+    Accept and file transferred jobs into the system
+     */
     public void transfer(ArrayList<Job> j, int where) {
         for (Job J : j) {
             detWeight(J);
@@ -247,6 +251,9 @@ public class DataCenter {
         jobsRecieved += j.size();
     }
 
+    /*
+    Calculate to see if I can take on a given job
+     */
     public boolean canTake(Job j) {
         boolean yes = false;
         double totalC = 0;
@@ -262,7 +269,10 @@ public class DataCenter {
         }
         return yes;
     }
-    //Calculate and remove jobs that are done
+
+    /*
+    Calculate and remove jobs that are done
+     */
     public void cleanHouse(){
         ArrayList<Queue<Job>> done = new ArrayList<>();
         int total = 0;
@@ -296,7 +306,9 @@ public class DataCenter {
         }
     }
 
-    //Place jobs into clusters
+   /*
+   Scan through clusters, distributing jobs to everywhere that has space
+    */
     public void reganomics(){
         boolean rejected = false;
         boolean[] scale = new boolean[clusters.size()];
@@ -357,9 +369,11 @@ public class DataCenter {
                 }
             }
         }
-        //System.out.println("Center Level post placement: " + jobs.size());
     }
 
+    /*
+    Remove any jobs that are still in the system over the amount of time that they paid for
+     */
     public void moveAlong() {
         ArrayList<Job> hold2 = new ArrayList<>();
         if (!inProgress.isEmpty()) {
@@ -388,14 +402,18 @@ public class DataCenter {
         }
     }
 
-    //Remove a job in processing that underestimated time needed
+    /*
+    Remove a job in processing that underestimated time needed
+     */
     public void sAndD(int id) {
         for (Cluster c : clusters) {
             c.find(id);
         }
     }
 
-    //Remove a job in processing that underestimated time needed
+    /*
+    Remove a job in processing to send to new center
+     */
     public void quaretine(int id) {
         jobsSent++;
         for (Cluster c : clusters) {
@@ -410,9 +428,10 @@ public class DataCenter {
         inProgress = hold;
     }
 
-    //Execute work on clusters
+    /*
+    Execute work on clusters
+     */
     public void wash() {
-        //System.out.println(inProgress);
         for (Cluster c : clusters) {
             c.spin();
         }
@@ -421,7 +440,9 @@ public class DataCenter {
         }
     }
 
-    //Load jobs that are waiting at lower levels
+    /*
+    Load jobs that are waiting at lower levels
+     */
     public void process() {
         for (Cluster c : clusters) {
             c.primeThePump();
@@ -432,7 +453,10 @@ public class DataCenter {
     /*
     CALCULATING POWER USAGE AND COSTS
     */
-    //total power required by the house for all running tasks.
+
+    /*
+    total power required by the house for all running tasks.
+     */
     public double powerUsage(){
         double convRate = 1000000.0;
         double watts = 0;
@@ -442,6 +466,9 @@ public class DataCenter {
         return (watts/convRate);
     }
 
+    /*
+    Calculate total usage of the house at the given moment
+     */
     public double completeUsage() {
         double totalC = 0;
         double totalR = 0;
@@ -455,15 +482,23 @@ public class DataCenter {
         return total;
     }
 
-    //Calculate cost of execution in a data center as a function of executing work and climate in surrounding area
+    /*
+    Calculate cost of execution in a data center as a function of executing work and climate in surrounding area
+     */
     public double coolingCost(double used) {
         return used * coolingPer;
     }
 
+    /*
+    Log aggregate cost incurred
+     */
     public void incurredCost(double cost) {
         totalCost += cost;
     }
 
+    /*
+    Calc total percentage of CPU usage
+     */
     public double centerStress() {
         double hold = 0;
         for (Cluster c : clusters) {
@@ -475,19 +510,26 @@ public class DataCenter {
     /*
     WEIGHTING JOBS AND THE TOTAL POWER OF THE CENTER
      */
-    //maximum percentage of weight that a given type of job could take in this center
+
+    /*
+    Maximum percentage of weight that a given type of job could take in this center
+     */
     public double setJobWeights() {
         return ((Job.MAXCOREL +  Job.MAXRAML + Job.MAXDISKL)/(totalCPU + totalRAM + totalDisk));
     }
 
-    //determine the total weight this job would require during execution in this center
+    /*
+    Determine the total weight this job would require during execution in this center
+     */
     public void detWeight(Job j) {
         double totalPer = 1 * setJobWeights();
         j.setCenterWeight((j.getWeight() * totalPer));
     }
 
 
-    //max cost the center could incur given the current rates this minute
+    /*
+    Max cost the center could incur given the current rates this minute
+     */
     public double maxCost() {
         return ((maxWh + coolingCost(maxWh)) / 1000000) * currentRate;
     }
@@ -495,7 +537,10 @@ public class DataCenter {
     /*
     PROJECTING FUTURE COSTS
     */
-    //Calculate the total cost of running for a given time interval
+
+    /*
+    Calculate the total cost of running for a given time interval
+     */
     public double projectedCost(int interval) {
         double stress = completeUsage();
         int project = interval;
@@ -522,10 +567,14 @@ public class DataCenter {
         }
         return ((totalPrice / accountForFail) * interval);
     }
+
     /*
     SETTING WHICH JOBS SHOULD BE OFFLOADED
      */
-    //Holder method for launching the market agent
+
+    /*
+    Holder method for launching the market agent
+     */
     public void reasonableIndulgence() {
         buying = false;
         selling = false;
@@ -533,15 +582,14 @@ public class DataCenter {
         if (Math.abs(centerStress()) > Progress.EPSILON && ClockWork.t > 10) {
             int n = participation;
             double cost = projectedCost(n);
-            double conv = budget / 43200; //monthly budget split by minute
+            //monthly budget split by minute
+            double conv = budget / 43200;
             double budge = conv * n;
             double room = 0.1;
             if (Math.abs(cost) > Progress.EPSILON) {
                 if (cost > (budge + (budge * room))) {
-//                    System.out.println("buy");
                     balance(budge, inProgress, cost);
                 } else if (cost < budge) {
-//                    System.out.println("sell");
                     reload(cost, budge, n);
                 }
             }
@@ -551,67 +599,52 @@ public class DataCenter {
     /*
     BALANCING COST WITH BUDGET
     */
-    //want to search through the list of jobs, finding the jobs currently in execution that would both satisfy the budget constraint while also returning the maximum profit in house
+
+    /*
+    Want to search through the list of jobs, finding the jobs currently in execution that would both satisfy the budget constraint while also returning the maximum profit in house
+     */
     private void balance(double ceiling, ArrayList<Job> candidates, double cost) {
         offLoad = new ArrayList<>();
         double total = 0;
         boolean aggregate = true;
+        double alpha = 1.0;
         ArrayList<Job> offload = new ArrayList<>();
-        MergeSortSlack ob = new MergeSortSlack(candidates);
-        ob.sortGivenArray();
-        ArrayList<Job> slack = ob.getSortedArray();
-        MergeSortMig obj = new MergeSortMig(candidates);
-        obj.sortGivenArray();
-        ArrayList<Job> mig = obj.getSortedArray();
-        int iter = 0;
-        double searchPer = 0;
-        while (aggregate && iter < 12) {
-            for (int i = slack.size() - 1; i > 0; i = i - 1) {
-                Job j = slack.get(i);
-                if (!offload.contains(j)) {
-                    if ((cost - total) > ceiling) {
-                        if (iter == 0) {
-                            searchPer = 0.1;
-                        } else if (iter == 1) {
-                            searchPer = 0.2;
-                        } else if (iter == 2) {
-                            searchPer = 0.3;
-                        } else if (iter == 3) {
-                            searchPer = 0.4;
-                        } else if (iter == 4) {
-                            searchPer = 0.5;
-                        } else if (iter == 5) {
-                            searchPer = 0.6;
-                        } else if (iter == 6) {
-                            searchPer = 0.7;
-                        } else if (iter == 7) {
-                            searchPer = 0.8;
-                        } else if (iter == 8) {
-                            searchPer = 0.9;
-                        } else  {
-                            searchPer = 1.0;
-                        }
-                        int start = (int)((mig.size()) * searchPer);
-//                        System.out.println(start);
-                        if (start == mig.size()) {
-                            start = start - 1;
-                        }
-                        Job comp = mig.get(start);
-                        if (j.getMigrationTime() <= comp.getMigrationTime()) {
-                            offload.add(j);
-                            total += j.getRelCost();
-                        } else {
-                            break;
-                        }
-                    } else {
-                        aggregate = false;
-                    }
-                }
-                else if (offload.size() == mig.size()) {
-                    aggregate = false;
-                }
+        ArrayList<ArrayList<Double>> f = new ArrayList<>();
+        int index = 0;
+        int slack;
+        double mig;
+        double c;
+        double r;
+        double val;
+        double val2;
+        ArrayList<Double> holster;
+        for (Job j : candidates) {
+            slack = j.timeLeft();
+            mig = j.getMigrationTime();
+            c = j.getRelCost() * slack;
+            r = j.getRevenue();
+            val = alpha * ((double)slack - mig);
+            val2 = (1 - alpha) * (1/(r - c));
+            holster = new ArrayList<>();
+            holster.add((double)index);
+            holster.add(val + val2);
+            f.add(holster);
+            index++;
+        }
+        Collections.sort(f,new ListComparator());
+        System.out.println("Function");
+        for(ArrayList a : f) {
+            System.out.println(a);
+        }
+        int ind = 0;
+        double hold;
+        while ((cost - total) > ceiling && ind < candidates.size() - 1) {
+            hold = f.get(ind).get(0);
+            Job j = candidates.get((int)hold);
+            if (cost - (total + j.getRelCost()) > ceiling) {
+                offload.add(j);
             }
-            iter++;
+            ind++;
         }
         setMu(offload);
         ArrayList<Double> tuple = new ArrayList<>();
@@ -632,7 +665,9 @@ public class DataCenter {
         offLoad = tuple;
     }
 
-    //Return a binary version of the inprogress arraylist. 0 signifies that it should stay, 1 if it should be offloaded
+    /*
+    Return a binary version of the inprogress arraylist. 0 signifies that it should stay, 1 if it should be offloaded
+     */
     public void setMu(ArrayList<Job> leave) {
         int[] hold =  new int[inProgress.size()];
         int i = 0;
@@ -651,6 +686,10 @@ public class DataCenter {
 
     /*
     CALCULATE JOBS TO BRING ON
+     */
+
+    /*
+    Calculate and populate <C,R,LD> tuple
      */
     public void reload(double cost, double ceiling, int interval) {
         onLoad = new ArrayList<>();
@@ -673,36 +712,23 @@ public class DataCenter {
     /*
     MISC
     */
-    public void tick() {
-        for (Job j : jobs) {
-            if (j.getTimeSensitive() > 1) {
-                j.setTimeSensitive();
-            }
-        }
-        participation = participation - 1;
-    }
 
-    public int getParticipation() {
-        return participation;
-    }
-
+    /*
+    Reset processes for each cluster
+     */
     public void setProcesses() {
         for (Cluster c : clusters) {
             c.reset();
         }
     }
-    //monthly budget for this datacenter
-    public double getBudget(){
-        return budget;
-    }
 
-
+    /*
+    STATISTICAL TRACKING
+     */
     public void collectRev(Job j) {
         double collect = j.getRevenue();
         revenue += collect;
-        //System.out.println("t rev: " + revenue);
         revAtm += collect;
-        //System.out.println("rev atm: " + revAtm);
     }
 
     public void logPrice(double cost) {
@@ -717,7 +743,62 @@ public class DataCenter {
         revenueLog.add(gain);
     }
 
-    //Getters
+    public double throughput(){
+        double total = 0;
+        for (double d : jobThroughput) {
+            total += d;
+        }
+        return total / jobThroughput.size();
+    }
+
+    public double failureRate() {
+        double totalF = 0;
+        double totalJ = 0;
+        for (int i = 0; i < failureLog.size(); i++) {
+            totalF += failureLog.get(i);
+            totalJ += failureLog.get(i) + jobThroughput.get(i);
+        }
+        totalF = totalF / failureLog.size();
+        totalJ = totalJ / jobThroughput.size();
+        return (totalF / (totalF + totalJ));
+    }
+
+    public void noThrough() {
+        jobThroughput.add(0.0);
+    }
+
+    public void noFails() {
+        failureLog.add(0.0);
+    }
+
+    public void tock() {
+        jobThroughput.add(throughput());
+        failureLog.add(failureRate());
+    }
+
+    /*
+    Age jobs and move participation rate
+    */
+    public void tick() {
+        for (Job j : jobs) {
+            if (j.getTimeSensitive() > 1) {
+                j.setTimeSensitive();
+            }
+        }
+        participation = participation - 1;
+    }
+
+    /*
+    Getters & Setters
+     */
+    public int getParticipation() {
+        return participation;
+    }
+
+    public double getBudget(){
+        return budget;
+    }
+
     public boolean isBuyer() {
         return buying;
     }
@@ -730,7 +811,9 @@ public class DataCenter {
         return inProgress;
     }
 
-    //list of jobs that need to be offloaded to reach peak profit
+    /*
+    List of jobs that need to be offloaded to reach peak profit
+     */
     public int[] getMu(){
         return mu;
     }
@@ -832,39 +915,6 @@ public class DataCenter {
 
     public ArrayList<Double> getRevenueLog() {
         return revenueLog;
-    }
-
-    public double throughput(){
-        double total = 0;
-        for (double d : jobThroughput) {
-            total += d;
-        }
-        return total / jobThroughput.size();
-    }
-
-    public double failureRate() {
-        double totalF = 0;
-        double totalJ = 0;
-        for (int i = 0; i < failureLog.size(); i++) {
-            totalF += failureLog.get(i);
-            totalJ += failureLog.get(i) + jobThroughput.get(i);
-        }
-        totalF = totalF / failureLog.size();
-        totalJ = totalJ / jobThroughput.size();
-        return (totalF / (totalF + totalJ));
-    }
-
-    public void noThrough() {
-        jobThroughput.add(0.0);
-    }
-
-    public void noFails() {
-        failureLog.add(0.0);
-    }
-
-    public void tock() {
-        jobThroughput.add(throughput());
-        failureLog.add(failureRate());
     }
 
     public String toString() {

@@ -38,12 +38,6 @@ public class Progress {
         else if (select == 1) {
            c.lessMotion(month);
         }
-//        else if (select == 2) {
-//           c.VIP(month);
-//        }
-//        else {
-//           c.minimalist(month);
-//        }
         //Collect statistical dump
         Stats s = new Stats(c);
         System.out.println(s.results());
