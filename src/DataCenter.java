@@ -87,6 +87,8 @@ public class  DataCenter {
     private double per;
     //Bandwidth available to house
     private double bandwidth;
+    //Min Fail rate (1.0), Max Profit (0.0)
+    double alpha = 1.0;
     //Tracking statistics
     private ArrayList<Double> priceLog = new ArrayList<>();
     private ArrayList<Double> energyLog = new ArrayList<>();
@@ -113,7 +115,7 @@ public class  DataCenter {
         this.bandwidth = bandwidth;
         this.participation = participation;
         SETPART = participation;
-        //Createe and spec out clusters
+        //Create and spec out clusters
         for(int x = 0; x < numClust; x++){
             clusters.add(new Cluster(Progress.idCluster, clusterSpecs));
             Progress.idCluster++;
@@ -217,7 +219,6 @@ public class  DataCenter {
             //Whether job balks or not
             determine = rand.nextDouble();
             detWeight(j);
-            int balk = 0;
             if (stress >= 0 && stress <= .3) {
                 hold.add(j);
             } else if (stress > .3 && stress <= .6) {
@@ -309,18 +310,19 @@ public class  DataCenter {
    /*
    Scan through clusters, distributing jobs to everywhere that has space
     */
-    public void reganomics(){
+    public void systemScheduler(){
         boolean rejected = false;
-        boolean[] scale = new boolean[clusters.size()];
+        boolean[] freeSpace = new boolean[clusters.size()];
         int ind = 0;
         for (Cluster check : clusters) {
             if (check.perCPU() < per || check.perRAM() < per) {
-                scale[ind] = true;
+                //If there is free space
+                freeSpace[ind] = true;
             }
             ind++;
         }
         boolean s = true;
-        for (boolean b : scale) {
+        for (boolean b : freeSpace) {
             if (!b) {
                 s = false;
             }
@@ -341,18 +343,21 @@ public class  DataCenter {
                 for (Cluster c : clusters) {
                     if (!jobs.isEmpty()) {
                         if (c.perCPU() < per || c.perRAM() < per) { //check to see if there is less than a designated amount of space available of the space on the cluster. If there is reject so that it has time to process jobs
-                            if (c.more()) {
-                                process();
-                                wash();
-                                onward[index] = true;
-                            } else if (!c.more() && numTries == clusters.size() && !Arrays.asList(onward).contains(true)) {
-                                rejected = true;
-                            } else {
-                                numTries++;
-                            }
-                        } else if (c.getAvailCPUSpace() > j.getCoreCount() && c.getAvailLocalDiskSpace() > j.getLocalDisk() && c.getAvailRAM() > j.getRAM()) {
+                            //CPUs have more processing available to do
+                             if (c.perCPU() < per || c.perRAM() < per) { //check to see if there is less than a designated amount of space available of the space on the cluster. If there is reject so that it has time to process jobs
+                                 if (c.more()) {
+                                     process();
+                                     wash();
+                                     onward[index] = true;
+                                 } else if (!c.more() && numTries == clusters.size() && !Arrays.asList(onward).contains(true)) {
+                                     rejected = true;
+                                 } else {
+                                     numTries++;
+                                 }
+                             }
+                        } else if (c.getAvailCPUSpace() > j.getCoreCount() && c.getAvailLocalDiskSpace() > j.getLocalDisk() && c.getAvailRAM() > j.getRAM()) { //There is space available
+                            //Add job to processing on that cluster
                             j = jobs.poll();
-                            // System.out.println("sending job: " + j);
                             inProgress.add(j);
                             c.sweep(j);
                             rejected = false;
@@ -604,10 +609,19 @@ public class  DataCenter {
     Want to search through the list of jobs, finding the jobs currently in execution that would both satisfy the budget constraint while also returning the maximum profit in house
      */
     private void balance(double ceiling, ArrayList<Job> candidates, double cost) {
-        offLoad = new ArrayList<>();
+        int tSlack = 0;
+        int tMig = 0;
+        int tC = 0;
+        int tR = 0;
+        for (Job j : candidates) {
+            tSlack += j.timeLeft();
+            tMig += j.getMigrationTime();
+            tC +=j.getRelCost() * j.timeLeft();
+            tR += j.getRevenue() - (j.getRelCost() * j.timeLeft());
+        }
+        int norm1 = tSlack - tMig;
+        int norm2 = tR - tC;
         double total = 0;
-        boolean aggregate = true;
-        double alpha = 1.0;
         ArrayList<Job> offload = new ArrayList<>();
         ArrayList<ArrayList<Double>> f = new ArrayList<>();
         int index = 0;
@@ -623,8 +637,8 @@ public class  DataCenter {
             mig = j.getMigrationTime();
             c = j.getRelCost() * slack;
             r = j.getRevenue();
-            val = alpha * ((double)slack - mig);
-            val2 = (1 - alpha) * (1/(r - c));
+            val = alpha * (((slack - mig)/norm1));
+            val2 = (1 - alpha) * (1/(((r - c)/norm2)));
             holster = new ArrayList<>();
             holster.add((double)index);
             holster.add(val + val2);
@@ -632,10 +646,6 @@ public class  DataCenter {
             index++;
         }
         Collections.sort(f,new ListComparator());
-        System.out.println("Function");
-        for(ArrayList a : f) {
-            System.out.println(a);
-        }
         int ind = 0;
         double hold;
         while ((cost - total) > ceiling && ind < candidates.size() - 1) {
@@ -647,12 +657,18 @@ public class  DataCenter {
             ind++;
         }
         setMu(offload);
+    }
+
+    /*
+    Return a binary version of the inprogress arraylist. 0 signifies that it should stay, 1 if it should be offloaded
+     */
+    public void setMu(ArrayList<Job> leave) {
         ArrayList<Double> tuple = new ArrayList<>();
         double cs = 0;
         double ram = 0;
         double ld = 0;
         double costToMe = 0;
-        for (Job j : offload) {
+        for (Job j : leave) {
             cs += j.getCoreCount();
             ram += j.getRAM();
             ld += j.getLocalDisk();
@@ -663,12 +679,6 @@ public class  DataCenter {
         tuple.add(ld);
         tuple.add(costToMe);
         offLoad = tuple;
-    }
-
-    /*
-    Return a binary version of the inprogress arraylist. 0 signifies that it should stay, 1 if it should be offloaded
-     */
-    public void setMu(ArrayList<Job> leave) {
         int[] hold =  new int[inProgress.size()];
         int i = 0;
         for (Job j : inProgress) {

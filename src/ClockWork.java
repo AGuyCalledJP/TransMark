@@ -116,7 +116,7 @@ public class ClockWork {
                                 D.addJobs(hold);
 
                                 //Move jobs into clusters
-                                D.reganomics();
+                                D.systemScheduler();
 
                                 //execute tasks for this minute
                                 D.setProcesses();
@@ -265,7 +265,7 @@ public class ClockWork {
                                 D.addJobs(hold);
 
                                 //Move jobs into clusters
-                                D.reganomics();
+                                D.systemScheduler();
 
                                 //execute tasks for this minute
                                 D.setProcesses();
@@ -376,7 +376,7 @@ public class ClockWork {
                 D.addJobs(hold);
 
                 //Move jobs into clusters
-                D.reganomics();
+                D.systemScheduler();
 
                 //execute tasks for this minute
                 D.setProcesses();

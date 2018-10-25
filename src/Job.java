@@ -5,16 +5,9 @@ public class Job implements Comparable<Job>{
     private ArrayList<Task> tasks = new ArrayList<>(); //needs to be an array list so that a system can determine its ability to take the whole job on. It is also going to be more efficient when implementing the movement of jobs between centers
     private ArrayList<Task> finishedTasks = new ArrayList<>();
     private Random rand = new Random();
-    public static final int MAXPROC = 21199 * 10;
-    public static final double MAXCORES = 2.0;
-    public static final double MAXRAMS = 2.0;
-    public static final double MAXCOREM = 5.0;
-    public static final double MAXRAMM = 5.0;
     public static final double MAXCOREL = 10.0;
     public static final double MAXRAML = 10.0;
     public static final double MAXDISKL = .1;
-    public static final double MAXDISKM = .01;
-    public static final double MAXDISKS = .001;
     public static final double MAXSPACE = 400;
     private double revenue;
     private int timeSensitive;

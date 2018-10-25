@@ -115,12 +115,10 @@ public class Cell {
 
     //Move tasks down to machine level to get executed
     public void locked() {
-//        System.out.println("me");
         Machine dest = new Machine(0, 0, 0, -1);
         double least = 1.0;
         boolean end = false;
          while (!tasks.isEmpty() && !end) {
-//             System.out.println("runnin runnin and ");
             for (Machine m : machines) {
                 double used = m.machineStress();
                 if (used < least) {
@@ -128,7 +126,6 @@ public class Cell {
                     dest = m;
                 }
             }
-            //System.out.println(dest.getId());
             if (dest.getId() != -1) {
                 if ((dest.getCapacityCPU() - dest.getCPUUsed()) > tasks.peek().getReqCoreSpace() && (dest.getCapacityRAM() - dest.getRamUsed()) > tasks.peek().getRequiredRam()) {
                     Task t = tasks.poll();
@@ -144,15 +141,11 @@ public class Cell {
                 end = true;
             }
         }
-        //System.out.println("Cell level post placement: " + tasks.size());
     }
 
     public void cycle(){
         for (Machine m : machines) {
-//            System.out.println("Cycling: " + m.getId());
-//            System.out.println("Stress: " + m.machineStress());
             m.exe();
-//            System.out.println("FUck yourself: " + m.collector());
         }
     }
 
@@ -163,9 +156,6 @@ public class Cell {
             stillGoin[index] = m.getRunning();
             index++;
         }
-//        for(boolean b : stillGoin) {
-//            System.out.println(b);
-//        }
         boolean working = false;
         for (boolean b : stillGoin) {
             if (b) {

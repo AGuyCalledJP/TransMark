@@ -12,7 +12,6 @@ public class Task {
     private int id;
     private int parentId;
     private double estTimeToComplete;
-    private double weight;
 
     public Task(TaskTypes t, int id, int parentId, int speed){
         DetTaskReqs d = new DetTaskReqs(t, speed);
