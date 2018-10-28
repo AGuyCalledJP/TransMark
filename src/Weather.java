@@ -1,5 +1,8 @@
 import java.util.Random;
-//has been made very granular
+/*
+Simulate weather patterns for a given state
+Currently unused
+ */
 public class Weather {
     StateVal s;
     int high;

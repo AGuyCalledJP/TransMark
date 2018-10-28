@@ -1,19 +1,28 @@
 import java.util.*;
 
-//Job manager for sets of cells.
+/*
+Control the distribution of jobs from the Data Center down to the Cells, as progress allows
+ */
 public class Cluster {
-    public Queue<Job> clusterJobs = new LinkedList<>(); // jobs that are waiting to be processed
-    public ArrayList<Job> inProgress = new ArrayList<>(); //jobs that are actively being processed
+    // jobs that are waiting to be processed
+    public Queue<Job> clusterJobs = new LinkedList<>();
+    //jobs that are actively being processed
+    public ArrayList<Job> inProgress = new ArrayList<>();
     public Queue<Job> finished = new LinkedList<>();
-    private ArrayList<Cell> clusterCells = new ArrayList<>(); //All cells that this cluster contains
+    //All cells that this cluster contains
+    private ArrayList<Cell> clusterCells = new ArrayList<>();
     private Random rand = new Random();
     private double RAM;
     private double localDiskSpace;
+    //Total CPU I have access too
     private double maxCPUSpace;
+    //Total work I can do each minute
     private double maxCPUTasks;
+    //How much [x] do I have available?
     private double availRAM;
     private double availLocalDiskSpace;
     private double availCPUSpace;
+    //How fast am I?
     private double avgSpeed;
     private int id;
     private int jobsDone = 0;
@@ -37,7 +46,7 @@ public class Cluster {
 
     }
 
-    //update the amount of total space in this cluster
+    //Set the amount of total space in this cluster, based off number of cells
     public void availSpace() {
         double totalUsedR = 0;
         double totalUsedD = 0;
@@ -63,12 +72,9 @@ public class Cluster {
         availRAM = RAM - totalUsedR;
     }
 
+    //Get to one of my cells
     public Cell accessCell(int index) {
         return clusterCells.get(index);
-    }
-
-    public int getNumCells() {
-        return clusterCells.size();
     }
 
     //Return completed tasks to their proper jobs
@@ -108,30 +114,31 @@ public class Cluster {
     public void primeThePump() {
         boolean runnin = true;
         while (!clusterJobs.isEmpty() && runnin) {
-//            System.out.println("help");
-            Job j = clusterJobs.peek(); //check to see if the head of the list can be taken into the next level of the system
+            //check to see if the head of the list can be taken into the next level of the system
+            Job j = clusterJobs.peek();
             if (availCPUSpace > j.getCoreCount() && availRAM > j.getRAM()) {
-                // System.out.println("here");
-                j = clusterJobs.poll(); //pop the job
-                //System.out.println(j.getTasks().size());
+                //pop the job
+                j = clusterJobs.poll();
                 j.inExecution();
-                inProgress.add(j); // move the job into the active phase
+                // move the job into the active phase
+                inProgress.add(j);
                 //send the next jobs tasks into the cpu for the cpu to manage
                 for (int k = 0; k < j.getTasks().size(); k++) {
-                    //Check to see if the machines have enough total space to bring on the job. If they do start sending the tasks. There may be tasks that are too large to get immediately serviced, and for these we will just send them to a random machine
+                    /*
+                    Check to see if the machines have enough total space to bring on the job.
+                    If they do start sending the tasks. There may be tasks that are too large
+                    to get immediately serviced, and for these we will just send them to a random machine
+                    */
                     Cell dest = new Cell(-1);
                     int min = 0;
                     double per = 1.0;
                     for (int i = 0; i < clusterCells.size(); i++) {
-                        //System.out.println("Comparing: " + clusterCells.get(i).cellStress());
-                        //System.out.println(clusterCells.get(i).cellStress() < per);
                         if (clusterCells.get(i).cellStress() < per) {
                             per = clusterCells.get(i).cellStress();
                             min = i;
                         }
                     }
                     dest = clusterCells.get(min);
-                    //System.out.println("Going to: " + dest.getId());
                     if (dest.getId() != -1) {
                         if (clusterCells.get(min).availCPU() > j.getTasks().get(k).getReqCoreSpace() && clusterCells.get(min).availRAM() > j.getTasks().get(k).getRequiredRam()) {
                             clusterCells.get(min).deploy(j.getTasks().get(k));
@@ -142,7 +149,6 @@ public class Cluster {
                         int send = rand.nextInt(clusterCells.size());
                         clusterCells.get(send).deploy(j.getTasks().get(k));
                         clusterCells.get(send).locked();
-                        //System.out.println("sending " + j.getTasks().get(k));
                         break;
                     }
                 }
@@ -151,47 +157,15 @@ public class Cluster {
                 runnin = false;
             }
         }
-        //System.out.println("Cluster level post placement: " +clusterJobs.size());
         availSpace();
     }
-
-    //Method to send the head of the queue of jobs to a cell
-//    public void primeThePump() {
-//        if (!clusterJobs.isEmpty()) {
-//            Job j = clusterJobs.peek(); //check to see if the head of the list can be taken into the next level of the system
-//            if (availCPUSpace > j.getCoreCount() && availRAM > j.getRAM()) {
-//                // System.out.println("here");
-//                j = clusterJobs.poll(); //pop the job
-//                j.inExecution();
-//                inProgress.add(j); // move the job into the active phase
-//                //send the next jobs tasks into the cpu for the cpu to manage
-//                for (int k = 0; k < j.getTasks().size(); k++) {
-//                    //Check to see if the machines have enough total space to bring on the job. If they do start sending the tasks. There may be tasks that are too large to get immediately serviced, and for these we will just send them to a random machine
-//                    for (int i = 0; i < clusterCells.size(); i++) {
-//                        if (clusterCells.get(i).availCPU() > j.getTasks().get(k).getReqCoreSpace() && clusterCells.get(i).availRAM() > j.getTasks().get(k).getRequiredRam()) {
-//                            clusterCells.get(i).deploy(j.getTasks().get(k));
-//                            clusterCells.get(i).locked();
-//                            //System.out.println("sending " + j.getTasks().get(k));
-//                            break;
-//                        } else {
-//                            int send = rand.nextInt(clusterCells.size());
-//                            clusterCells.get(send).deploy(j.getTasks().get(k));
-//                            clusterCells.get(i).locked();
-//                            //System.out.println("sending " + j.getTasks().get(k));
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        availSpace();
-//    }
 
     //Add incoming jobs to the job queue
     public void sweep(Job j) {
         clusterJobs.add(j);
     }
 
+    //Do work
     public void spin() {
         for (Cell c : clusterCells) {
             c.cycle();
@@ -222,6 +196,7 @@ public class Cluster {
         return more;
     }
 
+    //Determine total watt usage
     public double cellPowerUse() {
        double watts = 0;
        for (Cell c : clusterCells) {
@@ -230,6 +205,7 @@ public class Cluster {
        return watts;
     }
 
+    //How stressed am I?
     public double clusterStress() {
         double hold = 0;
         for (Cell c : clusterCells) {
@@ -238,6 +214,7 @@ public class Cluster {
         return (hold / clusterCells.size());
     }
 
+    //Find and remove a Job
     public void find(int id) {
         Queue<Job> hold = new LinkedList<>();
         if (!clusterJobs.isEmpty()) {
@@ -270,14 +247,7 @@ public class Cluster {
         }
     }
 
-    public int collectProcesses() {
-        int total = 0;
-        for (Cell c : clusterCells) {
-            total += c.tax();
-        }
-        return total;
-    }
-
+    //Give CPU's back their completable tasks
     public void reset() {
         for (Cell c : clusterCells) {
             for (Machine m : c.getMachines()) {
@@ -286,24 +256,22 @@ public class Cluster {
         }
     }
 
+    //Percentage CPU currently available
+    public double perCPU() {
+        return (availCPUSpace / maxCPUSpace);
+    }
+    //Percentage RAM currently available
+    public double perRAM() {
+        return (availRAM / RAM);
+    }
+
+    //Getters & Setters
     public ArrayList<Cell> getClusterCells() {
         return clusterCells;
     }
 
     public double getAvgSpeed() {
         return avgSpeed;
-    }
-
-    public double getRAM() {
-        return RAM;
-    }
-
-    public double getLocalDiskSpace() {
-        return localDiskSpace;
-    }
-
-    public double getMaxCPUTasks() {
-        return maxCPUTasks;
     }
 
     public double getAvailRAM() {
@@ -328,15 +296,6 @@ public class Cluster {
 
     public double getMaxRam() {
         return RAM;
-    }
-
-    //Percentage CPU currently available
-    public double perCPU() {
-        return (availCPUSpace / maxCPUSpace);
-    }
-
-    public double perRAM() {
-        return (availRAM / RAM);
     }
 
     public int getId() {

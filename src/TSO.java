@@ -1,7 +1,10 @@
 import java.util.Random;
 import java.util.ArrayList;
 
-//Transmission State Operator
+/*
+Transmission State Operator -> Model an operator given no data
+Currently unused
+ */
 public class TSO {
     private int time;
     private int id;

@@ -157,27 +157,26 @@ public class ClockWork {
                                     //Get price projection from now till next participation time
                                     D.reasonableIndulgence();
 
-                                    //If I want to sell jobs, make sure I have a meaningful contribution to the market
-                                    if (D.isSeller()) {
+                                    //If I want to buy jobs, make sure that I want to buy more than nothing
+                                    if (D.isBuyer()) {
                                         if (D.getOnLoad().size() > 0) {
                                             if (D.getOnLoad().get(0) > 0 && D.getOnLoad().get(1) > 0 && D.getOnLoad().get(2) > 0) {
-                                                market.addSeller(D);
+                                                market.addBuyer(D);
                                             }
                                         }
                                     } else {
-                                        market.removeSeller(D);
+                                        market.removeBuyer(D);
                                     }
 
-                                    //If im not selling then I must be buying
-                                    if (D.isBuyer()) {
+                                    //Simulate Capitalism
+                                    if (D.isSeller()) {
                                         if (D.getOffLoad().size() > 0) {
-                                            //Simulate Capitalism
                                             market.silkRoad(D);
                                         }
                                     }
                                 }
                             }
-                            //If youre overbudget, you no longer get to play
+                            //If you're over-budget, you no longer get to play
                             else {
                                 D.incurredCost(0);
                                 D.logPrice(0);

@@ -1,15 +1,22 @@
 import java.util.*;
-
-//ADD IN MIGRATION OVERHEAD
+/*
+Wrapping class for bundles of tasks. Tracks overall usage needs, and weights jobs against the maximum possible weights.
+Also tracks migration time penalties, time rented, relative cost, and centerStress / weight
+ */
 public class Job implements Comparable<Job>{
-    private ArrayList<Task> tasks = new ArrayList<>(); //needs to be an array list so that a system can determine its ability to take the whole job on. It is also going to be more efficient when implementing the movement of jobs between centers
+    //Bundle of tasks left to be done
+    private ArrayList<Task> tasks = new ArrayList<>();
+    //tasks that have been completed
     private ArrayList<Task> finishedTasks = new ArrayList<>();
     private Random rand = new Random();
+    //Maximum values jobs can require
     public static final double MAXCOREL = 10.0;
     public static final double MAXRAML = 10.0;
     public static final double MAXDISKL = .1;
     public static final double MAXSPACE = 400;
+    //How much will I pay you
     private double revenue;
+    //Priority
     private int timeSensitive;
     private int estCompletionTime;
     private double migrationTime;
@@ -20,18 +27,25 @@ public class Job implements Comparable<Job>{
     private int id;
     private int totalTasks;
     private int timeRented;
+    //How much do I weight overall
     private double weight;
+    //How much do I weigh to my center
     private double centerWeight;
+    //Am I currently in execution
     private boolean executing = false;
+    //How much do I cost to my center
     private double relCost = 0;
-    private int start;
+    //How large am I?
     private String jobType;
     private String jobClass;
+    //Hav I been sent?
     private boolean transfered = false;
+    //Why...did I do something wrong?
     private boolean failed = false;
 
-    public Job(int currentTime, int id, TaskTypes t, int speed){
+    public Job(int id, TaskTypes t, int speed){
         double split = rand.nextDouble();
+        //How soon do I need to be done? No rush -> 10, I need it now -> 1
         if (split > .7) {
             timeSensitive = 1;
         }
@@ -41,19 +55,21 @@ public class Job implements Comparable<Job>{
         this.id = id;
         jobClass = t.toString();
         jobType = t.toString().substring(0,1);
+        //How many total tasks do I contain> 1 -> 10
         int numTasks = rand.nextInt(9) + 1;
         for(int i = 0; i < numTasks; i++){
             tasks.add(new Task(t, Progress.idTask, id, speed));
             Progress.idTask++;
         }
         totalTasks = numTasks;
+        //How much do I weigh?
         calcReq();
         weight();
+        //How long would it take me to transfer out?
         calcMigTime();
-        start = tasks.size();
-//        System.out.println("time in mins to complete: " + estCompletionTime);
     }
 
+    //How much do I weigh?
     public void calcReq(){
         coreCount = 0;
         RAM = 0;
@@ -70,6 +86,7 @@ public class Job implements Comparable<Job>{
         estCompletionTime = estCompletionTime + 15;
     }
 
+    //How long would it take to transfer me?
     public void calcMigTime() {
         double total = 0;
         for (Task t : tasks) {
@@ -80,6 +97,7 @@ public class Job implements Comparable<Job>{
         migrationTime = total;
     }
 
+    //Have I completed execution
     public boolean done(){
         if (totalTasks == finishedTasks.size()){
             return true;
@@ -89,6 +107,7 @@ public class Job implements Comparable<Job>{
         }
     }
 
+    //How much do I weigh in comparison to the biggest possible Job?
     public void weight() {
         double total = 0;
         for (Task t : tasks) {
@@ -100,6 +119,7 @@ public class Job implements Comparable<Job>{
         weight = total;
     }
 
+    //Remove necessary time when I am transferred
     public void migPenalty(double band1, double band2) {
         double totalSize = migrationTime * MAXSPACE;
         double secondsToUpload = totalSize / band1;
@@ -119,7 +139,9 @@ public class Job implements Comparable<Job>{
         return migrationTime * MAXSPACE;
     }
 
-    //Getters
+    /*
+    Getters & Setters
+     */
     public double getRevenue(){
         return revenue;
     }
@@ -138,7 +160,7 @@ public class Job implements Comparable<Job>{
         return migrationTime;
     }
 
-    public double  getRAM() {
+    public double getRAM() {
         return RAM;
     }
 
@@ -175,11 +197,6 @@ public class Job implements Comparable<Job>{
         return centerWeight;
     }
 
-    public boolean exe() {
-        return executing;
-    }
-
-    //Setters
     public void setMigTime() {
         calcMigTime();
     }

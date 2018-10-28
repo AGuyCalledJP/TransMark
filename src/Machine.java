@@ -1,18 +1,25 @@
 import java.util.*;
-
+/*
+Modeling the core of a Google Cluster Trace Cell
+ */
 public class Machine {
+    //My work
     private Queue<Task> tasks = new LinkedList<>();
     private Queue<Task> executing = new LinkedList<>();
     private Queue<Task> finished = new LinkedList<>();
+    //How full am I?
     private double percentageUsed;
     private double ramUsed;
     private double capacityCPU;
     private double capacityRAM;
     private int tProcesses;
-    private int idle;
+    //Am I working?
     private boolean runnin = true;
+    //How hard could I possibly work?
+    private int idle;
     private int max;
     private int id;
+    //How much have I done?
     private int tasksDone = 0;
     private int processesDone = 0;
 
@@ -29,15 +36,17 @@ public class Machine {
 
     //Run the Machine
     public void exe() {
-        int processesNow = gettProcesses(); //total actions that can be executed this minute
+        //total actions that can be executed this minute
+        int processesNow = gettProcesses();
         runnin = true;
         boolean run = true;
         while (run) {
             if(!executing.isEmpty()) {
                 Task t = executing.peek();
-                int workLeft = t.getNumProcesses(); //amount of work that still needs to be done on this particular task
-
-                if (workLeft > processesNow) { //if theres more work than can be done in a minute, remove a mins worth of work from this task
+                //amount of work that still needs to be done on this particular task
+                int workLeft = t.getNumProcesses();
+                //if theres more work than can be done in a minute, remove a mins worth of work from this task
+                if (workLeft > processesNow) {
                     t.workDone(processesNow);
                     t.setDataGenerated();
                     runnin = false;
@@ -72,7 +81,6 @@ public class Machine {
     public void andLoaded() {
         boolean rejected = false;
         while (!rejected && !tasks.isEmpty()) {
-//            System.out.println("be strong");
             if (!tasks.isEmpty()) {
                 Task t = tasks.peek();
                 if ((getCapacityRAM() - getRamUsed()) > t.getRequiredRam() && (getCapacityCPU() - getCPUUsed()) > t.getReqCoreSpace()) {
@@ -83,25 +91,6 @@ public class Machine {
                     rejected = true;
                 }
             }
-        }
-    }
-
-    //Getters
-    public double getCPUUsed() {
-        if (Math.abs(percentageUsed) < Progress.EPSILON) {
-            return 0;
-        }
-        else {
-            return percentageUsed;
-        }
-    }
-
-    public double getRamUsed() {
-        if (Math.abs(ramUsed) < Progress.EPSILON) {
-            return 0;
-        }
-        else {
-            return ramUsed;
         }
     }
 
@@ -142,14 +131,33 @@ public class Machine {
         executing = hold2;
     }
 
-    public int collector() {
-        return processesDone;
+    //Total CPU used at this moment
+    public double getCPUUsed() {
+        if (Math.abs(percentageUsed) < Progress.EPSILON) {
+            return 0;
+        }
+        else {
+            return percentageUsed;
+        }
+    }
+
+    //Total RAM used at this moment
+    public double getRamUsed() {
+        if (Math.abs(ramUsed) < Progress.EPSILON) {
+            return 0;
+        }
+        else {
+            return ramUsed;
+        }
     }
 
     public double machineStress() {
         return (getCPUUsed() / capacityCPU);
     }
 
+    /*
+    Getters & Setters
+     */
     public int gettProcesses() {
         return tProcesses;
     }
@@ -164,14 +172,6 @@ public class Machine {
 
     public boolean getRunning() {
         return runnin;
-    }
-
-    public int idleSpeed() {
-        return idle;
-    }
-
-    public int maxSpeed() {
-        return max;
     }
 
     public int getId() {

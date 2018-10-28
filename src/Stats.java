@@ -1,3 +1,6 @@
+/*
+Statistical aggregation module
+ */
 public class Stats {
     ClockWork c;
 

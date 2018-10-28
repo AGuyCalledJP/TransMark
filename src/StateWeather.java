@@ -1,3 +1,6 @@
+/*
+Model state weather patterns on a monthly basis
+ */
 public class StateWeather {
     StateVal s;
 

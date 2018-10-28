@@ -1,5 +1,7 @@
 import java.util.Random;
-
+/*
+Given a task type Enum, Return a string in the range of said task type
+ */
 public class DetTaskReqs {
     private TaskTypes t;
     private int speed;
@@ -12,6 +14,7 @@ public class DetTaskReqs {
         pull = t.toString();
     }
 
+    //How long?
     public int detDuration() {
         if (pull.substring(0,1).equals("S")) {
             return rand.nextInt(speed * 57) + speed * 3; //run between 3 minutes and 30 minutes
@@ -21,6 +24,7 @@ public class DetTaskReqs {
         }
     }
 
+    //How much CPu
     public double detCore() {
         if (pull.substring(1,2).equals("S")) {
             double y = rand.nextInt(20);
@@ -36,6 +40,7 @@ public class DetTaskReqs {
         }
     }
 
+    //How much RAM
     public double detMem() {
         if (pull.substring(2,3).equals("S")) {
             double y = rand.nextInt(20);
@@ -51,6 +56,7 @@ public class DetTaskReqs {
         }
     }
 
+    //How much Local Disk
     public double detLD() {
         if (pull.substring(3).equals("S")) {
             return (rand.nextDouble()/10000);

@@ -6,7 +6,8 @@ import java.util.LinkedList;
 import java.util.Arrays;
 import java.util.Collections;
 /*
-
+Data Center. This class comprises the working heart of this simulation. Each data center object tracks its inner statistics
+and workings, while monitoring when and how it will participate in the market.
  */
 public class  DataCenter {
     //Utility
@@ -95,8 +96,6 @@ public class  DataCenter {
     private ArrayList<Double> revenueLog = new ArrayList<>();
     private ArrayList<Double> failureLog = new ArrayList<>();
     private ArrayList<Double> jobThroughput = new ArrayList<>();
-    private MarketHistory transactions = new MarketHistory();
-
     //Constructor for pre-calculated arrival rate
     public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, double arrival, ArrayList theWorld){
         String[] a = theWorld.get(1).toString().split("],");
@@ -246,7 +245,6 @@ public class  DataCenter {
         for (Job J : j) {
             detWeight(J);
         }
-        transactions.addTransaction(j, where);
         jobs.addAll(j);
         totalJobs += j.size();
         jobsRecieved += j.size();
@@ -595,7 +593,7 @@ public class  DataCenter {
                 if (cost > (budge + (budge * room))) {
                     balance(budge, inProgress, cost);
                 } else if (cost < budge) {
-                    reload(cost, budge, n);
+                    reload(cost, budge);
                 }
             }
         }
@@ -606,7 +604,7 @@ public class  DataCenter {
     */
 
     /*
-    Want to search through the list of jobs, finding the jobs currently in execution that would both satisfy the budget constraint while also returning the maximum profit in house
+    Want to search through the list of jobs, finding the jobs currently in execution that would both satisfy the budget constraint
      */
     private void balance(double ceiling, ArrayList<Job> candidates, double cost) {
         int tSlack = 0;
@@ -699,9 +697,9 @@ public class  DataCenter {
      */
 
     /*
-    Calculate and populate <C,R,LD> tuple
+    Calculate and populate <C,R,LD,PC> tuple
      */
-    public void reload(double cost, double ceiling, int interval) {
+    public void reload(double cost, double ceiling) {
         onLoad = new ArrayList<>();
         double canTake = (ceiling)/ maxCost;
         double currentlyTaking = cost / maxCost;
@@ -821,13 +819,12 @@ public class  DataCenter {
         return inProgress;
     }
 
-    /*
-    List of jobs that need to be offloaded to reach peak profit
-     */
+    //List of jobs that need to be offloaded to reach peak profit
     public int[] getMu(){
         return mu;
     }
 
+    //Tuples used for market operations
     public ArrayList<Double> getOffLoad() {
         return offLoad;
     }
@@ -962,7 +959,6 @@ public class  DataCenter {
         str += "Profit: " + (revenue - totalCost) + "\n";
 //        str += "log of energy usage: " + energyLog + "\n";
 //        str += "log of cost: " + priceLog + "\n";
-        str += "Failed transfers: " + transactions.failPer() + "\n";
         str += "Avg Failure Rate: " + failureRate() + "\n";
         str += "Avg Job Throughput: " + throughput();
         return str;

@@ -1,21 +1,30 @@
 import java.util.*;
-
+/*
+Modeling the CPU that was used in the Google Cluster Trace Data
+ */
 public class Cell {
+    //My Cores
     private ArrayList<Machine> machines = new ArrayList<>();
+    //My tasks that need to finish completion
     private Queue<Task> tasks = new LinkedList<>();
+    //Tasks currently executing
     private ArrayList<Task> inProgress = new ArrayList<>();
-    private ArrayList<Queue<Task>> completed = new ArrayList<Queue<Task>>();
+    //Tasks completed
+    private ArrayList<Queue<Task>> completed = new ArrayList<>();
+    //How many tasks can I complete in a minute?
     private int maxTasks;
     private double totalCPU;
     private double totalRam;
+    //How much do I use when idling
     private int basePowerUse;
+    //How much do I use at max capacity
     private int maxPowerUse;
-    private Random rand = new Random();
     private int id;
 
     public Cell(int id, String[] specs) {
         int speed = Integer.parseInt(specs[0]);
-        int theoMax = (speed * 10); //max tasks per minute
+        //max tasks per minute
+        int theoMax = (speed * 10);
         maxTasks = speed;
         int numMachines = Integer.parseInt(specs[1]);
 
@@ -28,7 +37,7 @@ public class Cell {
         int machineIdle = (basePowerUse/numMachines);
         int maxPower = (maxPowerUse/numMachines);
 
-        //How many machines do I have? They all have 10 for now
+        //How many machines do I have?
         for(int i = 0; i < numMachines; i++){
             machines.add(new Machine(machinePower,machineIdle,maxPower,Progress.idMachine));
             Progress.idMachine++;
@@ -43,8 +52,7 @@ public class Cell {
         this.id = id;
     }
 
-    //translate and add together the total energy being used by all the machines
-    //machine power is calculated by translating total percentage of machine used 0 -> 100 to power usage 161 -> 230
+    //translate and add together the total energy being used by all the machines: 0 -> 100 to power usage x -> y
     public double machinePowerUse(){
         double watts = 0;
         for(Machine m : machines) {
@@ -53,23 +61,7 @@ public class Cell {
         return watts;
     }
 
-    public double cpuInUse(){
-        double totalPer = 0;
-        for(Machine m : machines){
-            totalPer += m.getCPUUsed();
-        }
-        return totalPer;
-    }
-
-    public double ramInUse(){
-        double totalPer = 0;
-        for(Machine m : machines){
-            totalPer += m.getRamUsed();
-        }
-        return totalPer;
-    }
-
-    //returns total available cpu room on server
+    //returns total available CPU room on server
     public double availCPU(){
         if (Math.abs(totalCPU) < Progress.EPSILON) {
             return 0;
@@ -79,6 +71,7 @@ public class Cell {
         }
     }
 
+    //returns total available RAM room on server
     public double availRAM(){
         if (Math.abs(totalRam) < Progress.EPSILON) {
             return 0;
@@ -88,7 +81,7 @@ public class Cell {
         }
     }
 
-
+    //Remove Tasks that have completed execution in order of completion
     public ArrayList<Queue<Task>> clean(){
         for(Machine m : machines){
             Queue<Task> f = m.getFinished();
@@ -143,12 +136,14 @@ public class Cell {
         }
     }
 
+    //Do work
     public void cycle(){
         for (Machine m : machines) {
             m.exe();
         }
     }
 
+    //Do I still have work to do this minute?
     public boolean working() {
         boolean[] stillGoin = new boolean[machines.size()];
         int index = 0;
@@ -165,6 +160,7 @@ public class Cell {
         return working;
     }
 
+    //How much work am I doing right now?
     public double cellStress() {
         double hold = 0;
         for (Machine m : machines) {
@@ -173,6 +169,7 @@ public class Cell {
         return (hold / machines.size());
     }
 
+    //Get rid of killed tasks from CPU
     public void taskRemoval(int id) {
         Queue<Task> hold = new LinkedList<>();
         if (!tasks.isEmpty()) {
@@ -199,26 +196,16 @@ public class Cell {
         }
     }
 
+    //Remove job from the machine
     public void machineRemoval(int id) {
         for (Machine m : machines) {
             m.pullOff(id);
         }
     }
 
-    public int tax() {
-        int total = 0;
-        for (Machine m : machines) {
-            total += m.collector();
-        }
-        return total;
-    }
-
-
-    //Getters
-    public int getNumMachines(){
-        return machines.size();
-    }
-
+    /*
+    Getters & Setters
+     */
     public int getSpeed() {
         return maxTasks;
     }
@@ -257,7 +244,6 @@ public class Cell {
 
     //toString
     public String toString(){
-       int key = 1;
        String str = "";
        str += "Waiting Tasks: " + tasks.size() + "\n";
        str += "Executing Tasks: " + inProgress.size() + "\n";

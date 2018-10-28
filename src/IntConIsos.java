@@ -1,3 +1,6 @@
+/*
+Given an Interconnection, return the set of operating ISO's contained within it
+ */
 public class IntConIsos {
     IntCon con;
 
@@ -6,8 +9,6 @@ public class IntConIsos {
     }
 
     public ISOVal[] detISO() {
-        ISOVal[] isoVal;
-
         switch (con) {
             case WESTERN:
                 return new ISOVal[]{ISOVal.CAISO};

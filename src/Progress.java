@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.SortedSet;
-
+/*
+Generator
+ */
 public class Progress {
     /*
      * Identification values for the major classes participating in the simulation
