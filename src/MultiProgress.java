@@ -7,13 +7,23 @@ Secondary main, used to aggregate runs of the simulation
  */
 public class MultiProgress {
 
-    public static void main(String[]args){
-        ArrayList<ArrayList<ArrayList<Double>>> average = new ArrayList<>();
+    public static int cellSpeed;
+    public static int numCores;
+    public static int IdlePC;
+    public static int MaxPC;
+    public static int select;
+    public static int chunk;
+
+    public static void main(String[]args) {
+        ArrayList<ArrayList<ArrayList<Double>>> minAverage = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<Double>>> tAverage = new ArrayList<>();
+        ArrayList<ArrayList<ArrayList<Double>>> jAverage = new ArrayList<>();
         int avg = 5;
         long startTime = System.currentTimeMillis();
         ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = loadConfig();
         ClockWork c = new ClockWork(bigDeal);
-        int select = 2;
+        int select = 0;
+        int day = 24*60;
         int month = 44640;
         int year = 525600;
         for (int i = 0; i < avg; i++) {
@@ -22,44 +32,48 @@ public class MultiProgress {
             } else if (select == 1) {
                 c.lessMotion(month);
             }
-            average.add(c.collection());
+            minAverage.add(c.minCollection());
+            tAverage.add(c.tCollection());
+            jAverage.add(c.jCollection());
             Stats s = new Stats(c);
             System.out.println(s.results());
         }
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println(elapsedTime);
-        String holder = condense(average);
-        System.out.println(holder);
+        String holder1 = condense(minAverage);
+        String holder2 = condense(tAverage);
+        String holder3 = fun(jAverage);
         if (select == 0) {
             try {
-                write(holder, "outPutDataMH");
-            }
-            catch (IOException writeError){
+                write(holder1, "avgMinByMinOutputM");
+            } catch (IOException writeError) {
                 System.out.println("Unable to write");
             }
-        }
-        else if (select == 1) {
             try {
-                write(holder, "outPutDataNM");
-            }
-            catch (IOException writeError){
+                write(holder2, "avgTOutputM");
+            } catch (IOException writeError) {
                 System.out.println("Unable to write");
             }
-        }
-        else if (select == 2) {
             try {
-                write(holder, "outPutDataC");
-            }
-            catch (IOException writeError){
+                write(holder3, "avgJobPerformanceM");
+            } catch (IOException writeError) {
                 System.out.println("Unable to write");
             }
-        }
-        else {
+        } else {
             try {
-                write(holder, "outPutDataU");
+                write(holder1, "avgMinByMinOutputNM");
+            } catch (IOException writeError) {
+                System.out.println("Unable to write");
             }
-            catch (IOException writeError){
+            try {
+                write(holder2, "avgTOutputNM");
+            } catch (IOException writeError) {
+                System.out.println("Unable to write");
+            }
+            try {
+                write(holder3, "avgJobPerformanceNM");
+            } catch (IOException writeError) {
                 System.out.println("Unable to write");
             }
         }
@@ -74,7 +88,6 @@ public class MultiProgress {
 
     public static String condense(ArrayList<ArrayList<ArrayList<Double>>> average) {
         int winner = 0;
-        //System.out.println(average);
         for (int i = 0; i < average.size(); i++) {
             for (int j = 0; j < average.get(i).size(); j++) {
                 if (average.get(i).get(j).size() > winner) {
@@ -117,9 +130,6 @@ public class MultiProgress {
             C[l] = C[l] / average.size();
             R[l] = R[l] / average.size();
         }
-//        System.out.println(E.length);
-//        System.out.println(C.length);
-//        System.out.println(R.length);
         String str = "";
         str += Arrays.toString(E) + "\n";
         str += Arrays.toString(C) + "\n";
@@ -127,6 +137,50 @@ public class MultiProgress {
         return str;
     }
 
+    public static String fun(ArrayList<ArrayList<ArrayList<Double>>> average) {
+        int winner = 0;
+        //System.out.println(average);
+        for (int i = 0; i < average.size(); i++) {
+            for (int j = 0; j < average.get(i).size(); j++) {
+                if (average.get(i).get(j).size() > winner) {
+                    winner = average.get(i).get(j).size();
+                }
+            }
+        }
+        System.out.println("winner: " + winner);
+        Double[] T = new Double[winner];
+        Double[] F = new Double[winner];
+        for (int x = 0; x < T.length; x++) {
+            T[x] = 0.0;
+            F[x] = 0.0;
+        }
+        for (int i = 0; i < average.size() - 1; i++) {
+            for (int j = 0; j < average.get(i).size() - 1; j++) {
+                for (int k = 0; k < average.get(i).get(j).size() - 1; k++) {
+                    if (j % 2 == 0) {
+                        double total = T[k] + average.get(i).get(j).get(k);
+                        T[k] = total;
+                    }
+                    else {
+                        double total = F[k] + average.get(i).get(j).get(k);
+                        F[k] = total;
+                    }
+                }
+            }
+        }
+        for (int l = 0; l < T.length; l++) {
+            T[l] = T[l] / average.size();
+            F[l] = F[l] / average.size();
+        }
+        String str = "";
+        str += Arrays.toString(T) + "\n";
+        str += Arrays.toString(F) + "\n";
+        return str;
+    }
+
+    /*
+     Read config file into 8d arraylist
+      */
     public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
         String path = System.getProperty("user.dir") + "/config/exampleConfig";
         File file = new File(path);
@@ -136,6 +190,45 @@ public class MultiProgress {
             Scanner inputFile = new Scanner(file);
             while (inputFile.hasNextLine()) {
                 String line = inputFile.nextLine();
+                if (line.equals("//WORLD SETTINGS")) {
+                    String f = inputFile.nextLine();
+                    if (f.contains("Length: ")) {
+                        String[] hold = f.split(": ");
+                        String l = hold[1];
+                        chunk = Integer.parseInt(l);
+                    }
+                    f = inputFile.nextLine();
+                    if (f.contains("Market/Non-Market: ")) {
+                        String[] hold = f.split(": ");
+                        String q = hold[1];
+                        int l = Integer.parseInt(q);
+                        select = l;
+                    }
+                }
+                line = inputFile.nextLine();
+                if (line.equals("//GLOBAL CELL")) {
+                    String s = inputFile.nextLine();
+                    if (s.contains("Speed:")) {
+                        String[] hold = s.split(": ");
+                        cellSpeed = Integer.parseInt(hold[1]);
+                    }
+                    s = inputFile.nextLine();
+                    if (s.contains("Number of Cores:")) {
+                        String[] hold = s.split(": ");
+                        numCores = Integer.parseInt(hold[1]);
+                    }
+                    s = inputFile.nextLine();
+                    if (s.contains("Idle Power Consumption:")) {
+                        String[] hold = s.split(": ");
+                        IdlePC = Integer.parseInt(hold[1]);
+                    }
+                    s = inputFile.nextLine();
+                    if (s.contains("Max Power Consumption:")) {
+                        String[] hold = s.split(": ");
+                        MaxPC = Integer.parseInt(hold[1]);
+                    }
+                }
+                line = inputFile.nextLine();
                 if (line.equals("//INTERCONNECTION")) {
                     boolean connecting = true;
                     while (connecting) {
@@ -166,7 +259,7 @@ public class MultiProgress {
                                             boolean collecting = true;
                                             while (collecting) {
                                                 ArrayList<ArrayList> center = new ArrayList<>();
-                                                ArrayList<Integer> specs = new ArrayList<>();
+                                                ArrayList specs = new ArrayList<>();
                                                 String spec = inputFile.nextLine();
                                                 if (spec.contains("Budget:")) {
                                                     String[] hold = spec.split(": ");
@@ -184,7 +277,26 @@ public class MultiProgress {
                                                 spec = inputFile.nextLine();
                                                 if (spec.contains("Band Width Speed:")) {
                                                     String[] hold = spec.split(": ");
+                                                    specs.add(Double.parseDouble(hold[1]));
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                spec = inputFile.nextLine();
+                                                if (spec.contains("Participation Rate:")) {
+                                                    String[] hold = spec.split(": ");
                                                     specs.add(Integer.parseInt(hold[1]));
+                                                } else {
+                                                    specs.add(null);
+                                                }
+                                                spec = inputFile.nextLine();
+                                                if (spec.contains("Arrival Rate:")) {
+                                                    String[] hold = spec.split(": ");
+                                                    if (!hold[1].equals("null")) {
+                                                        specs.add(Double.parseDouble(hold[1]));
+                                                    }
+                                                    else {
+                                                        specs.add(null);
+                                                    }
                                                 } else {
                                                     specs.add(null);
                                                 }
@@ -202,39 +314,7 @@ public class MultiProgress {
                                                             holster.add(Integer.parseInt(hold[1]));
                                                             clusterSpecs.add(holster);
                                                         }
-                                                        if (inputFile.nextLine().equals("//CELL")) {
-                                                            boolean cells = true;
-                                                            while (cells) {
-                                                                ArrayList<Integer> cellSpecs = new ArrayList<>();
-                                                                String cellSpec = inputFile.nextLine();
-                                                                if (cellSpec.contains("Speed:")) {
-                                                                    String[] hold = cellSpec.split(": ");
-                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
-                                                                }
-                                                                cellSpec = inputFile.nextLine();
-                                                                if (cellSpec.contains("Number of Cores:")) {
-                                                                    String[] hold = cellSpec.split(": ");
-                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
-                                                                }
-                                                                cellSpec = inputFile.nextLine();
-                                                                if (cellSpec.contains("Idle Power Consumption:")) {
-                                                                    String[] hold = cellSpec.split(": ");
-                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
-                                                                }
-                                                                cellSpec = inputFile.nextLine();
-                                                                if (cellSpec.contains("Max Power Consumption:")) {
-                                                                    String[] hold = cellSpec.split(": ");
-                                                                    cellSpecs.add(Integer.parseInt(hold[1]));
-                                                                }
-                                                                save = inputFile.nextLine();
-                                                                if (!save.equals("//CELL")) {
-                                                                    cells = false;
-                                                                    clusterSpecs.add(cellSpecs);
-                                                                } else {
-                                                                    clusterSpecs.add(cellSpecs);
-                                                                }
-                                                            }
-                                                        }
+                                                        save = inputFile.nextLine();
                                                         if (!save.equals("//CLUSTER")) {
                                                             clustering = false;
                                                             center.add(clusterSpecs);

@@ -1,3 +1,12 @@
+//WORLD SETTINGS
+Length: 2
+Market/Non-Market: 0
+Aggregate/Single: 0
+//GLOBAL CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 161
+Max Power Consumption: 230
 //INTERCONNECTION
 Western Interconnection
 //ISO REGION
@@ -12,58 +21,8 @@ Participation Rate: 120
 Arrival Rate: 1
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //INTERCONNECTION
 Eastern Interconnection
 //ISO REGION
@@ -78,85 +37,10 @@ Participation Rate: 150
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 IA
 //DATA CENTER
@@ -167,31 +51,6 @@ Participation Rate: 120
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 MO
 //DATA CENTER
@@ -202,112 +61,12 @@ Participation Rate: 15
 Arrival Rate: 3
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 AR
 //DATA CENTER
@@ -318,31 +77,6 @@ Participation Rate: 175
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 LA
 //DATA CENTER
@@ -353,58 +87,8 @@ Participation Rate: 50
 Arrival Rate: 1
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 MS
 //DATA CENTER
@@ -415,139 +99,14 @@ Participation Rate: 112
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 IL
 //DATA CENTER
@@ -558,139 +117,14 @@ Participation Rate: 45
 Arrival Rate: 3
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 IN
 //DATA CENTER
@@ -701,58 +135,8 @@ Participation Rate: 120
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 WI
 //DATA CENTER
@@ -763,112 +147,12 @@ Participation Rate: 155
 Arrival Rate: 3
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 MI
 //DATA CENTER
@@ -879,139 +163,14 @@ Participation Rate: 57
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //ISO REGION
 PJM
 //STATE
@@ -1024,85 +183,10 @@ Participation Rate: 25
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 KY
 //DATA CENTER
@@ -1113,139 +197,14 @@ Participation Rate: 120
 Arrival Rate: 4
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 WV
 //DATA CENTER
@@ -1256,31 +215,6 @@ Participation Rate: 90
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 VA
 //DATA CENTER
@@ -1291,31 +225,6 @@ Participation Rate: 140
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 PA
 //DATA CENTER
@@ -1326,112 +235,12 @@ Participation Rate: 60
 Arrival Rate: 2
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 NJ
 //DATA CENTER
@@ -1442,85 +251,10 @@ Participation Rate: 75
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 DE
 //DATA CENTER
@@ -1531,139 +265,14 @@ Participation Rate: 111
 Arrival Rate: 4
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 MD
 //DATA CENTER
@@ -1674,139 +283,14 @@ Participation Rate: 177
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //ISO REGION
 SPP
 //STATE
@@ -1819,139 +303,14 @@ Participation Rate: 120
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 KS
 //DATA CENTER
@@ -1962,58 +321,8 @@ Participation Rate: 22
 Arrival Rate: 1.04
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 NE
 //DATA CENTER
@@ -2024,31 +333,6 @@ Participation Rate: 117
 Arrival Rate: .44
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 SD
 //DATA CENTER
@@ -2059,112 +343,12 @@ Participation Rate: 42
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //STATE
 ND
 //DATA CENTER
@@ -2175,58 +359,8 @@ Participation Rate: 120
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //ISO REGION
 NYISO
 //STATE
@@ -2239,137 +373,12 @@ Participation Rate: 15
 Arrival Rate: null
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 //CLUSTER
 Total Cells: 5
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
-//CELL
-Speed: 1200
-Number of Cores: 10
-Idle Power Consumption: 161
-Max Power Consumption: 230
 %

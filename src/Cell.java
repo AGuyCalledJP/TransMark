@@ -21,16 +21,15 @@ public class Cell {
     private int maxPowerUse;
     private int id;
 
-    public Cell(int id, String[] specs) {
-        int speed = Integer.parseInt(specs[0]);
-        //max tasks per minute
-        int theoMax = (speed * 10);
+    public Cell(int id) {
+        int speed = Progress.cellSpeed;
+        int theoMax = (speed * 10); //max tasks per minute
         maxTasks = speed;
-        int numMachines = Integer.parseInt(specs[1]);
+        int numMachines = Progress.numCores;
 
         //Idle wattage vs max wattage
-        basePowerUse = Integer.parseInt(specs[2]);
-        maxPowerUse = Integer.parseInt(specs[3]);
+        basePowerUse = Progress.IdlePC;
+        maxPowerUse = Progress.MaxPC;
 
         //total measures of performance for the machines of the cpu
         int machinePower = (theoMax/numMachines);
@@ -45,10 +44,6 @@ public class Cell {
             totalRam += machines.get(i).getCapacityRAM();
         }
 
-        this.id = id;
-    }
-
-    public Cell(int id) {
         this.id = id;
     }
 

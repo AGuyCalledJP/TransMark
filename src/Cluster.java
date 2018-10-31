@@ -30,7 +30,7 @@ public class Cluster {
     public Cluster(int id, ArrayList<String[]> specs) {
         int r = Integer.parseInt(specs.get(0)[0]);
         for (int i = 0; i < r; i++) {
-            clusterCells.add(new Cell(Progress.idCell, specs.get(i + 1)));
+            clusterCells.add(new Cell(Progress.idCell));
             Progress.idCell++;
             maxCPUTasks += clusterCells.get(i).getMaxTasks();
             maxCPUSpace += clusterCells.get(i).getTotalCPU();

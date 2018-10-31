@@ -49,20 +49,26 @@ public class Market {
                 ArrayList<Double> avail = S.getOnLoad();
                 if (avail.size() > 0) {
                     //Calculate offload and onload percentages
-                    double weight = 0;
-                    if (avail.get(cpu) > offload.get(cpu)) {
-                        weight = avail.get(cpu) - offload.get(cpu);
-                        weight = ((avail.get(cpu) - weight) / avail.get(cpu));
-                    } else {
-                        weight = offload.get(cpu) - avail.get(cpu);
-                        weight = ((offload.get(cpu) - weight) / offload.get(cpu));
+                    double weightOff = avail.get(cpu) / offload.get(cpu);
+                    double weightOn = offload.get(cpu) / avail.get(cpu);
+                    if (weightOff > 1) {
+                        weightOff = 1;
                     }
-                    double comp = offload.get(cost) * weight;
-                    double cpuComp = offload.get(cpu) * weight;
-                    double buyComp = avail.get(cpu) / cpuComp;
+                    if (weightOn > 1) {
+                        weightOn = 1;
+                    }
+                    double comp = offload.get(cost) * weightOff;
+                    double onComp = avail.get(cost) * weightOn;
                     //Compare cost ratio
-                    if (comp > avail.get(cost) * buyComp) {
-                        double d = comp - (avail.get(cost) * buyComp);
+//                    System.out.println("Offload: " + offload);
+//                    System.out.println("Onload: " + avail);
+//                    System.out.println("from offload: " + weightOff);
+//                    System.out.println("to onload: " + weightOn);
+//                    System.out.println(comp);
+//                    System.out.println(onComp);
+//                    System.out.println(comp - onComp);
+                    if (comp > onComp) {
+                        double d = comp - onComp;
                         double w = (double)index;
                         ArrayList<Double> make = new ArrayList<>();
                         make.add(w);
@@ -114,8 +120,9 @@ public class Market {
             boolean moreRoom = true;
             DataCenter S = buyers.get(where);
             ArrayList<Job> sendEr = new ArrayList<>();
+            double totalCore = 0;
             //While I still have available jobs, offload as many as this center can take
-            while (check(available) && jindex < (available.length - 1) && jindex < (jobs.size()) && moreRoom) {
+            while (check(available) && jindex < (available.length - 1) && jindex < (jobs.size()) && moreRoom && totalCore < S.getOnLoad().get(0)) {
                 if (available[jindex] == 1) {
                     if (S.canTake(jobs.get(jindex))) {
                         //Split revenue
@@ -142,6 +149,9 @@ public class Market {
                         //Calculate cost to transfer
                         double size = jobs.get(jindex).getTotalSize();
                         D.addRev((size * - transferCost));
+
+                        //Account for total weight of jobs
+                        totalCore += jobs.get(jindex).getCoreCount();
                     }
                     else {
                         //Can I still take more?
@@ -151,8 +161,10 @@ public class Market {
                 jindex++;
             }
             S.transfer(sendEr, D.getId());
-            //Go again incase I didnt get enough, or to take me off the selling list
-            S.reasonableIndulgence();
+            S.recalibrate(sendEr);
+            if (S.isWaiting()) {
+                buyers.remove(S);
+            }
         }
     }
 

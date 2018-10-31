@@ -76,7 +76,7 @@ public class  DataCenter {
     //Market Flags
     private boolean buying = false;
     private boolean selling = false;
-    private boolean available = false;
+    private boolean waiting = false;
     //Notation Array <C,R,LD> for market
     private ArrayList<Double> offLoad = new ArrayList<>();
     private ArrayList<Double> onLoad = new ArrayList<>();
@@ -94,6 +94,9 @@ public class  DataCenter {
     private ArrayList<Double> priceLog = new ArrayList<>();
     private ArrayList<Double> energyLog = new ArrayList<>();
     private ArrayList<Double> revenueLog = new ArrayList<>();
+    private ArrayList<Double> tPriceLog = new ArrayList<>();
+    private ArrayList<Double> tEnergyLog = new ArrayList<>();
+    private ArrayList<Double> tRevenueLog = new ArrayList<>();
     private ArrayList<Double> failureLog = new ArrayList<>();
     private ArrayList<Double> jobThroughput = new ArrayList<>();
     //Constructor for pre-calculated arrival rate
@@ -550,7 +553,13 @@ public class  DataCenter {
         double totalPrice = 0;
         int index = 0;
         double per = 0;
-        int accountForFail = 2;
+        double accountForFail;
+        if (failureRate() != 0) {
+            accountForFail = failureRate();
+        }
+        else {
+            accountForFail = 2.0;
+        }
         ArrayList<Job> hold = new ArrayList<>();
         while (per < stress && index < inProgress.size()) {
             per += inProgress.get(index).getCenterWeight();
@@ -599,6 +608,28 @@ public class  DataCenter {
         }
     }
 
+    //Method to recalculate a bid after buying jobs
+    public void recalibrate(ArrayList<Job> incoming) {
+        buying = false;
+        selling = false;
+        ArrayList<Double> hold = onLoad;
+        for (Job j : incoming) {
+            hold.set(0,hold.get(0) - j.getCoreCount());
+            hold.set(1,hold.get(1) - j.getRAM());
+            hold.set(2,hold.get(2) - j.getLocalDisk());
+        }
+        double perc = hold.get(0) / totalCPU;
+        double nMC = maxCost() * perc;
+        hold.set(3,nMC);
+        onLoad = hold;
+        if (onLoad.get(0) > 0 && onLoad.get(1) > 0 && onLoad.get(2) > 0 && onLoad.get(3) > 0) {
+            buying = true;
+        }
+        else {
+            waiting = true;
+        }
+    }
+
     /*
     BALANCING COST WITH BUDGET
     */
@@ -637,13 +668,26 @@ public class  DataCenter {
             r = j.getRevenue();
             val = alpha * (((slack - mig)/norm1));
             val2 = (1 - alpha) * (1/(((r - c)/norm2)));
+            double val3;
+            if (Double.isNaN(val + val2)) {
+                val3 = 0;
+            }
+            else {
+                val3 = val + val2;
+            }
             holster = new ArrayList<>();
             holster.add((double)index);
-            holster.add(val + val2);
+            holster.add(val3);
             f.add(holster);
             index++;
         }
-        Collections.sort(f,new ListComparator());
+        try {
+            Collections.sort(f, new ListComparator());
+        }
+        catch (IllegalArgumentException message) {
+            System.out.println(message);
+            System.out.println(f);
+        }
         int ind = 0;
         double hold;
         while ((cost - total) > ceiling && ind < candidates.size() - 1) {
@@ -743,32 +787,59 @@ public class  DataCenter {
         priceLog.add(cost);
     }
 
+    public void logTPrice(double cost) {
+        tPriceLog.add(priceLog.get(priceLog.size() - 1 ) + cost);
+    }
+
     public void logEnergyUse(double expended) {
         energyLog.add(expended);
     }
 
-    public void logRevenue(double gain) {
+    public void logTEnergyUse(double expended) {
+        tEnergyLog.add(energyLog.get(energyLog.size() - 1 ) + expended);
+    }
+
+    public void logTRevenue(double gain) {
         revenueLog.add(gain);
     }
 
+    public void logMRevenue(double diff) {
+        tRevenueLog.add(diff - revenueLog.get(revenueLog.size() - 1));
+    }
+
     public double throughput(){
-        double total = 0;
-        for (double d : jobThroughput) {
-            total += d;
+        if (!jobThroughput.isEmpty()) {
+            double total = 0;
+            for (double d : jobThroughput) {
+                total += d;
+            }
+            return total / jobThroughput.size();
         }
-        return total / jobThroughput.size();
+        else {
+            return 0;
+        }
     }
 
     public double failureRate() {
-        double totalF = 0;
-        double totalJ = 0;
-        for (int i = 0; i < failureLog.size(); i++) {
-            totalF += failureLog.get(i);
-            totalJ += failureLog.get(i) + jobThroughput.get(i);
+        if (!failureLog.isEmpty() && !jobThroughput.isEmpty()) {
+            double totalF = 0;
+            double totalJ = 0;
+            for (int i = 0; i < failureLog.size(); i++) {
+                totalF += failureLog.get(i);
+                totalJ += failureLog.get(i) + jobThroughput.get(i);
+            }
+            totalF = totalF / failureLog.size();
+            totalJ = totalJ / jobThroughput.size();
+            if (totalF + totalJ > 0) {
+                return (totalF / (totalF + totalJ));
+            }
+            else {
+                return 0;
+            }
         }
-        totalF = totalF / failureLog.size();
-        totalJ = totalJ / jobThroughput.size();
-        return (totalF / (totalF + totalJ));
+        else {
+            return 0;
+        }
     }
 
     public void noThrough() {
@@ -813,6 +884,10 @@ public class  DataCenter {
 
     public boolean isSeller() {
         return selling;
+    }
+
+    public boolean isWaiting() {
+        return waiting;
     }
 
     public ArrayList<Job> getInProgress() {
@@ -924,10 +999,30 @@ public class  DataCenter {
         return revenueLog;
     }
 
+    public ArrayList<Double> getTPriceLog() {
+        return tPriceLog;
+    }
+
+    public ArrayList<Double> getTEnergyLog() {
+        return tEnergyLog;
+    }
+
+    public ArrayList<Double> getTRevenueLog() {
+        return tRevenueLog;
+    }
+
+    public ArrayList<Double> getFailureLog() {
+        return failureLog;
+    }
+
+    public ArrayList<Double> getJobThroughput() {
+        return jobThroughput;
+    }
+
     public String toString() {
         int key = 1;
         String str = "Center: " + id + "\n";
-//        str += "Jobs executing in this data center: " + "\n" + inProgress.size() + "\n";
+        str += "Jobs executing in this data center: " + "\n" + inProgress.size() + "\n";
 //        str += "Jobs waiting to be executed: " + jobs.size() + "\n";
 //        for(Cluster s : clusters) {
 //            str += s.clusterStress() + "\n";
@@ -936,7 +1031,7 @@ public class  DataCenter {
 //        str += inProgress + "\n";
         str += "Num clusters: " + clusters.size() + "\n";
         str += "Arrival Rate: " + lambda + "\n";
-        str += "Per: " + per + "\n";
+        str += "Participation Rate: " + participation + "\n";
         if (buying) {
             str += "Looking to buy right now \n";
         }
@@ -947,8 +1042,8 @@ public class  DataCenter {
 //        str += "balking rate: " + balk + "\n";
         str += "Jobs rejected: " + jobsRejected + "\n";
         str += "Miscalculations: " + forcedOut + "\n";
-//        str += "Jobs Sent: " + jobsSent + "\n";
-//        str += "Jobs Received: " + jobsRecieved + "\n";
+        str += "Jobs Sent: " + jobsSent + "\n";
+        str += "Jobs Received: " + jobsRecieved + "\n";
 //        str += "Transfer failures : " + transferedFail + "\n";
 //        str += "Transfer Failure Rate : " + tFailRate() + "\n";
         str += "Total jobs taken on: " + totalJobs + "\n";
@@ -960,7 +1055,8 @@ public class  DataCenter {
 //        str += "log of energy usage: " + energyLog + "\n";
 //        str += "log of cost: " + priceLog + "\n";
         str += "Avg Failure Rate: " + failureRate() + "\n";
-        str += "Avg Job Throughput: " + throughput();
+        str += "Avg Job Throughput: " + throughput() + "\n";
+        str += "Current Energy Rate: " + currentRate;
         return str;
     }
 }
