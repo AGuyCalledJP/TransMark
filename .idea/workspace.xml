@@ -2,56 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6034e6b-ac9b-41b2-a3a4-a2f4f76cd437" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Centers involved controlled market" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RegionMH" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/centersInvolvedM3H" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/config/exampleConfig" beforeDir="false" afterPath="$PROJECT_DIR$/config/exampleConfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/exampleConfig2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/templateConfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Cell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/Cell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/ClockWork.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/ClockWork.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Cluster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/Cluster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/DataCenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/DataCenter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/DetTaskReqs.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/DetTaskReqs.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/ISOVal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/ISOVal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/IntConIsos$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/IntConIsos$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/IntConIsos.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/IntConIsos.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/IntConVal$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/IntConVal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/IsoRegion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/IsoRegion.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/JobComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/JobComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/ListComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/ListComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Machine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/Machine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Market.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/Market.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/MarketHistory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/MergeSortCostRatio.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/MergeSortMig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/MultiProgress.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Progress.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/StateVal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/StateVal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/StateWeather$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/StateWeather$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/StateWeather.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/StateWeather.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Stats.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/Stats.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/TSO.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/TSO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/TaskTypes.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/TaskTypes.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/TimeZone.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/TimeZone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/Weather.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TransMark/Weather.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TransMark/YearProgress.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outPut data controlled market" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outPutDataM3H" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outPutDataMH" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/outPutDataU" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ClockWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ClockWork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cluster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Cluster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DataCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataCenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IsoRegion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IsoRegion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Market.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MultiProgress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MultiProgress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Progress.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Progress.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/YearProgress.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -106,10 +57,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Progress.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
+            <state relative-caret-position="7">
               <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -118,10 +69,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ClockWork.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6554">
+            <state relative-caret-position="1838">
               <caret line="97" column="110" selection-start-line="97" selection-start-column="110" selection-end-line="97" selection-end-column="110" />
             </state>
           </provider>
@@ -331,7 +282,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="currentPrice&#9;null&#9;null" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541018562063" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541087325867" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -377,6 +328,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.25178713" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -388,7 +340,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.329927" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.7" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.4218978" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -572,20 +524,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClockWork.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6554">
-          <caret line="97" column="110" selection-start-line="97" selection-start-column="110" selection-end-line="97" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Progress.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="7">
           <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ClockWork.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1838">
+          <caret line="97" column="110" selection-start-line="97" selection-start-column="110" selection-end-line="97" selection-end-column="110" />
         </state>
       </provider>
     </entry>
