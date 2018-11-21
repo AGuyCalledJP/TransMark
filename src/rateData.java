@@ -12,7 +12,7 @@ public class rateData {
 
    public double[] genData(int month){
         // Open the file.
-       String path = System.getProperty("user.dir") + "/" + iso + "DATA/";
+       String path = System.getProperty("user.dir") + "/data/" + iso + "DATA/";
        String[] cat = new String[] {"JAN" , "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
        double[] data;
        if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {

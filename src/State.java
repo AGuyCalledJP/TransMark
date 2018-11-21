@@ -64,6 +64,10 @@ public class State {
         return totalEnergy;
     }
 
+    public int zone() {
+        return new DetTime(zone).convTime();
+    }
+
     public ArrayList<DataCenter> getClientele(){
         return clientele;
     }

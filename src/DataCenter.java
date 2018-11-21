@@ -83,22 +83,19 @@ public class  DataCenter {
     //Total failed transferred jobs
     private int transferedFail = 0;
     //Arrival Rate
-    private double lambda = 0;
+    private double lambda;
     //Ceiling for job scheduler
     private double per;
     //Bandwidth available to house
     private double bandwidth;
     //Min Fail rate (1.0), Max Profit (0.0)
-    double alpha = 1.0;
-    //Tracking statistics
-    private ArrayList<Double> priceLog = new ArrayList<>();
-    private ArrayList<Double> energyLog = new ArrayList<>();
-    private ArrayList<Double> revenueLog = new ArrayList<>();
-    private ArrayList<Double> tPriceLog = new ArrayList<>();
-    private ArrayList<Double> tEnergyLog = new ArrayList<>();
-    private ArrayList<Double> tRevenueLog = new ArrayList<>();
-    private ArrayList<Double> failureLog = new ArrayList<>();
-    private ArrayList<Double> jobThroughput = new ArrayList<>();
+    double alpha = 0;
+    //Tracking statistics -> want to make all of these write out minute by minute, rather than saving over the duration of a whole run
+    private double priceLog = 0.0;
+    private double energyLog = 0.0;
+    private double profitLog = 0.0;
+    private double failureLog = 0.0;
+    private double jobThroughput = 0.0;
     //Constructor for pre-calculated arrival rate
     public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, double arrival, ArrayList theWorld){
         String[] a = theWorld.get(1).toString().split("],");
@@ -302,7 +299,7 @@ public class  DataCenter {
                 }
             }
         }
-        jobThroughput.add((double)total);
+        jobThroughput = (double)total;
         if(total > 0) {
             jobsProcessed += total;
         }
@@ -391,7 +388,7 @@ public class  DataCenter {
                 }
             }
         }
-        failureLog.add((double)(hold2.size()));
+        failureLog = (double)hold2.size();
         for (Job j2 : hold2) {
             if (j2.getTransfered()) {
                 transferedFail++;
@@ -553,13 +550,13 @@ public class  DataCenter {
         double totalPrice = 0;
         int index = 0;
         double per = 0;
-        double accountForFail;
-        if (failureRate() != 0) {
-            accountForFail = failureRate();
-        }
-        else {
-            accountForFail = 2.0;
-        }
+        double accountForFail = 2.0;
+//        if (failureRate() != 0) {
+//            accountForFail = failureRate();
+//        }
+//        else {
+//            accountForFail = 2.0;
+//        }
         ArrayList<Job> hold = new ArrayList<>();
         while (per < stress && index < inProgress.size()) {
             per += inProgress.get(index).getCenterWeight();
@@ -784,75 +781,34 @@ public class  DataCenter {
     }
 
     public void logPrice(double cost) {
-        priceLog.add(cost);
-    }
-
-    public void logTPrice(double cost) {
-        tPriceLog.add(priceLog.get(priceLog.size() - 1 ) + cost);
+        priceLog = cost;
     }
 
     public void logEnergyUse(double expended) {
-        energyLog.add(expended);
+        energyLog = expended;
     }
 
-    public void logTEnergyUse(double expended) {
-        tEnergyLog.add(energyLog.get(energyLog.size() - 1 ) + expended);
-    }
-
-    public void logTRevenue(double gain) {
-        revenueLog.add(gain);
-    }
-
-    public void logMRevenue(double diff) {
-        tRevenueLog.add(diff - revenueLog.get(revenueLog.size() - 1));
+    public void logProfit(double gain) {
+        profitLog = gain;
     }
 
     public double throughput(){
-        if (!jobThroughput.isEmpty()) {
-            double total = 0;
-            for (double d : jobThroughput) {
-                total += d;
-            }
-            return total / jobThroughput.size();
+        if (jobThroughput != 0) {
+            return jobThroughput;
         }
         else {
             return 0;
         }
     }
 
+    //Need a way to actively tabulate failure rate
     public double failureRate() {
-        if (!failureLog.isEmpty() && !jobThroughput.isEmpty()) {
-            double totalF = 0;
-            double totalJ = 0;
-            for (int i = 0; i < failureLog.size(); i++) {
-                totalF += failureLog.get(i);
-                totalJ += failureLog.get(i) + jobThroughput.get(i);
-            }
-            totalF = totalF / failureLog.size();
-            totalJ = totalJ / jobThroughput.size();
-            if (totalF + totalJ > 0) {
-                return (totalF / (totalF + totalJ));
-            }
-            else {
-                return 0;
-            }
+        if (failureLog != 0 && jobThroughput != 0) {
+            return failureLog / (failureLog + jobThroughput);
         }
         else {
             return 0;
         }
-    }
-
-    public void noThrough() {
-        jobThroughput.add(0.0);
-    }
-
-    public void noFails() {
-        failureLog.add(0.0);
-    }
-
-    public void tock() {
-        jobThroughput.add(throughput());
-        failureLog.add(failureRate());
     }
 
     /*
@@ -987,35 +943,23 @@ public class  DataCenter {
         return bandwidth;
     }
 
-    public ArrayList<Double> getPriceLog() {
+    public double getPriceLog() {
         return priceLog;
     }
 
-    public ArrayList<Double> getEnergyLog() {
+    public double getEnergyLog() {
         return energyLog;
     }
 
-    public ArrayList<Double> getRevenueLog() {
-        return revenueLog;
+    public double getProfitLog() {
+        return profitLog;
     }
 
-    public ArrayList<Double> getTPriceLog() {
-        return tPriceLog;
-    }
-
-    public ArrayList<Double> getTEnergyLog() {
-        return tEnergyLog;
-    }
-
-    public ArrayList<Double> getTRevenueLog() {
-        return tRevenueLog;
-    }
-
-    public ArrayList<Double> getFailureLog() {
+    public double getFailureLog() {
         return failureLog;
     }
 
-    public ArrayList<Double> getJobThroughput() {
+    public double getJobThroughput() {
         return jobThroughput;
     }
 

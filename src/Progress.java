@@ -27,21 +27,23 @@ public class Progress {
     public static int week = 10080;
     public static int day = 24 * 60;
     public static int[] chunks = new int[]{day, week, month, year};
+    private static ClockWork c;
     /*
     Global metric used for comparing doubles to zero
      */
     public final static double EPSILON = .000001;
+
     /*
     Main method for running the simulation once over a month long period
      */
-    public static void main(String[]args){
+    public static void main(String[] args) {
         //Read in information from config file
         ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = loadConfig();
         if (aggregate == 1) {
             //Track progress of the simulation
             long startTime = System.currentTimeMillis();
             //Create ClockWork Module
-            ClockWork c = new ClockWork(bigDeal);
+            c = new ClockWork(bigDeal);
             //Choose which version of simulation to run
             if (select == 0) {
                 c.motion(chunks[chunk]);
@@ -51,74 +53,11 @@ public class Progress {
             //Collect statistical dump
             Stats s = new Stats(c);
             System.out.println(s.results());
+            //Total execution time
             long stopTime = System.currentTimeMillis();
             long elapsedTime = stopTime - startTime;
-            //Total execution time
             System.out.println(elapsedTime);
-            //Compile stats on revenue, cost, etc
-            ArrayList<ArrayList<ArrayList<Double>>> regionMData = new ArrayList<>();
-            ArrayList<ArrayList<ArrayList<Double>>> regionTData = new ArrayList<>();
-            ArrayList<ArrayList<ArrayList<Double>>> regionJobPerf = new ArrayList<>();
-            ArrayList<ISOVal> regions = new ArrayList<>();
-            for (Interconnection I : c.getPowerGrid()) {
-                for (IsoRegion i : I.getIsoRegions()) {
-                    regionMData.add(i.compileMStats());
-                    regionTData.add(i.compileTStats());
-                    regionJobPerf.add(i.compileJStats());
-                    regions.add(i.getAuthority().getIso());
-                }
-            }
-            ArrayList<String> yump = gridLock(regionMData);
-            ArrayList<String> yump2 = gridLock(regionTData);
-            ArrayList<String> yump3 = jobLock(regionJobPerf);
-            //Write data to txt file
-            if (select == 0) {
-                for (String str : yump) {
-                    try {
-                        write(str, "minByMinOutputM");
-                    } catch (IOException writeError) {
-                        System.out.println("Unable to write");
-                    }
-                }
-                for (String str : yump2) {
-                    try {
-                        write(str, "tOutputM");
-                    } catch (IOException writeError) {
-                        System.out.println("Unable to write");
-                    }
-                }
-                for (String str : yump3) {
-                    try {
-                        write(str, "JobPerformanceM");
-                    } catch (IOException writeError) {
-                        System.out.println("Unable to write");
-                    }
-                }
-            } else if (select == 1) {
-                for (String str : yump) {
-                    try {
-                        write(str, "minByMinOutputNM");
-                    } catch (IOException writeError) {
-                        System.out.println("Unable to write");
-                    }
-                }
-                for (String str : yump2) {
-                    try {
-                        write(str, "tOutputNM");
-                    } catch (IOException writeError) {
-                        System.out.println("Unable to write");
-                    }
-                }
-                for (String str : yump3) {
-                    try {
-                        write(str, "JobPerformanceNM");
-                    } catch (IOException writeError) {
-                        System.out.println("Unable to write");
-                    }
-                }
-            }
-        }
-        else {
+        } else {
             System.out.println("Aggregating");
             ArrayList<ArrayList<ArrayList<Double>>> minAverage = new ArrayList<>();
             ArrayList<ArrayList<ArrayList<Double>>> tAverage = new ArrayList<>();
@@ -132,9 +71,9 @@ public class Progress {
                 } else if (select == 1) {
                     c.lessMotion(chunks[chunk]);
                 }
-                minAverage.add(c.minCollection());
-                tAverage.add(c.tCollection());
-                jAverage.add(c.jCollection());
+//                minAverage.add(c.minCollection());
+//                tAverage.add(c.tCollection());
+//                jAverage.add(c.jCollection());
                 Stats s = new Stats(c);
                 System.out.println(s.results());
             }
@@ -144,133 +83,200 @@ public class Progress {
             String holder1 = condense(minAverage);
             String holder2 = condense(tAverage);
             String holder3 = fun(jAverage);
-            if (select == 0) {
-                try {
-                    write(holder1, "avgMinByMinOutputM");
-                } catch (IOException writeError) {
-                    System.out.println("Unable to write");
-                }
-                try {
-                    write(holder2, "avgTOutputM");
-                } catch (IOException writeError) {
-                    System.out.println("Unable to write");
-                }
-                try {
-                    write(holder3, "avgJobPerformanceM");
-                } catch (IOException writeError) {
-                    System.out.println("Unable to write");
-                }
-            } else {
-                try {
-                    write(holder1, "avgMinByMinOutputNM");
-                } catch (IOException writeError) {
-                    System.out.println("Unable to write");
-                }
-                try {
-                    write(holder2, "avgTOutputNM");
-                } catch (IOException writeError) {
-                    System.out.println("Unable to write");
-                }
-                try {
-                    write(holder3, "avgJobPerformanceNM");
-                } catch (IOException writeError) {
-                    System.out.println("Unable to write");
-                }
-            }
+//            if (select == 0) {
+//                try {
+//                    write(holder1, "avgMinByMinOutputM");
+//                } catch (IOException writeError) {
+//                    System.out.println("Unable to write");
+//                }
+//                try {
+//                    write(holder2, "avgTOutputM");
+//                } catch (IOException writeError) {
+//                    System.out.println("Unable to write");
+//                }
+//                try {
+//                    write(holder3, "avgJobPerformanceM");
+//                } catch (IOException writeError) {
+//                    System.out.println("Unable to write");
+//                }
+//            } else {
+//                try {
+//                    write(holder1, "avgMinByMinOutputNM");
+//                } catch (IOException writeError) {
+//                    System.out.println("Unable to write");
+//                }
+//                try {
+//                    write(holder2, "avgTOutputNM");
+//                } catch (IOException writeError) {
+//                    System.out.println("Unable to write");
+//                }
+//                try {
+//                    write(holder3, "avgJobPerformanceNM");
+//                } catch (IOException writeError) {
+//                    System.out.println("Unable to write");
+//                }
+//            }
         }
     }
 
-    public static void write(String str, String name)
-            throws IOException {
+    public static void write(String str, String name) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(name));
         writer.write(str);
         writer.close();
     }
 
-    /*
-    Take 3d Arraylist of values and aggregate into a 1d arraylist of string values
-     */
-    public static ArrayList<String> gridLock(ArrayList<ArrayList<ArrayList<Double>>> data) {
-        //Find largest tuple
-        ArrayList<String> holders = new ArrayList<>();
-        for (int i = 0; i < data.size() - 1; i++) {
-            int winner = 0;
-            for (int j = 0; j < data.get(i).size(); j++) {
-                if (data.get(i).get(j).size() > winner) {
-                    winner = data.get(i).get(j).size();
-                }
+    public static void append(String minute, String total, String jobPerf) {
+        ArrayList<ArrayList<Double>> regionData = new ArrayList<>();
+        ArrayList<ArrayList<Double>> regionJobPerf = new ArrayList<>();
+        for (Interconnection I : c.getPowerGrid()) {
+            for (IsoRegion i : I.getIsoRegions()) {
+                regionData.add(i.compileMStats());
+                regionJobPerf.add(i.compileJStats());
             }
-            ///Create holder
-            Double[] E = new Double[winner];
-            Double[] C = new Double[winner];
-            Double[] R = new Double[winner];
-            for (int x = 0; x < E.length; x++) {
-                E[x] = 0.0;
-                C[x] = 0.0;
-                R[x] = 0.0;
-            }
-            for (int j = 0; j < data.get(i).size() - 1; j++) {
-                for (int k = 0; k < data.get(i).get(j).size() - 1; k++) {
-                    if (j % 3 == 0) {
-                        E[k] = data.get(i).get(j).get(k);
-                    } else if (j % 3 == 1) {
-                        double total = C[k] + data.get(i).get(j).get(k);
-                        C[k] = total;
-                    } else {
-                        double total = R[k] + data.get(i).get(j).get(k);
-                        R[k] = total;
-                    }
-                }
-            }
-            for (int l = 0; l < E.length; l++) {
-                E[l] = E[l] / data.get(i).size();
-                C[l] = C[l] / data.get(i).size();
-                R[l] = R[l] / data.get(i).size();
-            }
-            String str = "";
-            str += Arrays.toString(E) + "\n";
-            str += Arrays.toString(C) + "\n";
-            str += Arrays.toString(R) + "\n";
-            holders.add(str);
         }
+        File min = new File(minute);
+        File tot = new File(total);
+        File job = new File(jobPerf);
+        if(!min.exists()) {
+            try {
+                min.createNewFile();
+            }
+            catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+        if(!tot.exists()) {
+            try {
+                tot.createNewFile();
+            }
+            catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+        if(!job.exists()) {
+            try {
+                job.createNewFile();
+            }
+            catch (IOException e) {
+                System.out.println(e);
+            }
+        }
+        ArrayList<String> write = gridLock(regionData);
+        ArrayList<String> jobs = jobLock(regionJobPerf);
+        try {
+            Scanner scanM = new Scanner(new File(minute));
+            Scanner scanT = new Scanner(new File(total));
+            Scanner scanJ = new Scanner(new File(jobPerf));
+            ArrayList<String> ECRM = new ArrayList<>();
+            ArrayList<String> ECRT = new ArrayList<>();
+            ArrayList<String> ECRJ = new ArrayList<>();
+            if (scanM.hasNext() && scanT.hasNext() && scanJ.hasNext()) {
+                while (scanM.hasNext()) {
+                    ECRM.add(scanM.nextLine());
+                }
+                String strM = "";
+                for (int i = 0; i < ECRM.size(); i++) {
+                    String read = ECRM.get(i);
+                    read = read.substring(0, read.length() - 1);
+                    String add = write.get(i);
+                    read += ", " + add + "]\n";
+                    strM += read;
+                }
+                while (scanT.hasNext()) {
+                    ECRT.add(scanT.nextLine());
+                }
+                String strT = "";
+                for (int i = 0; i < ECRT.size(); i++) {
+                    String read = ECRT.get(i);
+                    String rewrite = read.substring(0, read.length() - 1);
+                    read = read.substring(1, read.length() - 1);
+                    String[] vals = read.split(", ");
+                    String last = vals[vals.length-1];
+                    String add = write.get(i);
+                    Double fin = Double.parseDouble(last) + Double.parseDouble(add);
+                    rewrite += ", " + fin + "]\n";
+                    strT += rewrite;
+                }
+                while (scanJ.hasNext()) {
+                    ECRJ.add(scanJ.nextLine());
+                }
+                String strJ = "";
+                for (int i = 0; i < ECRJ.size(); i++) {
+                    String read = ECRJ.get(i);
+                    read = read.substring(0, read.length() - 1);
+                    String add = jobs.get(i);
+                    read += ", " + add + "]\n";
+                    strJ += read;
+                }
+                write(strM,minute);
+                write(strT,total);
+                write(strJ,jobPerf);
+            }
+            else {
+                String format = "";
+                for (int i = 0; i < write.size(); i++) {
+                    format += "[" + write.get(i) + "]\n";
+                }
+                String jFormat = "";
+                for (int i = 0; i < jobs.size(); i++) {
+                    jFormat += "[" + jobs.get(i) + "]\n";
+                }
+                write(format,minute);
+                write(format,total);
+                write(jFormat,jobPerf);
+            }
+        }
+        catch(IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    /*
+    Take 2d Arraylist of values and aggregate into a 1d arraylist of string values
+     */
+    public static ArrayList<String> gridLock(ArrayList<ArrayList<Double>> data) {
+        ArrayList<String> holders = new ArrayList<>();
+        ///Create holder
+        Double E =  0.0;
+        Double C = 0.0;
+        Double R = 0.0;
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = 0; j < data.get(i).size(); j++) {
+                if (j % 3 == 0) {
+                    E += data.get(i).get(j);
+                } else if (j % 3 == 1) {
+                    C += data.get(i).get(j);
+                } else {
+                    R += data.get(i).get(j);
+                }
+            }
+        }
+        E = E / data.size();
+        C = C / data.size();
+        R = R / data.size();
+        holders.add(E.toString());
+        holders.add(C.toString());
+        holders.add(R.toString());
         return holders;
     }
 
-    public static ArrayList<String> jobLock(ArrayList<ArrayList<ArrayList<Double>>> data) {
+    public static ArrayList<String> jobLock(ArrayList<ArrayList<Double>> data) {
         ArrayList<String> holders = new ArrayList<>();
+        Double T =  0.0;
+        Double F = 0.0;
         for (int i = 0; i < data.size() - 1; i++) {
-            int winner = 0;
-            for (int j = 0; j < data.get(i).size(); j++) {
-                if (data.get(i).get(j).size() > winner) {
-                    winner = data.get(i).get(j).size();
-                }
-            }
-            Double[] T = new Double[winner];
-            Double[] F = new Double[winner];
-            for (int x = 0; x < T.length; x++) {
-                T[x] = 0.0;
-                F[x] = 0.0;
-            }
             for (int j = 0; j < data.get(i).size() - 1; j++) {
-                for (int k = 0; k < data.get(i).get(j).size() - 1; k++) {
-                    if (j % 2 == 0) {
-                        double total = T[k] + data.get(i).get(j).get(k);
-                        T[k] = total;
-                    } else{
-                        double total = F[k] + data.get(i).get(j).get(k);
-                        F[k] = total;
-                    }
+                if (j % 2 == 0) {
+                    T += data.get(i).get(j);
+                } else{
+                    F += data.get(i).get(j);
                 }
             }
-            for (int l = 0; l < T.length; l++) {
-                T[l] = T[l] / data.get(i).size();
-                F[l] = F[l] / data.get(i).size();
-            }
-            String str = "";
-            str += Arrays.toString(T) + "\n";
-            str += Arrays.toString(F) + "\n";
-            holders.add(str);
         }
+        T = T / data.size();
+        F = F / data.size();
+        holders.add(T.toString());
+        holders.add(F.toString());
         return holders;
     }
 
@@ -364,7 +370,7 @@ public class Progress {
     Read config file into 8d arraylist
      */
     public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
-        String path = System.getProperty("user.dir") + "/config/exampleConfig";
+        String path = System.getProperty("user.dir") + "/config/sparse";
         File file = new File(path);
         String save = "";
         ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = new ArrayList<>();
