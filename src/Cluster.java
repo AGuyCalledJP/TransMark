@@ -2,6 +2,7 @@ import java.util.*;
 
 /*
 Control the distribution of jobs from the Data Center down to the Cells, as progress allows
+@author Jared Polonitza
  */
 public class Cluster {
     // jobs that are waiting to be processed

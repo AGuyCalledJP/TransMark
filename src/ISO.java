@@ -1,5 +1,6 @@
 /*
 ISO models a major Regional Transmissions Operator, taking in a time value, and returning the given energy rate according to that time
+@author Jared Polonitza
  */
 public class ISO {
     //Enum for associated ISO

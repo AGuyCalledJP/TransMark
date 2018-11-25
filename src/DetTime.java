@@ -1,5 +1,6 @@
 /*
 Determine offset from UTC for the timezones of the US
+@author Jared Polonitza
  */
 public class DetTime {
     TimeZone t;

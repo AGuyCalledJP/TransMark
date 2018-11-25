@@ -1,3 +1,7 @@
+/*
+Translate an integer into a date value
+@author Jared Polonitza
+ */
 public class Calendar {
     //List of total number of days for a given month in the year
     private int[] daysInMonth = new int[]{31,28,31,30,31,30,31,31,30,31,30,31,0};

@@ -1,0 +1,5 @@
+String str = "";
+str += "Location of the boulder is: (" + x + ", " + y + ")";
+str = "Location of the boulder is (x, y)"
+
+ArrayList<Double> name = new ArrayList<>();

@@ -1,7 +1,7 @@
 //WORLD SETTINGS
-Length: 2
+Length: 0
 Market/Non-Market: 1
-Aggregate/Single: 0
+Aggregate/Single: 1
 //GLOBAL CELL
 Speed: 1200
 Number of Cores: 10

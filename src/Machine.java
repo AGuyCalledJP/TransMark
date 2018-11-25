@@ -1,6 +1,7 @@
 import java.util.*;
 /*
 Modeling the core of a Google Cluster Trace Cell
+@author Jared Polonitza
  */
 public class Machine {
     //My work

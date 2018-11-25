@@ -48,36 +48,24 @@ public class IsoRegion {
     }
 
     //Compile usage stats for all centers across the region
-    public ArrayList<ArrayList<Double>> compileMStats() {
-        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
+    public ArrayList<Double> compileMStats() {
+        ArrayList<Double> holster = new ArrayList<>();
         for (State S : states) {
             for (DataCenter d : S.getClientele()) {
                 holster.add(d.getPriceLog());
                 holster.add(d.getEnergyLog());
-                holster.add(d.getTRevenueLog());
+                holster.add(d.getProfitLog());
             }
         }
         return holster;
     }
 
-    public ArrayList<ArrayList<Double>> compileTStats() {
-        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
+    public ArrayList<Double> compileJStats() {
+        ArrayList<Double> holster = new ArrayList<>();
         for (State S : states) {
             for (DataCenter d : S.getClientele()) {
-                holster.add(d.getTPriceLog());
-                holster.add(d.getTEnergyLog());
-                holster.add(d.getRevenueLog());
-            }
-        }
-        return holster;
-    }
-
-    public ArrayList<ArrayList<Double>> compileJStats() {
-        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
-        for (State S : states) {
-            for (DataCenter d : S.getClientele()) {
-                holster.add(d.getJobThroughput());
-                holster.add(d.getFailureLog());
+                holster.add(d.throughput());
+                holster.add(d.failureRate());
             }
         }
         return holster;

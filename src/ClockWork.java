@@ -7,6 +7,7 @@ ClockWork is the discrete blueprint for how data centers act and interact, both 
 Upon initialization this module populates its powerGrid array with Interconnections, ISOs, States, and Data Centers, creating
 the environment for these objects to interact. Once motion (or one of motion's many relatives) is commenced, the simulation
 steps through a minute by minute simulation of some predetermined time interval.
+@author Jared Polonitza
  */
 public class ClockWork {
     /*
@@ -82,14 +83,13 @@ public class ClockWork {
                     T.giveMonth(month);
                     for (State S : P.getStates()) {
                         for (DataCenter D : S.getClientele()) {
-                            int time = S.getLocalTime();
                             //If a new month started, reset budget and other metrics to start again
                             if (giveNewMonth) {
                                 tHrs = 0;
                                 D.newMonth();
                             }
                             //Update price rates on an hourly basis
-                            double price =  T.getRate(tHrs);;
+                            double price =  T.getRate(tHrs);
                             if (t % 60 == 0) {
                                 //Retrieve current energy price from authority
                                 D.setRate(price);
@@ -102,92 +102,73 @@ public class ClockWork {
                                 tTransfer += D.jobsTransfere();
                                 tJobs += D.getTotalJobs();
                             }
-                            //If a center has already crossed its budget threshold for the month,stop all processes
-                            if (D.getBudget() > D.incurredCost()) {
-                                JobMaster jobMast = D.getMaster();
-                                jobMast.setLambda();
+                            JobMaster jobMast = D.getMaster();
+                            jobMast.setLambda();
 
-                                //Generate jobs for a center to incur this minute
-                                Queue<Job> hold = jobMast.genJobs();
+                            //Generate jobs for a center to incur this minute
+                            Queue<Job> hold = jobMast.genJobs();
 
-                                //Give jobs to center
-                                D.addJobs(hold);
+                            //Give jobs to center
+                            D.addJobs(hold);
 
-                                //Move jobs into clusters
-                                D.systemScheduler();
+                            //Move jobs into clusters
+                            D.systemScheduler();
 
-                                //execute tasks for this minute
-                                D.setProcesses();
-                                D.wash();
+                            //execute tasks for this minute
+                            D.setProcesses();
+                            D.wash();
 
-                                //Calculate cost incurred this minute
-                                double mWh = D.powerUsage();
+                            //Calculate cost incurred this minute
+                            double mWh = D.powerUsage();
 
-                                //Tag on 33% overall increase in usage due to cooling costs
-                                mWh += D.coolingCost(mWh);
+                            //Tag on 33% overall increase in usage due to cooling costs
+                            mWh += D.coolingCost(mWh);
 
-                                //Log energy usage totals for this state
-                                S.setTotalEnergy(mWh);
+                            //Log energy usage totals for this state
+                            S.setTotalEnergy(mWh);
 
-                                //Log energy usage totals for this data center
-                                D.logEnergyUse(mWh);
-                                D.logTEnergyUse(mWh);
+                            //Log energy usage totals for this data center
+                            D.logEnergyUse(mWh);
 
-                                //Cost/Revenue accrued by given center
-                                D.incurredCost(price * mWh);
-                                D.logPrice(price * mWh);
-                                D.logTPrice(price * mWh);
-                                D.logTRevenue(D.getRevenue() - D.getTotalCost());
-                                D.logMRevenue(D.getRevenue() - D.getTotalCost());
+                            //Cost/Revenue accrued by given center
+                            D.incurredCost(price * mWh);
+                            D.logPrice(price * mWh);
+                            D.logProfit(D.getProfit());
 
-                                //Offload any completed work
-                                D.cleanHouse();
+                            //Offload any completed work
+                            D.cleanHouse();
 
-                                //Remove any jobs that are over their rented time limit
-                                D.moveAlong();
+                            //Remove any jobs that are over their rented time limit
+                            D.moveAlong();
 
-                                //For all jobs in system, remove one minute of paid for time
-                                D.tick();
+                            //For all jobs in system, remove one minute of paid for time
+                            D.tick();
 
-                                //Mark values to track job throughput and failure rate
-                                D.tock();
+                            //Mark values to track job throughput and failure rate
 
-                                //Particpate in the market if the time is right
-                                if (D.getParticipation() == 0) {
+                            //Particpate in the market if the time is right
+                            if (D.getParticipation() == 0) {
 
-                                    //Get price projection from now till next participation time
-                                    D.reasonableIndulgence();
+                                //Get price projection from now till next participation time
+                                D.reasonableIndulgence();
 
-                                    //If I want to buy jobs, make sure that I want to buy more than nothing
-                                    if (D.isBuyer()) {
-                                        if (D.getOnLoad().size() > 0) {
-                                            if (D.getOnLoad().get(0) > 0 && D.getOnLoad().get(1) > 0 && D.getOnLoad().get(2) > 0) {
-                                                market.addBuyer(D);
-                                            }
+                                //If I want to buy jobs, make sure that I want to buy more than nothing
+                                if (D.isBuyer()) {
+                                    if (D.getOnLoad().size() > 0) {
+                                        if (D.getOnLoad().get(0) > 0 && D.getOnLoad().get(1) > 0 && D.getOnLoad().get(2) > 0) {
+                                            market.addBuyer(D);
                                         }
-                                    } else {
-                                        market.removeBuyer(D);
                                     }
+                                } else {
+                                    market.removeBuyer(D);
+                                }
 
-                                    //Simulate Capitalism
-                                    if (D.isSeller()) {
-                                        if (D.getOffLoad().size() > 0) {
-                                            market.silkRoad(D);
-                                        }
+                                //Simulate Capitalism
+                                if (D.isSeller()) {
+                                    if (D.getOffLoad().size() > 0) {
+                                        market.silkRoad(D);
                                     }
                                 }
-                            }
-                            //If you're over-budget, you no longer get to play
-                            else {
-                                D.logEnergyUse(0);
-                                D.logTEnergyUse(0);
-                                D.incurredCost(0);
-                                D.logPrice(0);
-                                D.logTPrice(0);
-                                D.logTRevenue(0);
-                                D.logMRevenue(0);
-                                D.noFails();
-                                D.noThrough();
                             }
                         }
                         //Manage time zone for given state
@@ -197,6 +178,16 @@ public class ClockWork {
             }
             //Move the simulation ahead one minute
             t++;
+            //Write aggregation information to file
+            if (Progress.aggregate == 1) {
+                Progress.append("minByMinOutputM", "tOutputM", "JobPerformanceM");
+            }
+            else {
+                String a = "avgMinByMinOutputM" + Progress.iter;
+                String b = "avgTOutputM" + Progress.iter;
+                String c = "avgJobPerformanceM" + Progress.iter;
+                Progress.append(a, b, c);
+            }
         }
     }
 
@@ -242,13 +233,14 @@ public class ClockWork {
                     ISO T = P.getAuthority();
                     for (State S : P.getStates()) {
                         for (DataCenter D : S.getClientele()) {
-                            int time = S.getLocalTime();
                             //Update price rates on an hourly basis
                             double price = 0;
+                            //Retrieve current energy price from authority
+                            int tempHrs = tHrs - S.zone();
+                            price = T.getRate(tempHrs);
                             if (t % 60 == 0) {
-                                //Retrieve current energy price from authority
-                                price = T.getRate(tHrs);
                                 D.setRate(price);
+
                             }
                             if (giveNewMonth) {
                                 D.newMonth();
@@ -261,115 +253,59 @@ public class ClockWork {
                                 tTransfer += D.jobsTransfere();
                                 tJobs += D.getTotalJobs();
                             }
-                            if (D.getBudget() > D.incurredCost()) {
-                                JobMaster jobMast = D.getMaster();
-                                jobMast.setLambda();
-                                Queue<Job> hold = jobMast.genJobs();
-                                D.addJobs(hold);
+                            JobMaster jobMast = D.getMaster();
+                            jobMast.setLambda();
+                            Queue<Job> hold = jobMast.genJobs();
+                            D.addJobs(hold);
 
-                                //Move jobs into clusters
-                                D.systemScheduler();
+                            //Move jobs into clusters
+                            D.systemScheduler();
 
-                                //execute tasks for this minute
-                                D.setProcesses();
-                                D.wash();
+                            //execute tasks for this minute
+                            D.setProcesses();
+                            D.wash();
 
-                                //Calculate cost incurred this minute
-                                double mWh = D.powerUsage();
-                                mWh += D.coolingCost(mWh);
-                                S.setTotalEnergy(mWh);
+                            //Calculate cost incurred this minute
+                            double mWh = D.powerUsage();
+                            mWh += D.coolingCost(mWh);
+                            S.setTotalEnergy(mWh);
 
-                                //Log energy usage totals for this data center
-                                D.logEnergyUse(mWh);
-                                D.logTEnergyUse(mWh);
+                            //Log energy usage totals for this data center
+                            D.logEnergyUse(mWh);
 
-                                //Cost/Revenue accrued by given center
-                                D.incurredCost(price * mWh);
-                                D.logPrice(price * mWh);
-                                D.logTPrice(price * mWh);
-                                D.logTRevenue(D.getRevenue() - D.getTotalCost());
-                                D.logMRevenue(D.getRevenue() - D.getTotalCost());
+                            //Cost/Revenue accrued by given center
+                            D.incurredCost(price * mWh);
+                            D.logPrice(price * mWh);
+                            D.logProfit(D.getProfit());
 
-                                //Offload any completed work
-                                D.cleanHouse();
+                            //Offload any completed work
+                            D.cleanHouse();
 
-                                //Remove any jobs that are over their rented time limit
-                                D.moveAlong();
+                            //Remove any jobs that are over their rented time limit
+                            D.moveAlong();
 
-                                D.tick();
-                                D.tock();
-                            }
-                            else {
-                                D.logEnergyUse(0);
-                                D.logTEnergyUse(0);
-                                D.incurredCost(0);
-                                D.logPrice(0);
-                                D.logTPrice(0);
-                                D.logTRevenue(0);
-                                D.logMRevenue(0);
-                                D.noFails();
-                                D.noThrough();
-                            }
+                            D.tick();
                         }
                         S.moveLocalTime();
                     }
                 }
             }
             t++;
+            if (Progress.aggregate == 1) {
+                Progress.append("minByMinOutputNM", "tOutputNM", "JobPerformanceNM");
+            }
+            else {
+                String a = "avgMinByMinOutputNM" + Progress.iter;
+                String b = "avgTOutputNM" + Progress.iter;
+                String c = "avgJobPerformanceNM" + Progress.iter;
+                Progress.append(a, b, c);
+            }
         }
     }
 
     //Getter for the Power Grid
     public ArrayList<Interconnection> getPowerGrid() {
         return powerGrid;
-    }
-
-    //Aggregate and return all information about Energy, Cost, and Profit available in the simulation
-    public ArrayList<ArrayList<Double>> minCollection() {
-        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
-        for (Interconnection i : powerGrid) {
-            for (IsoRegion j : i.getIsoRegions()) {
-                for (State s : j.getStates()) {
-                    for (DataCenter d : s.getClientele()) {
-                        holster.add(d.getPriceLog());
-                        holster.add(d.getEnergyLog());
-                        holster.add(d.getTRevenueLog());
-                    }
-                }
-            }
-        }
-        return holster;
-    }
-
-    public ArrayList<ArrayList<Double>> tCollection() {
-        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
-        for (Interconnection i : powerGrid) {
-            for (IsoRegion j : i.getIsoRegions()) {
-                for (State s : j.getStates()) {
-                    for (DataCenter d : s.getClientele()) {
-                        holster.add(d.getTPriceLog());
-                        holster.add(d.getTEnergyLog());
-                        holster.add(d.getRevenueLog());
-                    }
-                }
-            }
-        }
-        return holster;
-    }
-
-    public ArrayList<ArrayList<Double>> jCollection() {
-        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
-        for (Interconnection i : powerGrid) {
-            for (IsoRegion j : i.getIsoRegions()) {
-                for (State s : j.getStates()) {
-                    for (DataCenter d : s.getClientele()) {
-                        holster.add(d.getJobThroughput());
-                        holster.add(d.getFailureLog());
-                    }
-                }
-            }
-        }
-        return holster;
     }
 
     public String toString() {

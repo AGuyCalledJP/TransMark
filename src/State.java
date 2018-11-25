@@ -2,7 +2,8 @@ import java.util.ArrayList;
 /*
 States within the simulation act as the link between timezones, ISOs, and Data Centerw. States take a state value (the name of the states)
 and create an environment in which to house data centers. From this hub centers can interact with eachother, centers in other states, ISOs,
-and the market
+and the market.
+@author Jared Polonitza
  */
 public class State {
     //Enum value of State
@@ -62,6 +63,10 @@ public class State {
 
     public double getTotalEnergy() {
         return totalEnergy;
+    }
+
+    public int zone() {
+        return new DetTime(zone).convTime();
     }
 
     public ArrayList<DataCenter> getClientele(){

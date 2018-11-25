@@ -1,5 +1,6 @@
 /*
 Statistical aggregation module
+@author Jared Polonitza
  */
 public class Stats {
     ClockWork c;

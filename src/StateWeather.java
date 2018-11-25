@@ -1,5 +1,6 @@
 /*
-Model state weather patterns on a monthly basis
+Model state weather patterns on a monthly basis. Currently Unused
+@author Jared Polonitza
  */
 public class StateWeather {
     StateVal s;

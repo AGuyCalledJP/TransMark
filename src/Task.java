@@ -1,6 +1,7 @@
 import java.util.Random;
 /*
-Model a single core linux based task
+Model a linux based tasks that executes on a single core
+@author Jared Polonitza
  */
 public class Task {
     //How much of each do I need

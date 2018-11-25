@@ -2,6 +2,7 @@ import java.util.Random;
 /*
 Simulate weather patterns for a given state
 Currently unused
+@author Jared Polonitza
  */
 public class Weather {
     StateVal s;

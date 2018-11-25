@@ -2,6 +2,7 @@ import java.util.ArrayList;
 /*
 Interconnections are modeled after their name sake in the nations power grid. These are large networks of states that are serviced by a group of RTOs and ISOs.
 This clustering of ISOs is held in conjunction with all of the states that are contained in each of these major regions.
+@author Jared Polonitza
  */
 public class Interconnection {
     IntCon con;

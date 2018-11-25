@@ -1,6 +1,7 @@
 import java.util.*;
 /*
-Modeling the CPU that was used in the Google Cluster Trace Data
+Modeling the CPU from Google Cluster Trace Data
+@author Jared Polonitza
  */
 public class Cell {
     //My Cores

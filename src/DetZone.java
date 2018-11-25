@@ -1,5 +1,6 @@
 /*
 Given a StateVal enum, returns the time zone of given state
+@author Jared Polonitza
  */
 public class DetZone {
     StateVal s;

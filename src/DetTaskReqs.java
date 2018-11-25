@@ -1,6 +1,7 @@
 import java.util.Random;
 /*
 Given a task type Enum, Return a string in the range of said task type
+@author Jared Polonitza
  */
 public class DetTaskReqs {
     private TaskTypes t;
