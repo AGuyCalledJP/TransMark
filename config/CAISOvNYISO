@@ -1,5 +1,5 @@
 //WORLD SETTINGS
-Length: 1
+Length: 0
 Market/Non-Market: 1
 Aggregate/Single: 1
 //GLOBAL CELL
@@ -25,58 +25,6 @@ Total Cells: 5
 Total Cells: 5
 //INTERCONNECTION
 Eastern Interconnection
-//ISO REGION
-MISO
-//STATE
-MN
-//DATA CENTER
-Budget: 700
-Num Clusters: 3
-Band Width Speed: 1
-Participation Rate: 150
-Arrival Rate: null
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//ISO REGION
-PJM
-//STATE
-OH
-//DATA CENTER
-Budget: 700
-Num Clusters: 3
-Band Width Speed: 2
-Participation Rate: 25
-Arrival Rate: null
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//ISO REGION
-SPP
-//STATE
-OK
-//DATA CENTER
-Budget: 500
-Num Clusters: 5
-Band Width Speed: 2
-Participation Rate: 120
-Arrival Rate: null
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
 //ISO REGION
 NYISO
 //STATE

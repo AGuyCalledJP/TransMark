@@ -3,6 +3,7 @@ import java.io.*;
 /*
 Generate monthly energy rate arrays, given the ISO and current month
 Data was curated from CAISO, PJM, SPP, NYISO, and MISO
+@author Jared Polonitza
  */
 public class rateData {
     private ISOVal iso;

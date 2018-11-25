@@ -4,6 +4,7 @@ import java.util.ArrayList;
 /*
 Transmission State Operator -> Model an operator given no data
 Currently unused
+@author Jared Polonitza
  */
 public class TSO {
     private int time;

@@ -8,6 +8,7 @@ import java.util.Collections;
 /*
 Data Center. This class comprises the working heart of this simulation. Each data center object tracks its inner statistics
 and workings, while monitoring when and how it will participate in the market.
+@author Jared Polonitza
  */
 public class  DataCenter {
     //Utility
@@ -90,12 +91,13 @@ public class  DataCenter {
     private double bandwidth;
     //Min Fail rate (1.0), Max Profit (0.0)
     double alpha = 0;
-    //Tracking statistics -> want to make all of these write out minute by minute, rather than saving over the duration of a whole run
+    //Tracking statistics
     private double priceLog = 0.0;
     private double energyLog = 0.0;
     private double profitLog = 0.0;
     private double failureLog = 0.0;
     private double jobThroughput = 0.0;
+
     //Constructor for pre-calculated arrival rate
     public DataCenter(int id, double budget, int numClust, double bandwidth, int participation, double arrival, ArrayList theWorld){
         String[] a = theWorld.get(1).toString().split("],");
@@ -793,18 +795,17 @@ public class  DataCenter {
     }
 
     public double throughput(){
-        if (jobThroughput != 0) {
-            return jobThroughput;
+        if (inProgress.size() > 0) {
+            return jobThroughput / inProgress.size();
         }
         else {
             return 0;
         }
     }
 
-    //Need a way to actively tabulate failure rate
     public double failureRate() {
-        if (failureLog != 0 && jobThroughput != 0) {
-            return failureLog / (failureLog + jobThroughput);
+        if (inProgress.size() > 0) {
+            return failureLog / inProgress.size();
         }
         else {
             return 0;
@@ -863,16 +864,8 @@ public class  DataCenter {
         return onLoad;
     }
 
-    public ArrayList<Cluster> getClusters(){
-        return clusters;
-    }
-
     public double getRevenue() {
         return revenue;
-    }
-
-    public double getRevAtm() {
-        return revAtm;
     }
 
     public int numCluster() {
@@ -885,10 +878,6 @@ public class  DataCenter {
 
     public int getTotalJobs() {
         return totalJobs;
-    }
-
-    public double incurredCost() {
-        return totalCost;
     }
 
     public int getJobsRejected() {
@@ -967,12 +956,6 @@ public class  DataCenter {
         int key = 1;
         String str = "Center: " + id + "\n";
         str += "Jobs executing in this data center: " + "\n" + inProgress.size() + "\n";
-//        str += "Jobs waiting to be executed: " + jobs.size() + "\n";
-//        for(Cluster s : clusters) {
-//            str += s.clusterStress() + "\n";
-//            str += "Server " + s.getId() + ": " + s + "\n";
-//        }
-//        str += inProgress + "\n";
         str += "Num clusters: " + clusters.size() + "\n";
         str += "Arrival Rate: " + lambda + "\n";
         str += "Participation Rate: " + participation + "\n";
@@ -983,21 +966,16 @@ public class  DataCenter {
             str += "Looking to sell right now \n";
         }
         str += "Max Cost Right Now: " + maxCost() + "\n";
-//        str += "balking rate: " + balk + "\n";
         str += "Jobs rejected: " + jobsRejected + "\n";
         str += "Miscalculations: " + forcedOut + "\n";
         str += "Jobs Sent: " + jobsSent + "\n";
         str += "Jobs Received: " + jobsRecieved + "\n";
-//        str += "Transfer failures : " + transferedFail + "\n";
-//        str += "Transfer Failure Rate : " + tFailRate() + "\n";
         str += "Total jobs taken on: " + totalJobs + "\n";
         str += "Jobs done: " + jobsProcessed + "\n";
         str += "budget: " + budget + "\n";
         str += "Total Cost incurred: " + totalCost + "\n";
         str += "Total Revenue: " + revenue + "\n";
         str += "Profit: " + (revenue - totalCost) + "\n";
-//        str += "log of energy usage: " + energyLog + "\n";
-//        str += "log of cost: " + priceLog + "\n";
         str += "Avg Failure Rate: " + failureRate() + "\n";
         str += "Avg Job Throughput: " + throughput() + "\n";
         str += "Current Energy Rate: " + currentRate;

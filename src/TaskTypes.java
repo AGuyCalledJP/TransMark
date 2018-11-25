@@ -1,5 +1,6 @@
 /*
 Enum values for the different possible tasks in The system
+@author Jared Polonitza
  */
 public enum TaskTypes {
     SSSS, SMSS, SMSM, SMSL, SMMS, SMMM, SMML, SMLS, SMLM, SMLL, SLSS, SLSM, SLMS, SLMM, SLLL,

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 /*
 Comparator used to sort a 2D ArrayList of doubles. Used to assoicate a value with a specific value in a given list
+@author Jared Polonitza
  */
 class ListComparator implements Comparator<ArrayList<Double>>{
     public int compare(ArrayList<Double> a1, ArrayList<Double> a2) {

@@ -2,6 +2,7 @@ import java.util.*;
 /*
 Wrapping class for bundles of tasks. Tracks overall usage needs, and weights jobs against the maximum possible weights.
 Also tracks migration time penalties, time rented, relative cost, and centerStress / weight
+@author Jared Polonitza
  */
 public class Job implements Comparable<Job>{
     //Bundle of tasks left to be done

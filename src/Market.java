@@ -2,6 +2,7 @@ import java.util.*;
 /*
 Agent that simulates a free market exchange grounds for data centers to transact jobs and free space for profit according
 to adjusted rates
+@author Jared Polonitza
  */
 public class Market {
     //List of centers currently looking to buy jobs
@@ -60,13 +61,6 @@ public class Market {
                     double comp = offload.get(cost) * weightOff;
                     double onComp = avail.get(cost) * weightOn;
                     //Compare cost ratio
-//                    System.out.println("Offload: " + offload);
-//                    System.out.println("Onload: " + avail);
-//                    System.out.println("from offload: " + weightOff);
-//                    System.out.println("to onload: " + weightOn);
-//                    System.out.println(comp);
-//                    System.out.println(onComp);
-//                    System.out.println(comp - onComp);
                     if (comp > onComp) {
                         double d = comp - onComp;
                         double w = (double)index;
@@ -86,6 +80,9 @@ public class Market {
         }
     }
 
+    /*
+    Determine where and how much to send
+     */
     public void exchange(DataCenter D, ArrayList<ArrayList<Double>> diff) {
         //Where am I?
         int i = 0;
@@ -96,8 +93,10 @@ public class Market {
         ArrayList<Double> offload = D.getOffLoad();
         //Get rid of as much as possible
         while (offload.get(0) > 0 && offload.get(1) > 0 && offload.get(2) > 0 && i < diff.size()) {
+            //Get index of buying center
             int indMax = (int)((double)diff.get(i).get(0));
             send.add(indMax);
+            //Calculate total offload capacity
             offload.set(0, (offload.get(0) - buyers.get(indMax).getOnLoad().get(0)));
             offload.set(1, (offload.get(1) - buyers.get(indMax).getOnLoad().get(1)));
             offload.set(2, (offload.get(2) - buyers.get(indMax).getOnLoad().get(2)));
@@ -108,6 +107,9 @@ public class Market {
         completeTheTrade(D, send);
     }
 
+    /*
+    Send
+     */
     public void completeTheTrade(DataCenter D, ArrayList<Integer> send) {
         //List of jobs that I have
         ArrayList<Job> jobs = D.getInProgress();

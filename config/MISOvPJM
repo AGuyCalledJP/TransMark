@@ -1,0 +1,44 @@
+//WORLD SETTINGS
+Length: 0
+Market/Non-Market: 1
+Aggregate/Single: 1
+//GLOBAL CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 161
+Max Power Consumption: 230
+//INTERCONNECTION
+Eastern Interconnection
+//ISO REGION
+MISO
+//STATE
+MN
+//DATA CENTER
+Budget: 700
+Num Clusters: 3
+Band Width Speed: 1
+Participation Rate: 150
+Arrival Rate: null
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//ISO REGION
+PJM
+//STATE
+OH
+//DATA CENTER
+Budget: 700
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 25
+Arrival Rate: null
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+%

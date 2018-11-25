@@ -1,5 +1,6 @@
 /*
 Given an Interconnection, return the set of operating ISO's contained within it
+@author Jared Polonitza
  */
 public class IntConIsos {
     IntCon con;

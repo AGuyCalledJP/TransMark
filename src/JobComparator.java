@@ -1,6 +1,7 @@
 import java.util.Comparator;
 /*
 Comparator for Jobs to be sorted based on time sensitivity
+@author Jared Polonitza
  */
 class JobComparator implements Comparator<Job>{
     public int compare(Job j1, Job j2) {

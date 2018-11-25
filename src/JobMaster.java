@@ -1,6 +1,7 @@
 import java.util.*;
 /*
 JobMaster, given an average speed of CPU, will create a task to model a given split SSSS -> LLLL
+@author Jared Polonitza
  */
 public class JobMaster {
     private Poisson p = new Poisson();

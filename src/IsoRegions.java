@@ -1,5 +1,6 @@
 /*
 Given a ISO, returns the states served
+@author Jared Polonitza
  */
 public class IsoRegions {
     ISOVal iso;

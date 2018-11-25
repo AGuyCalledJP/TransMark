@@ -7,6 +7,7 @@ ClockWork is the discrete blueprint for how data centers act and interact, both 
 Upon initialization this module populates its powerGrid array with Interconnections, ISOs, States, and Data Centers, creating
 the environment for these objects to interact. Once motion (or one of motion's many relatives) is commenced, the simulation
 steps through a minute by minute simulation of some predetermined time interval.
+@author Jared Polonitza
  */
 public class ClockWork {
     /*
@@ -128,7 +129,6 @@ public class ClockWork {
 
                             //Log energy usage totals for this data center
                             D.logEnergyUse(mWh);
-//                                D.logTEnergyUse(mWh);
 
                             //Cost/Revenue accrued by given center
                             D.incurredCost(price * mWh);
@@ -145,7 +145,6 @@ public class ClockWork {
                             D.tick();
 
                             //Mark values to track job throughput and failure rate
-//                                D.tock();
 
                             //Particpate in the market if the time is right
                             if (D.getParticipation() == 0) {
@@ -184,7 +183,10 @@ public class ClockWork {
                 Progress.append("minByMinOutputM", "tOutputM", "JobPerformanceM");
             }
             else {
-                Progress.append("avgMinByMinOutputM", "avgTOutputM", "avgJobPerformanceM");
+                String a = "avgMinByMinOutputM" + Progress.iter;
+                String b = "avgTOutputM" + Progress.iter;
+                String c = "avgJobPerformanceM" + Progress.iter;
+                Progress.append(a, b, c);
             }
         }
     }
@@ -238,7 +240,6 @@ public class ClockWork {
                             price = T.getRate(tempHrs);
                             if (t % 60 == 0) {
                                 D.setRate(price);
-                                System.out.println(price);
 
                             }
                             if (giveNewMonth) {
@@ -271,14 +272,11 @@ public class ClockWork {
 
                             //Log energy usage totals for this data center
                             D.logEnergyUse(mWh);
-//                                D.logTEnergyUse(mWh);
 
                             //Cost/Revenue accrued by given center
                             D.incurredCost(price * mWh);
                             D.logPrice(price * mWh);
-//                                D.logTPrice(price * mWh);
                             D.logProfit(D.getProfit());
-//                                D.logMRevenue(D.getRevenue() - D.getTotalCost());
 
                             //Offload any completed work
                             D.cleanHouse();
@@ -294,10 +292,13 @@ public class ClockWork {
             }
             t++;
             if (Progress.aggregate == 1) {
-                Progress.append("minByMinOutputM", "tOutputM", "JobPerformanceM");
+                Progress.append("minByMinOutputNM", "tOutputNM", "JobPerformanceNM");
             }
             else {
-                Progress.append("avgMinByMinOutputM", "avgTOutputM", "avgJobPerformanceM");
+                String a = "avgMinByMinOutputNM" + Progress.iter;
+                String b = "avgTOutputNM" + Progress.iter;
+                String c = "avgJobPerformanceNM" + Progress.iter;
+                Progress.append(a, b, c);
             }
         }
     }

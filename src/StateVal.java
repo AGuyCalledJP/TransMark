@@ -1,5 +1,6 @@
 /*
 Enum values to represent every State in the United States
+@author Jared Polonitza
  */
 public enum StateVal {
     AL, AZ, AR, CA, CO, CT, DE, FL, GA, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE,
