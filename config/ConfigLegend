@@ -32,6 +32,12 @@
 //Band Width Speed: m -> Gb/s -> DEFAULT IS 1 Gb/s
 //Participation Rate: 1 minute to 24 hours. However often you would like your center to participate in the market
 //Arrival Rate: x -> Average number of jobs coming into the center on a minute by minute basis. Set to null if unknown
+//Cluster Trace Rates
+//1 -> 1.655
+//2 -> 2.13
+//3 -> 3.195
+//4 -> 4.26
+//5 -> 5.325
 
 //CLUSTER -> ADD AS MANY AS DESIRED
 //Total Cells: n
