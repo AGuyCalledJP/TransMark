@@ -103,7 +103,6 @@ public class ClockWork {
                                 tJobs += D.getTotalJobs();
                             }
                             JobMaster jobMast = D.getMaster();
-                            jobMast.setLambda();
 
                             //Generate jobs for a center to incur this minute
                             Queue<Job> hold = jobMast.genJobs();
@@ -254,7 +253,7 @@ public class ClockWork {
                                 tJobs += D.getTotalJobs();
                             }
                             JobMaster jobMast = D.getMaster();
-                            jobMast.setLambda();
+//                            jobMast.setLambda();
                             Queue<Job> hold = jobMast.genJobs();
                             D.addJobs(hold);
 

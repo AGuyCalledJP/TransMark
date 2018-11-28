@@ -18,7 +18,7 @@ Budget: 500
 Num Clusters: 2
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 1
+Arrival Rate: 2.13
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -34,7 +34,7 @@ Budget: 700
 Num Clusters: 3
 Band Width Speed: 1
 Participation Rate: 150
-Arrival Rate: null
+Arrival Rate: 3.195
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -48,7 +48,7 @@ Budget: 300
 Num Clusters: 1
 Band Width Speed: 1
 Participation Rate: 120
-Arrival Rate: null
+Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //STATE
@@ -58,7 +58,7 @@ Budget: 400
 Num Clusters: 4
 Band Width Speed: 1
 Participation Rate: 15
-Arrival Rate: 3
+Arrival Rate: 4.26
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -74,7 +74,7 @@ Budget: 100
 Num Clusters: 1
 Band Width Speed: 1
 Participation Rate: 175
-Arrival Rate: null
+Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //STATE
@@ -84,7 +84,7 @@ Budget: 500
 Num Clusters: 2
 Band Width Speed: 2
 Participation Rate: 50
-Arrival Rate: 1
+Arrival Rate: 2.13
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -96,7 +96,7 @@ Budget: 1000
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 112
-Arrival Rate: null
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -114,7 +114,7 @@ Budget: 500
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 45
-Arrival Rate: 3
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -132,7 +132,7 @@ Budget: 500
 Num Clusters: 2
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: null
+Arrival Rate: 2.13
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -144,7 +144,7 @@ Budget: 400
 Num Clusters: 4
 Band Width Speed: 2
 Participation Rate: 155
-Arrival Rate: 3
+Arrival Rate: 4.26
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -160,7 +160,7 @@ Budget: 1000
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 57
-Arrival Rate: null
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -180,7 +180,7 @@ Budget: 700
 Num Clusters: 3
 Band Width Speed: 2
 Participation Rate: 25
-Arrival Rate: null
+Arrival Rate: 3.195
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -194,7 +194,7 @@ Budget: 500
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 4
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -212,7 +212,7 @@ Budget: 300
 Num Clusters: 1
 Band Width Speed: 2
 Participation Rate: 90
-Arrival Rate: null
+Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //STATE
@@ -222,7 +222,7 @@ Budget: 300
 Num Clusters: 1
 Band Width Speed: 2
 Participation Rate: 140
-Arrival Rate: null
+Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //STATE
@@ -232,7 +232,7 @@ Budget: 900
 Num Clusters: 4
 Band Width Speed: 2
 Participation Rate: 60
-Arrival Rate: 2
+Arrival Rate: 4.26
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -248,7 +248,7 @@ Budget: 1000
 Num Clusters: 3
 Band Width Speed: 2
 Participation Rate: 75
-Arrival Rate: null
+Arrival Rate: 3.195
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -262,7 +262,7 @@ Budget: 1000
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 111
-Arrival Rate: 4
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -280,7 +280,7 @@ Budget: 1000
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 177
-Arrival Rate: null
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -300,7 +300,7 @@ Budget: 500
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: null
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -318,7 +318,7 @@ Budget: 500
 Num Clusters: 2
 Band Width Speed: .5
 Participation Rate: 22
-Arrival Rate: 1.04
+Arrival Rate: 2.13
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -330,7 +330,7 @@ Budget: 300
 Num Clusters: 1
 Band Width Speed: 2
 Participation Rate: 117
-Arrival Rate: .44
+Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //STATE
@@ -340,7 +340,7 @@ Budget: 900
 Num Clusters: 4
 Band Width Speed: 2
 Participation Rate: 42
-Arrival Rate: null
+Arrival Rate: 4.26
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -356,7 +356,7 @@ Budget: 200
 Num Clusters: 2
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: null
+Arrival Rate: 2.13
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -370,7 +370,7 @@ Budget: 100
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 15
-Arrival Rate: null
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER

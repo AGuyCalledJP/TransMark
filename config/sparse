@@ -1,5 +1,5 @@
 //WORLD SETTINGS
-Length: 1
+Length: 3
 Market/Non-Market: 1
 Aggregate/Single: 1
 //GLOBAL CELL
@@ -18,7 +18,7 @@ Budget: 500
 Num Clusters: 2
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 1
+Arrival Rate: 2.13
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -31,14 +31,10 @@ MISO
 MN
 //DATA CENTER
 Budget: 700
-Num Clusters: 3
+Num Clusters: 1
 Band Width Speed: 1
 Participation Rate: 150
-Arrival Rate: null
-//CLUSTER
-Total Cells: 5
-//CLUSTER
-Total Cells: 5
+Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //ISO REGION
@@ -50,7 +46,7 @@ Budget: 700
 Num Clusters: 3
 Band Width Speed: 2
 Participation Rate: 25
-Arrival Rate: null
+Arrival Rate: 3.195
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -63,12 +59,10 @@ SPP
 OK
 //DATA CENTER
 Budget: 500
-Num Clusters: 5
+Num Clusters: 4
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: null
-//CLUSTER
-Total Cells: 5
+Arrival Rate: 4.26
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -86,7 +80,7 @@ Budget: 100
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 15
-Arrival Rate: null
+Arrival Rate: 5.325
 //CLUSTER
 Total Cells: 5
 //CLUSTER
