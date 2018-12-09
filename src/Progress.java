@@ -199,104 +199,6 @@ public class Progress {
         return holders;
     }
 
-    public static String condense(String fileName) throws IOException {
-        ArrayList<ArrayList<Double>> average = new ArrayList<>();
-        for (int i = 0; i < avg; i++) {
-            ArrayList<Double> hold = new ArrayList<>();
-            String a = fileName + i;
-            Scanner scan = new Scanner(new File(a));
-            while(scan.hasNext()) {
-                String line = scan.nextLine();
-                line = line.substring(1,line.length()-1);
-                String[] S = line.split(", ");
-                for (String s : S) {
-                    hold.add(Double.parseDouble(s));
-                }
-            }
-            average.add(hold);
-        }
-        int size = average.get(0).size();
-        Double[] E = new Double[size];
-        Double[] C = new Double[size];
-        Double[] R = new Double[size];
-        for (int x = 0; x < E.length; x++) {
-            E[x] = 0.0;
-            C[x] = 0.0;
-            R[x] = 0.0;
-        }
-        for (int i = 0; i < average.size(); i++) {
-            for (int j = 0; j < average.get(i).size(); j++) {
-                if (i % 3 == 0) {
-                    double total = E[j] + average.get(i).get(j);
-                    E[j] = total;
-                }
-                else if (i % 3 == 1) {
-                    double total = C[j] + average.get(i).get(j);
-                    C[j] = total;
-                }
-                else {
-                    double total = R[j] + average.get(i).get(j);
-                    R[j] = total;
-                }
-            }
-        }
-        for (int l = 0; l < E.length; l++) {
-            E[l] = E[l] / size;
-            C[l] = C[l] / size;
-            R[l] = R[l] / size;
-        }
-        String str = "";
-        str += Arrays.toString(E) + "\n";
-        str += Arrays.toString(C) + "\n";
-        str += Arrays.toString(R) + "\n";
-        return str;
-    }
-
-    public static String fun(String fileName) throws IOException {
-        ArrayList<ArrayList<Double>> average = new ArrayList<>();
-        for (int i = 0; i < avg; i++) {
-            ArrayList<Double> hold = new ArrayList<>();
-            String a = fileName + Progress.iter;
-            Scanner scan = new Scanner(new File(a));
-            while(scan.hasNext()) {
-                String line = scan.nextLine();
-                line = line.substring(1,line.length()-1);
-                String[] S = line.split(", ");
-                for (String s : S) {
-                    hold.add(Double.parseDouble(s));
-                }
-            }
-            average.add(hold);
-        }
-        int size = average.get(0).size();
-        Double[] T = new Double[size];
-        Double[] F = new Double[size];
-        for (int x = 0; x < T.length; x++) {
-            T[x] = 0.0;
-            F[x] = 0.0;
-        }
-        for (int i = 0; i < average.size(); i++) {
-            for (int j = 0; j < average.get(i).size(); j++) {
-                if (i % 2 == 0) {
-                    double total = T[j] + average.get(i).get(j);
-                    T[j] = total;
-                }
-                else {
-                    double total = F[j] + average.get(i).get(j);
-                    F[j] = total;
-                }
-            }
-        }
-        for (int l = 0; l < T.length; l++) {
-            T[l] = T[l] / size;
-            F[l] = F[l] / size;
-        }
-        String str = "";
-        str += Arrays.toString(T) + "\n";
-        str += Arrays.toString(F) + "\n";
-        return str;
-    }
-
     /*
     Read config file
     Change config file name to select chosen config file
@@ -526,3 +428,102 @@ public class Progress {
         return bigDeal;
     }
 }
+
+//GRAVEYARD
+public static String condense(String fileName) throws IOException {
+//        ArrayList<ArrayList<Double>> average = new ArrayList<>();
+//        for (int i = 0; i < avg; i++) {
+//            ArrayList<Double> hold = new ArrayList<>();
+//            String a = fileName + i;
+//            Scanner scan = new Scanner(new File(a));
+//            while(scan.hasNext()) {
+//                String line = scan.nextLine();
+//                line = line.substring(1,line.length()-1);
+//                String[] S = line.split(", ");
+//                for (String s : S) {
+//                    hold.add(Double.parseDouble(s));
+//                }
+//            }
+//            average.add(hold);
+//        }
+//        int size = average.get(0).size();
+//        Double[] E = new Double[size];
+//        Double[] C = new Double[size];
+//        Double[] R = new Double[size];
+//        for (int x = 0; x < E.length; x++) {
+//            E[x] = 0.0;
+//            C[x] = 0.0;
+//            R[x] = 0.0;
+//        }
+//        for (int i = 0; i < average.size(); i++) {
+//            for (int j = 0; j < average.get(i).size(); j++) {
+//                if (i % 3 == 0) {
+//                    double total = E[j] + average.get(i).get(j);
+//                    E[j] = total;
+//                }
+//                else if (i % 3 == 1) {
+//                    double total = C[j] + average.get(i).get(j);
+//                    C[j] = total;
+//                }
+//                else {
+//                    double total = R[j] + average.get(i).get(j);
+//                    R[j] = total;
+//                }
+//            }
+//        }
+//        for (int l = 0; l < E.length; l++) {
+//            E[l] = E[l] / size;
+//            C[l] = C[l] / size;
+//            R[l] = R[l] / size;
+//        }
+//        String str = "";
+//        str += Arrays.toString(E) + "\n";
+//        str += Arrays.toString(C) + "\n";
+//        str += Arrays.toString(R) + "\n";
+//        return str;
+//    }
+//
+//    public static String fun(String fileName) throws IOException {
+//        ArrayList<ArrayList<Double>> average = new ArrayList<>();
+//        for (int i = 0; i < avg; i++) {
+//            ArrayList<Double> hold = new ArrayList<>();
+//            String a = fileName + Progress.iter;
+//            Scanner scan = new Scanner(new File(a));
+//            while(scan.hasNext()) {
+//                String line = scan.nextLine();
+//                line = line.substring(1,line.length()-1);
+//                String[] S = line.split(", ");
+//                for (String s : S) {
+//                    hold.add(Double.parseDouble(s));
+//                }
+//            }
+//            average.add(hold);
+//        }
+//        int size = average.get(0).size();
+//        Double[] T = new Double[size];
+//        Double[] F = new Double[size];
+//        for (int x = 0; x < T.length; x++) {
+//            T[x] = 0.0;
+//            F[x] = 0.0;
+//        }
+//        for (int i = 0; i < average.size(); i++) {
+//            for (int j = 0; j < average.get(i).size(); j++) {
+//                if (i % 2 == 0) {
+//                    double total = T[j] + average.get(i).get(j);
+//                    T[j] = total;
+//                }
+//                else {
+//                    double total = F[j] + average.get(i).get(j);
+//                    F[j] = total;
+//                }
+//            }
+//        }
+//        for (int l = 0; l < T.length; l++) {
+//            T[l] = T[l] / size;
+//            F[l] = F[l] / size;
+//        }
+//        String str = "";
+//        str += Arrays.toString(T) + "\n";
+//        str += Arrays.toString(F) + "\n";
+//        return str;
+//    }
