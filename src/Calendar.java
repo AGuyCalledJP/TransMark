@@ -15,22 +15,21 @@ public class Calendar {
         int hold = 0;
         int months = 0;
         int minPDay = 1440;
-        int currentMo = 1;
-        while(hold < currentT){
-            currentMo = months % 12;
-            hold += (minPDay * daysInMonth[currentMo]);
+        while(hold <= currentT && months < daysInMonth.length){
+            hold += (minPDay * daysInMonth[months]);
             months++;
         }
-        return (months % 12);
+        return (months % 13);
     }
 
     /*
     Get day of the week in the current month given a random integer from 1 - n
      */
     public int getDayInMonth(int currentT) {
+        System.out.println(currentT);
         int hold = 0;
         int month = 0;
-        int day = 0;
+        int day = 1;
         int totalDays = 0;
         while(totalDays < (currentT / 1440)){
             hold = daysInMonth[month];

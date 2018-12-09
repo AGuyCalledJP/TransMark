@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class ClockWork {
     time tracking
      */
     public static int t = 0; //this will be considered 12:00 am UTC
-    private int month = 0; //start in january
+    private int month = 1; //start in january
     /*
     Hold the US Power Grid
      */
@@ -45,7 +46,7 @@ public class ClockWork {
         int tJobs = 0;
         int tHrs = 0;
         //Initialize month tracker to invalid month
-        int lastMonth = -1;
+        int lastMonth = 0;
         //Begin the simulaiton
         for (int i = 0; i < duration; i++) {
             boolean giveNewMonth = false;
@@ -57,16 +58,17 @@ public class ClockWork {
                 tHrs++;
             }
             //Updated information on a daily basis
-            if ((i % 1440) == 0) {
+            if ((i % 1440) == 0 && i != 0) {
                 //Check to see if month has changed based on change of day
-                int month = C.getMonth(i);
+                month = C.getMonth(i);
                 if (month > lastMonth) {
                     lastMonth = month;
                     giveNewMonth = true;
                 }
+
                 //Print information about the day
                 lTrans += tTransfer;
-                int day = C.getDay(i);
+                int day = C.getDayInMonth(i);
                 System.out.println("Month " + month + " Day " + day);
                 System.out.println("total transfers today: " + (tTransfer));
                 System.out.println("total transfers: " + lTrans);
@@ -89,7 +91,10 @@ public class ClockWork {
                                 D.newMonth();
                             }
                             //Update price rates on an hourly basis
-                            double price =  T.getRate(tHrs);
+                            int tempHrs = tHrs - S.zone();
+//                            System.out.println("tHrs : " + tHrs);
+//                            System.out.println("tempHrs : " + tempHrs);
+                            double price = T.getRate(tempHrs);
                             if (t % 60 == 0) {
                                 //Retrieve current energy price from authority
                                 D.setRate(price);
@@ -102,8 +107,10 @@ public class ClockWork {
                                 tTransfer += D.jobsTransfere();
                                 tJobs += D.getTotalJobs();
                             }
-                            JobMaster jobMast = D.getMaster();
+                            //Rev for the minute set to 0
+                            D.setRevAtm();
 
+                            JobMaster jobMast = D.getMaster();
                             //Generate jobs for a center to incur this minute
                             Queue<Job> hold = jobMast.genJobs();
 
@@ -127,12 +134,15 @@ public class ClockWork {
                             S.setTotalEnergy(mWh);
 
                             //Log energy usage totals for this data center
+                            if (mWh < 0) {
+                                System.out.println(mWh);
+                            }
                             D.logEnergyUse(mWh);
 
                             //Cost/Revenue accrued by given center
                             D.incurredCost(price * mWh);
                             D.logPrice(price * mWh);
-                            D.logProfit(D.getProfit());
+                            D.logProfit(D.getRevAtm() - (price * mWh));
 
                             //Offload any completed work
                             D.cleanHouse();
@@ -164,7 +174,7 @@ public class ClockWork {
 
                                 //Simulate Capitalism
                                 if (D.isSeller()) {
-                                    if (D.getOffLoad().size() > 0) {
+                                    if (D.getOffLoad().size() > 0 && market.anyBuyers(D)) {
                                         market.silkRoad(D);
                                     }
                                 }
@@ -178,14 +188,20 @@ public class ClockWork {
             //Move the simulation ahead one minute
             t++;
             //Write aggregation information to file
-            if (Progress.aggregate == 1) {
-                Progress.append("minByMinOutputM", "tOutputM", "JobPerformanceM");
+            try {
+                String month = "";
+                if (this.month < 10) {
+                    month = "0" + this.month;
+                }
+                String a = "outPutData/E/EM" + month;
+                String b = "outPutData/C/CM" + month;
+                String c = "outPutData/R/RM" + month;
+                String d = "outPutData/P/PM" + month;
+                String f = "outPutData/F/FM" + month;
+                Progress.append(a,b,c,d,f);
             }
-            else {
-                String a = "avgMinByMinOutputM" + Progress.iter;
-                String b = "avgTOutputM" + Progress.iter;
-                String c = "avgJobPerformanceM" + Progress.iter;
-                Progress.append(a, b, c);
+            catch (IOException e) {
+                System.out.println(e);
             }
         }
     }
@@ -196,10 +212,8 @@ public class ClockWork {
      */
     public void lessMotion(int duration){
         Calendar C = new Calendar();
-        int lTrans = 0;
-        int tTransfer = 0;
         int tJobs = 0;
-        int lastMonth = -1;
+        int lastMonth = 0;
         int tHrs  = 0;
         for (int i = 0; i < duration; i++) {
             boolean giveNewMonth = false;
@@ -208,52 +222,46 @@ public class ClockWork {
                 System.out.println("Hour " + hour);
                 tHrs++;
             }
-            if ((i % 1440) == 0) {
-                int month = C.getMonth(i);
+            if ((i % 1440) == 0 && i != 0) {
+                month = C.getMonth(i);
                 if (month > lastMonth) {
                     lastMonth = month;
                     giveNewMonth = true;
-                    System.out.println("Month: " + month);
                 }
-                else {
-                    giveNewMonth = false;
-                }
+
                 int day = C.getDayInMonth(i);
                 System.out.println("Month " + month + " Day " + day);
-                System.out.println("total transfers today: " + (tTransfer - lTrans));
-                System.out.println("total transfers: " + tTransfer);
                 System.out.println("total jobs in system: " + tJobs);
-                lTrans = tTransfer;
-                tTransfer = 0;
                 tJobs = 0;
             }
             for (Interconnection I : powerGrid) {
                 for (IsoRegion P : I.getIsoRegions()) {
                     ISO T = P.getAuthority();
+                    T.giveMonth(month);
                     for (State S : P.getStates()) {
                         for (DataCenter D : S.getClientele()) {
-                            //Update price rates on an hourly basis
-                            double price = 0;
-                            //Retrieve current energy price from authority
-                            int tempHrs = tHrs - S.zone();
-                            price = T.getRate(tempHrs);
-                            if (t % 60 == 0) {
-                                D.setRate(price);
-
-                            }
                             if (giveNewMonth) {
                                 D.newMonth();
                                 tHrs = 0;
+                            }
+                            //Retrieve current energy price from authority
+                            int tempHrs = tHrs - S.zone();
+//                            System.out.println("tHrs : " + tHrs);
+//                            System.out.println("tempHrs : " + tempHrs);
+                            //Update price rates on an hourly basis
+                            double price = T.getRate(tempHrs);
+                            if (t % 60 == 0) {
+                                D.setRate(price);
+
                             }
                             if ((Progress.chunk == 3 && giveNewMonth) || (Progress.chunk <=2 && t % 1439 == 0)) {
                                 System.out.println(D);
                                 System.out.print("\n");
                                 D.setRevAtm();
-                                tTransfer += D.jobsTransfere();
                                 tJobs += D.getTotalJobs();
                             }
+
                             JobMaster jobMast = D.getMaster();
-//                            jobMast.setLambda();
                             Queue<Job> hold = jobMast.genJobs();
                             D.addJobs(hold);
 
@@ -290,14 +298,20 @@ public class ClockWork {
                 }
             }
             t++;
-            if (Progress.aggregate == 1) {
-                Progress.append("minByMinOutputNM", "tOutputNM", "JobPerformanceNM");
+            try {
+                String month = "";
+                if (this.month < 10) {
+                    month = "0" + this.month;
+                }
+                String a = "outPutData/E/ENM" + month;
+                String b = "outPutData/C/CNM" + month;
+                String c = "outPutData/R/RNM" + month;
+                String d = "outPutData/P/PNM" + month;
+                String f = "outPutData/F/FNM" + month;
+                Progress.append(a,b,c,d,f);
             }
-            else {
-                String a = "avgMinByMinOutputNM" + Progress.iter;
-                String b = "avgTOutputNM" + Progress.iter;
-                String c = "avgJobPerformanceNM" + Progress.iter;
-                Progress.append(a, b, c);
+            catch (IOException e) {
+                System.out.println(e);
             }
         }
     }
@@ -315,128 +329,3 @@ public class ClockWork {
         return str;
     }
 }
-
-/*
-GRAVEYARD
- */
-//Run the simulation with a single data center participating in a non market environment
-//public void minimalist(int time){
-//    Calendar C = new Calendar();
-//    Market market = new Market();
-//    int lTrans = 0;
-//    int tTransfer = 0;
-//    int tJobs = 0;
-//    int lastMonth = -1;
-//    for (int i = 0; i < time; i++) {
-//        boolean giveNewMonth = false;
-//        int hour = C.getHour(i);
-//        if ((i % 60) == 0) {
-//            System.out.println("Hour " + hour);
-//        }
-//        if ((i % 1440) == 0) {
-//            int month = C.getMonth(i);
-//            if (month > lastMonth) {
-//                lastMonth = month;
-//                giveNewMonth = true;
-//            }
-//            else {
-//                giveNewMonth = false;
-//            }
-//
-//            int day = C.getDayInMonth(i);
-//            System.out.println("Month " + month + " Day " + day);
-//            System.out.println("total transfers today: " + (tTransfer - lTrans));
-//            System.out.println("total transfers: " + tTransfer);
-//            System.out.println("total jobs in system: " + tJobs);
-//            lTrans = tTransfer;
-//            tTransfer = 0;
-//            tJobs = 0;
-//        }
-//        Interconnection I = powerGrid.get(0);
-//        IsoRegion P = I.getIsoRegions().get(0);
-//        ISO T = P.getAuthority();
-//        State S = P.getStates().get(0);
-//        DataCenter D = S.getClientele().get(0);
-//        int t = S.getLocalTime();
-//        if (giveNewMonth) {
-//            D.newMonth();
-//        }
-//        //Update price rates on an hourly basis
-//        double price = 0;
-//        if (i % 60 == 0) {
-//            //Retrieve current energy price from authority
-//            price = T.getRate(C.getHour(t));
-//            D.setRate(price);
-//        }
-//        if (i % 1439 == 0) {
-//            System.out.println(D);
-//            System.out.print("\n");
-//            D.setRevAtm();
-//            tTransfer += D.jobsTransfere();
-//            tJobs += D.getTotalJobs();
-//        }
-//        if (D.getBudget() > D.incurredCost()) {
-//            JobMaster jobMast = D.getMaster();
-//            jobMast.setLambda();
-//            Queue<Job> hold = jobMast.genJobs();
-//            D.addJobs(hold);
-//
-//            //Move jobs into clusters
-//            D.systemScheduler();
-//
-//            //execute tasks for this minute
-//            D.setProcesses();
-//            D.wash();
-//
-//            //Calculate cost incurred this minute
-//            double mWh = D.powerUsage();
-//            mWh += D.coolingCost(mWh);
-//            S.setTotalEnergy(mWh);
-//
-//            //Log energy usage totals for this data center
-//            D.logEnergyUse(mWh);
-//            D.logTEnergyUse(mWh);
-//
-//            //Cost/Revenue accrued by given center
-//            D.incurredCost(price * mWh);
-//            D.logPrice(price * mWh);
-//            D.logTPrice(price * mWh);
-//            D.logTRevenue(D.getRevenue() - D.getTotalCost());
-//            D.logMRevenue(D.getRevenue() - D.getTotalCost());
-//
-//            //Offload any completed work
-//            D.cleanHouse();
-//
-//            //Remove any jobs that are over their rented time limit
-//            D.moveAlong();
-//
-//            D.tick();
-//            D.tock();
-//        }
-//        else {
-//            D.logEnergyUse(0);
-//            D.logTEnergyUse(0);
-//            D.incurredCost(0);
-//            D.logPrice(0);
-//            D.logTPrice(0);
-//            D.logTRevenue(0);
-//            D.logMRevenue(0);
-//            D.noFails();
-//            D.noThrough();
-//        }
-//        S.moveLocalTime();
-//        t++;
-//    }
-//}
-//
-//    public ArrayList<ArrayList<Double>> collectionSingle() {
-//        ArrayList<ArrayList<Double>> holster = new ArrayList<>();
-//        Interconnection i = powerGrid.get(0);
-//        IsoRegion j = i.getIsoRegions().get(0);
-//        State s = j.getStates().get(0);
-//        DataCenter d = s.getClientele().get(0);
-//        holster.add(d.getPriceLog());
-//        holster.add(d.getEnergyLog());
-//        holster.add(d.getRevenueLog());
-//        return holster;
-//    }

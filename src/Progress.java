@@ -24,7 +24,6 @@ public class Progress {
     public static int chunk;
     public static int iter;
     public static int avg;
-    public static int aggregate;
     public static int year = 525600;
     public static int month = 44640;
     public static int week = 10080;
@@ -37,82 +36,85 @@ public class Progress {
     public final static double EPSILON = .000001;
 
     /*
+    Files to manage data output
+     */
+    private static String E;
+    private static String C;
+    private static String R;
+    private static String P;
+    private static String F;
+    private static BufferedWriter EW;
+    private static BufferedWriter CW;
+    private static BufferedWriter RW;
+    private static BufferedWriter PW;
+    private static BufferedWriter FW;
+
+    /*
     Main method for running the simulation once over a month long period
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Read in information from config file
         ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = loadConfig();
-        if (aggregate == 1) {
-            //Track progress of the simulation
-            long startTime = System.currentTimeMillis();
-            //Create ClockWork Module
-            c = new ClockWork(bigDeal);
-            //Choose which version of simulation to run
-            if (select == 0) {
-                c.motion(chunks[chunk]);
-            } else if (select == 1) {
-                c.lessMotion(chunks[chunk]);
-            }
-            //Collect statistical dump
-            Stats s = new Stats(c);
-            System.out.println(s.results());
-            //Total execution time
-            long stopTime = System.currentTimeMillis();
-            long elapsedTime = stopTime - startTime;
-            System.out.println(elapsedTime);
-        } else {
-            System.out.println("Aggregating");
-            avg = 5;
-            long startTime = System.currentTimeMillis();
-            c = new ClockWork(bigDeal);
-            for (int i = 0; i < avg; i++) {
-                iter = i;
-                if (select == 0) {
-                    c.motion(chunks[chunk]);
-                } else if (select == 1) {
-                    c.lessMotion(chunks[chunk]);
-                }
-                Stats s = new Stats(c);
-                System.out.println(s.results());
-            }
-            long stopTime = System.currentTimeMillis();
-            long elapsedTime = stopTime - startTime;
-            System.out.println(elapsedTime);
-            try {
-                String a ="avgMinByMinOutputM";
-                String b ="avgTOutputM";
-                String c ="avgJobPerformanceM";
-                String min = condense(a);
-                String tot = condense(b);
-                String jobs = fun(c);
-                write(min,a);
-                write(tot,b);
-                write(jobs,c);
-                for (int i = 0; i < avg; i++) {
-                    String hold = a + i;
-                    String hold1 = b + i;
-                    String hold2 = c + i;
-                    File one = new File(hold);
-                    File two = new File(hold1);
-                    File three = new File(hold2);
-                    one.delete();
-                    two.delete();
-                    three.delete();
-                }
-            }
-            catch (IOException e) {
-                System.out.println(e);
-            }
+        //Track progress of the simulation
+        long startTime = System.currentTimeMillis();
+        //Create ClockWork Module
+        c = new ClockWork(bigDeal);
+
+        //Create directories to handle output
+        String path = System.getProperty("user.dir");
+        File outPut = new File(path + "/outPutData/");
+        outPut.mkdir();
+        File ED = new File(path + "/outPutData/E");
+        ED.mkdir();
+        File CD = new File(path + "/outPutData/C");
+        CD.mkdir();
+        File RD = new File(path + "/outPutData/R");
+        RD.mkdir();
+        File PD = new File(path + "/outPutData/P");
+        PD.mkdir();
+        File FD = new File(path + "/outPutData/F");
+        FD.mkdir();
+        //Choose which version of simulation to run
+        if (select == 0) {
+            E = "EM";
+            EW = new BufferedWriter(new FileWriter(E,true));
+            C = "CM";
+            CW = new BufferedWriter(new FileWriter(C,true));
+            R = "RM";
+            RW = new BufferedWriter(new FileWriter(R,true));
+            F = "FM";
+            FW = new BufferedWriter(new FileWriter(F,true));
+            P = "PM";
+            PW = new BufferedWriter(new FileWriter(P,true));
+            c.motion(chunks[chunk]);
+        } else if (select == 1) {
+            E = "ENM";
+            EW = new BufferedWriter(new FileWriter(E,true));
+            C = "CNM";
+            CW = new BufferedWriter(new FileWriter(C,true));
+            R = "RNM";
+            RW = new BufferedWriter(new FileWriter(R,true));
+            F = "FNM";
+            FW = new BufferedWriter(new FileWriter(F,true));
+            P = "PNM";
+            PW = new BufferedWriter(new FileWriter(P,true));
+            c.lessMotion(chunks[chunk]);
         }
+        //Collect statistical dump
+        Stats s = new Stats(c);
+        System.out.println(s.results());
+        //Total execution time
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        EW.close();
+        CW.close();
+        RW.close();
+        PW.close();
+        FW.close();
+        System.out.println(elapsedTime);
     }
 
-    public static void write(String str, String name) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(name));
-        writer.write(str);
-        writer.close();
-    }
-
-    public static void append(String minute, String total, String jobPerf) {
+    public static void append(String energy, String cost, String rev, String perf, String fail) throws IOException{
         ArrayList<ArrayList<Double>> regionData = new ArrayList<>();
         ArrayList<ArrayList<Double>> regionJobPerf = new ArrayList<>();
         for (Interconnection I : c.getPowerGrid()) {
@@ -121,101 +123,31 @@ public class Progress {
                 regionJobPerf.add(i.compileJStats());
             }
         }
-        File min = new File(minute);
-        File tot = new File(total);
-        File job = new File(jobPerf);
-        if(!min.exists()) {
-            try {
-                min.createNewFile();
-            }
-            catch (IOException e) {
-                System.out.println(e);
-            }
-        }
-        if(!tot.exists()) {
-            try {
-                tot.createNewFile();
-            }
-            catch (IOException e) {
-                System.out.println(e);
-            }
-        }
-        if(!job.exists()) {
-            try {
-                job.createNewFile();
-            }
-            catch (IOException e) {
-                System.out.println(e);
-            }
+        File test = new File(energy);
+        if (!test.exists()) {
+            EW.close();
+            CW.close();
+            RW.close();
+            FW.close();
+            PW.close();
+            EW = new BufferedWriter(new FileWriter(energy,true));
+            CW = new BufferedWriter(new FileWriter(cost,true));
+            RW = new BufferedWriter(new FileWriter(rev,true));
+            FW = new BufferedWriter(new FileWriter(perf,true));
+            PW = new BufferedWriter(new FileWriter(fail,true));
         }
         ArrayList<String> write = gridLock(regionData);
         ArrayList<String> jobs = jobLock(regionJobPerf);
-        try {
-            Scanner scanM = new Scanner(new File(minute));
-            Scanner scanT = new Scanner(new File(total));
-            Scanner scanJ = new Scanner(new File(jobPerf));
-            ArrayList<String> ECRM = new ArrayList<>();
-            ArrayList<String> ECRT = new ArrayList<>();
-            ArrayList<String> ECRJ = new ArrayList<>();
-            if (scanM.hasNext() && scanT.hasNext() && scanJ.hasNext()) {
-                while (scanM.hasNext()) {
-                    ECRM.add(scanM.nextLine());
-                }
-                String strM = "";
-                for (int i = 0; i < ECRM.size(); i++) {
-                    String read = ECRM.get(i);
-                    read = read.substring(0, read.length() - 1);
-                    String add = write.get(i);
-                    read += ", " + add + "]\n";
-                    strM += read;
-                }
-                while (scanT.hasNext()) {
-                    ECRT.add(scanT.nextLine());
-                }
-                String strT = "";
-                for (int i = 0; i < ECRT.size(); i++) {
-                    String read = ECRT.get(i);
-                    String rewrite = read.substring(0, read.length() - 1);
-                    read = read.substring(1, read.length() - 1);
-                    String[] vals = read.split(", ");
-                    String last = vals[vals.length-1];
-                    String add = write.get(i);
-                    Double fin = Double.parseDouble(last) + Double.parseDouble(add);
-                    rewrite += ", " + fin + "]\n";
-                    strT += rewrite;
-                }
-                while (scanJ.hasNext()) {
-                    ECRJ.add(scanJ.nextLine());
-                }
-                String strJ = "";
-                for (int i = 0; i < ECRJ.size(); i++) {
-                    String read = ECRJ.get(i);
-                    read = read.substring(0, read.length() - 1);
-                    String add = jobs.get(i);
-                    read += ", " + add + "]\n";
-                    strJ += read;
-                }
-                write(strM,minute);
-                write(strT,total);
-                write(strJ,jobPerf);
-            }
-            else {
-                String format = "";
-                for (int i = 0; i < write.size(); i++) {
-                    format += "[" + write.get(i) + "]\n";
-                }
-                String jFormat = "";
-                for (int i = 0; i < jobs.size(); i++) {
-                    jFormat += "[" + jobs.get(i) + "]\n";
-                }
-                write(format,minute);
-                write(format,total);
-                write(jFormat,jobPerf);
-            }
-        }
-        catch(IOException e) {
-            System.out.println(e);
-        }
+        String e = write.get(0) + "\n";
+        String c = write.get(1) + "\n";
+        String r = write.get(2) + "\n";
+        String p = jobs.get(0) + "\n";
+        String f = jobs.get(1) + "\n";
+        EW.write(e);
+        CW.write(c);
+        RW.write(r);
+        PW.write(p);
+        FW.write(f);
     }
 
     /*
@@ -224,7 +156,7 @@ public class Progress {
     public static ArrayList<String> gridLock(ArrayList<ArrayList<Double>> data) {
         ArrayList<String> holders = new ArrayList<>();
         ///Create holder
-        Double E =  0.0;
+        Double E = 0.0;
         Double C = 0.0;
         Double R = 0.0;
         for (int i = 0; i < data.size(); i++) {
@@ -251,8 +183,8 @@ public class Progress {
         ArrayList<String> holders = new ArrayList<>();
         Double T =  0.0;
         Double F = 0.0;
-        for (int i = 0; i < data.size() - 1; i++) {
-            for (int j = 0; j < data.get(i).size() - 1; j++) {
+        for (int i = 0; i < data.size(); i++) {
+            for (int j = 0; j < data.get(i).size(); j++) {
                 if (j % 2 == 0) {
                     T += data.get(i).get(j);
                 } else{
@@ -260,8 +192,8 @@ public class Progress {
                 }
             }
         }
-        T = T / data.size();
-        F = F / data.size();
+        T = T / (double)data.size();
+        F = F / (double)data.size();
         holders.add(T.toString());
         holders.add(F.toString());
         return holders;
@@ -366,10 +298,12 @@ public class Progress {
     }
 
     /*
-    Read config file into 8d arraylist
+    Read config file
+    Change config file name to select chosen config file
      */
     public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
-        String path = System.getProperty("user.dir") + "/config/sparse";
+        String configFileName = "/config/sparse";
+        String path = System.getProperty("user.dir") + configFileName;
         File file = new File(path);
         String save = "";
         ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> bigDeal = new ArrayList<>();
@@ -390,13 +324,6 @@ public class Progress {
                         String q = hold[1];
                         int l = Integer.parseInt(q);
                         select = l;
-                    }
-                    f = inputFile.nextLine();
-                    if (f.contains("Aggregate/Single: ")) {
-                        String[] hold = f.split(": ");
-                        String q = hold[1];
-                        int l = Integer.parseInt(q);
-                        aggregate = l;
                     }
                 }
                 line = inputFile.nextLine();
