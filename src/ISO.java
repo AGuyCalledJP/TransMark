@@ -25,7 +25,20 @@ public class ISO {
 
     //Return rate data for a given minute
     public double getRate(int t) {
-        return rates[t];
+        if (t > 0 && t < rates.length) {
+            return rates[t];
+        }
+        else if (t < 0) {
+            int hold = rates.length - t;
+            return rates[hold];
+        }
+        else if (t > rates.length){
+            int hold = t - rates.length;
+            return rates[hold];
+        }
+        else {
+            return 0;
+        }
     }
 
     //Return enum value of ISO being modeled

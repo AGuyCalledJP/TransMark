@@ -1,7 +1,6 @@
 //WORLD SETTINGS
 Length: 0
 Market/Non-Market: 1
-Aggregate/Single: 1
 //GLOBAL CELL
 Speed: 1200
 Number of Cores: 10
@@ -18,7 +17,7 @@ Budget: 700
 Num Clusters: 3
 Band Width Speed: 1
 Participation Rate: 150
-Arrival Rate: 3.325
+Arrival Rate: 4.965
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -34,7 +33,7 @@ Budget: 100
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 15
-Arrival Rate: 5.325
+Arrival Rate: 8.275
 //CLUSTER
 Total Cells: 5
 //CLUSTER

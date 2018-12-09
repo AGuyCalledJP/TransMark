@@ -398,6 +398,7 @@ public class  DataCenter {
             if (j2.numTasksFinished() > 0) {
                 j2.setFailed();
                 revenue += j2.getRevenue();
+                revAtm += j2.getRevenue();
                 forcedOut++;
             }
             else {
@@ -552,13 +553,13 @@ public class  DataCenter {
         double totalPrice = 0;
         int index = 0;
         double per = 0;
-        double accountForFail = 2.0;
-//        if (failureRate() != 0) {
-//            accountForFail = failureRate();
-//        }
-//        else {
-//            accountForFail = 2.0;
-//        }
+        double accountForFail;
+        if (failureRate() != 0) {
+            accountForFail = failureRate();
+        }
+        else {
+            accountForFail = 2.0;
+        }
         ArrayList<Job> hold = new ArrayList<>();
         while (per < stress && index < inProgress.size()) {
             per += inProgress.get(index).getCenterWeight();
@@ -924,6 +925,10 @@ public class  DataCenter {
         revAtm = 0;
     }
 
+    public double getRevAtm() {
+        return revAtm;
+    }
+
     public JobMaster getMaster() {
         return master;
     }
@@ -944,13 +949,6 @@ public class  DataCenter {
         return profitLog;
     }
 
-    public double getFailureLog() {
-        return failureLog;
-    }
-
-    public double getJobThroughput() {
-        return jobThroughput;
-    }
 
     public String toString() {
         int key = 1;

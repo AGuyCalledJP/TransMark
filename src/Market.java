@@ -120,52 +120,56 @@ public class Market {
         //List of job takers
         for (int where : send) {
             boolean moreRoom = true;
-            DataCenter S = buyers.get(where);
-            ArrayList<Job> sendEr = new ArrayList<>();
-            double totalCore = 0;
-            //While I still have available jobs, offload as many as this center can take
-            while (check(available) && jindex < (available.length - 1) && jindex < (jobs.size()) && moreRoom && totalCore < S.getOnLoad().get(0)) {
-                if (available[jindex] == 1) {
-                    if (S.canTake(jobs.get(jindex))) {
-                        //Split revenue
-                        int start = jobs.get(jindex).getEstCompleteionTime();
-                        int end = jobs.get(jindex).timeLeft();
-                        double split = jobs.get(jindex).getRevenue();
-                        double even = (double)(end / start);
-                        //Revenue sent away
-                        double sen = split * even;
-                        //What I get to keep
-                        double stay = split - sen;
-                        //Pay me
-                        D.addRev(stay);
-                        //Subtract my pay from the revenue
-                        jobs.get(jindex).setRevenue(sen);
-                        sendEr.add(jobs.get(jindex));
-                        jobs.get(jindex).setTransfered();
-                        //The job is no longer on my server
-                        D.quaretine(jobs.get(jindex).getId());
+            if (where < buyers.size()) {
+                DataCenter S = buyers.get(where);
+                ArrayList<Job> sendEr = new ArrayList<>();
+                double totalCore = 0;
+                //While I still have available jobs, offload as many as this center can take
+                while (check(available) && jindex < (available.length - 1) && jindex < (jobs.size()) && moreRoom && totalCore < S.getOnLoad().get(0)) {
+                    if (available[jindex] == 1) {
+                        if (S.canTake(jobs.get(jindex))) {
+                            //Split revenue
+                            int start = jobs.get(jindex).getEstCompleteionTime();
+                            int end = jobs.get(jindex).timeLeft();
+                            double split = jobs.get(jindex).getRevenue();
+                            double even = (double) (end / start);
+                            //Revenue sent away
+                            double sen = split * even;
+                            //What I get to keep
+                            double stay = split - sen;
+                            //Pay me
+                            D.addRev(stay);
+                            //Subtract my pay from the revenue
+                            jobs.get(jindex).setRevenue(sen);
+                            sendEr.add(jobs.get(jindex));
+                            jobs.get(jindex).setTransfered();
+                            //The job is no longer on my server
+                            D.quaretine(jobs.get(jindex).getId());
 
-                        //subtract the migration time from the job
-                        jobs.get(jindex).migPenalty(D.getBandwidth(), S.getBandwidth());
+                            //subtract the migration time from the job
+                            jobs.get(jindex).migPenalty(D.getBandwidth(), S.getBandwidth());
 
-                        //Calculate cost to transfer
-                        double size = jobs.get(jindex).getTotalSize();
-                        D.addRev((size * - transferCost));
+                            //Calculate cost to transfer
+                            double size = jobs.get(jindex).getTotalSize();
+                            D.addRev((size * -transferCost));
 
-                        //Account for total weight of jobs
-                        totalCore += jobs.get(jindex).getCoreCount();
+                            //Account for total weight of jobs
+                            totalCore += jobs.get(jindex).getCoreCount();
+                        } else {
+                            //Can I still take more?
+                            moreRoom = false;
+                        }
                     }
-                    else {
-                        //Can I still take more?
-                        moreRoom = false;
-                    }
+                    jindex++;
                 }
-                jindex++;
+                S.transfer(sendEr, D.getId());
+                S.recalibrate(sendEr);
+                if (S.isWaiting()) {
+                    buyers.remove(S);
+                }
             }
-            S.transfer(sendEr, D.getId());
-            S.recalibrate(sendEr);
-            if (S.isWaiting()) {
-                buyers.remove(S);
+            else {
+                System.out.println("Sorry not happening");
             }
         }
     }
@@ -179,5 +183,20 @@ public class Market {
             }
         }
         return fin;
+    }
+
+    public boolean anyBuyers(DataCenter seller) {
+        int size = buyers.size();
+        if (size > 0) {
+            if (size == 1) {
+                if(buyers.get(0) == seller) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

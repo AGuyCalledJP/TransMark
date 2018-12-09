@@ -16,10 +16,10 @@ public class rateData {
        String path = System.getProperty("user.dir") + "/data/" + iso + "DATA/";
        String[] cat = new String[] {"JAN" , "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
        double[] data;
-       if (month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11) {
+       if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
            data = new double[744];
        }
-       else if (month == 3 || month == 5 || month == 8 || month == 10) {
+       else if (month == 4 || month == 6 || month == 9 || month == 11) {
            data = new double[720];
        }
        else {

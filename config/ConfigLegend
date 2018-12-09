@@ -1,7 +1,6 @@
 //WORLD SETTINGS
 //Length: (0 -> Day), (1 -> Week), (2, Month), (3, Year)
 //Market / Non-Market: (0 -> Market), (1 -> Non-Market)
-//Aggregate/Single: (0 -> Runs of 5), (1 -> Single Run)
 
 //GLOBAL CPU SETTINGS
 //CPU Speed: x -> NUMBER OF OPERATIONS THAT CAN BE COMPLETED IN 1 MINUTE BY EACH CORE
@@ -34,10 +33,10 @@
 //Arrival Rate: x -> Average number of jobs coming into the center on a minute by minute basis. Set to null if unknown
 //Cluster Trace Rates
 //1 -> 1.655
-//2 -> 2.13
-//3 -> 3.195
-//4 -> 4.26
-//5 -> 5.325
+//2 -> 3.31
+//3 -> 4.965
+//4 -> 6.62
+//5 -> 8.275
 
 //CLUSTER -> ADD AS MANY AS DESIRED
 //Total Cells: n

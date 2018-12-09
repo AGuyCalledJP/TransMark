@@ -52,8 +52,8 @@ public class IsoRegion {
         ArrayList<Double> holster = new ArrayList<>();
         for (State S : states) {
             for (DataCenter d : S.getClientele()) {
-                holster.add(d.getPriceLog());
                 holster.add(d.getEnergyLog());
+                holster.add(d.getPriceLog());
                 holster.add(d.getProfitLog());
             }
         }
