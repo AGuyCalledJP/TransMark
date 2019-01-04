@@ -35,8 +35,8 @@ public class State {
             a = a.replace("]","");
             String[] split = a.split(", ");
             DataCenter D;
-            if (!split[4].equals("null")) {
-                D = new DataCenter(Progress.idDataCenter, Integer.parseInt(split[0]), Integer.parseInt(split[1]), Double.parseDouble(split[2]), Integer.parseInt(split[3]), Double.parseDouble(split[4]), theWorld.get(j));
+            if (Progress.set) {
+                D = new DataCenter(Progress.idDataCenter, Integer.parseInt(split[0]), Integer.parseInt(split[1]), Double.parseDouble(split[2]), Integer.parseInt(split[3]), Progress.lambda, theWorld.get(j));
             }
             else {
                 D = new DataCenter(Progress.idDataCenter, Integer.parseInt(split[0]), Integer.parseInt(split[1]), Double.parseDouble(split[2]), Integer.parseInt(split[3]), theWorld.get(j));

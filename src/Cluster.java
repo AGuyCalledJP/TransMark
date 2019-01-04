@@ -80,6 +80,7 @@ public class Cluster {
 
     //Return completed tasks to their proper jobs
     public Queue<Job> cleanCells() {
+        finished = new LinkedList<>();
         for (Cell c : clusterCells) {
             ArrayList<Queue<Task>> takeMeHome = c.clean();
             for (Queue<Task> q : takeMeHome) {
@@ -307,14 +308,14 @@ public class Cluster {
     public String toString() {
         int key = 1;
         String str = "";
-        //str += "Jobs executing on this cluster: " + inProgress.size() + "\n";
+        str += "Jobs executing on this cluster: " + inProgress + "\n";
         str += "Jobs executed on this cluster: " + jobsDone + "\n";
         //str += "Jobs waiting to be executed: " + clusterJobs.size() + "\n";
         str += "This Cluster contains: ";
-        for (Cell cpu : clusterCells) {
-            str += cpu.cellStress() + "\n";
-            str += "Cell " + cpu.getId() + ": \n" + cpu + "\n";
-        }
+//        for (Cell cpu : clusterCells) {
+//            str += cpu.cellStress() + "\n";
+//            str += "Cell " + cpu.getId() + ": \n" + cpu + "\n";
+//        }
         return str;
     }
 }

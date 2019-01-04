@@ -26,7 +26,6 @@ public class Calendar {
     Get day of the week in the current month given a random integer from 1 - n
      */
     public int getDayInMonth(int currentT) {
-        System.out.println(currentT);
         int hold = 0;
         int month = 0;
         int day = 1;

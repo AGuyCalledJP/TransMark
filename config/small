@@ -1,11 +1,13 @@
 //WORLD SETTINGS
-Length: 3
-Market/Non-Market: 0
+Length: 2
+Market/Non-Market: 1
 //GLOBAL CELL
 Speed: 1200
 Number of Cores: 10
 Idle Power Consumption: 161
 Max Power Consumption: 230
+//ARRIVAL RATE
+Arrival Rate: 0.13875
 //INTERCONNECTION
 Western Interconnection
 //ISO REGION
@@ -14,12 +16,9 @@ CAISO
 CA
 //DATA CENTER
 Budget: 500
-Num Clusters: 2
+Num Clusters: 1
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 2.13
-//CLUSTER
-Total Cells: 5
 //CLUSTER
 Total Cells: 5
 %

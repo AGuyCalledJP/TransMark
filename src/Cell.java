@@ -24,9 +24,9 @@ public class Cell {
 
     public Cell(int id) {
         int speed = Progress.cellSpeed;
-        int theoMax = (speed * 10); //max tasks per minute
         maxTasks = speed;
         int numMachines = Progress.numCores;
+        int theoMax = (speed * numMachines); //max tasks per minute
 
         //Idle wattage vs max wattage
         basePowerUse = Progress.IdlePC;
@@ -79,6 +79,7 @@ public class Cell {
 
     //Remove Tasks that have completed execution in order of completion
     public ArrayList<Queue<Task>> clean(){
+        completed = new ArrayList<>();
         for(Machine m : machines){
             Queue<Task> f = m.getFinished();
             ArrayList<Task> remove = new ArrayList<>();

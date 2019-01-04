@@ -70,11 +70,6 @@ public class ClockWork {
                 lTrans += tTransfer;
                 int day = C.getDayInMonth(i);
                 System.out.println("Month " + month + " Day " + day);
-                System.out.println("total transfers today: " + (tTransfer));
-                System.out.println("total transfers: " + lTrans);
-                System.out.println("total jobs in system: " + tJobs);
-                tTransfer = 0;
-                tJobs = 0;
             }
             //Make sure everyone is involved
             for (Interconnection I : powerGrid) {
@@ -92,8 +87,6 @@ public class ClockWork {
                             }
                             //Update price rates on an hourly basis
                             int tempHrs = tHrs - S.zone();
-//                            System.out.println("tHrs : " + tHrs);
-//                            System.out.println("tempHrs : " + tempHrs);
                             double price = T.getRate(tempHrs);
                             if (t % 60 == 0) {
                                 //Retrieve current energy price from authority
@@ -103,9 +96,6 @@ public class ClockWork {
                             if ((Progress.chunk == 3 && giveNewMonth) || (Progress.chunk <=2 && t % 1439 == 0)) {
                                 System.out.println(D);
                                 System.out.print("\n");
-                                D.setRevAtm();
-                                tTransfer += D.jobsTransfere();
-                                tJobs += D.getTotalJobs();
                             }
                             //Rev for the minute set to 0
                             D.setRevAtm();
@@ -134,15 +124,12 @@ public class ClockWork {
                             S.setTotalEnergy(mWh);
 
                             //Log energy usage totals for this data center
-                            if (mWh < 0) {
-                                System.out.println(mWh);
-                            }
                             D.logEnergyUse(mWh);
 
                             //Cost/Revenue accrued by given center
                             D.incurredCost(price * mWh);
                             D.logPrice(price * mWh);
-                            D.logProfit(D.getRevAtm() - (price * mWh));
+                            D.logProfit(D.getRevAtm());
 
                             //Offload any completed work
                             D.cleanHouse();
@@ -193,6 +180,9 @@ public class ClockWork {
                 if (this.month < 10) {
                     month = "0" + this.month;
                 }
+                else {
+                    month = String.valueOf(this.month);
+                }
                 String a = "outPutData/E/EM" + month;
                 String b = "outPutData/C/CM" + month;
                 String c = "outPutData/R/RM" + month;
@@ -212,7 +202,6 @@ public class ClockWork {
      */
     public void lessMotion(int duration){
         Calendar C = new Calendar();
-        int tJobs = 0;
         int lastMonth = 0;
         int tHrs  = 0;
         for (int i = 0; i < duration; i++) {
@@ -231,8 +220,6 @@ public class ClockWork {
 
                 int day = C.getDayInMonth(i);
                 System.out.println("Month " + month + " Day " + day);
-                System.out.println("total jobs in system: " + tJobs);
-                tJobs = 0;
             }
             for (Interconnection I : powerGrid) {
                 for (IsoRegion P : I.getIsoRegions()) {
@@ -246,8 +233,6 @@ public class ClockWork {
                             }
                             //Retrieve current energy price from authority
                             int tempHrs = tHrs - S.zone();
-//                            System.out.println("tHrs : " + tHrs);
-//                            System.out.println("tempHrs : " + tempHrs);
                             //Update price rates on an hourly basis
                             double price = T.getRate(tempHrs);
                             if (t % 60 == 0) {
@@ -257,8 +242,6 @@ public class ClockWork {
                             if ((Progress.chunk == 3 && giveNewMonth) || (Progress.chunk <=2 && t % 1439 == 0)) {
                                 System.out.println(D);
                                 System.out.print("\n");
-                                D.setRevAtm();
-                                tJobs += D.getTotalJobs();
                             }
 
                             JobMaster jobMast = D.getMaster();
@@ -283,7 +266,7 @@ public class ClockWork {
                             //Cost/Revenue accrued by given center
                             D.incurredCost(price * mWh);
                             D.logPrice(price * mWh);
-                            D.logProfit(D.getProfit());
+                            D.logProfit(D.getRevAtm());
 
                             //Offload any completed work
                             D.cleanHouse();
@@ -302,6 +285,9 @@ public class ClockWork {
                 String month = "";
                 if (this.month < 10) {
                     month = "0" + this.month;
+                }
+                else {
+                    month = String.valueOf(this.month);
                 }
                 String a = "outPutData/E/ENM" + month;
                 String b = "outPutData/C/CNM" + month;

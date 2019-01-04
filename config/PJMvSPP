@@ -6,6 +6,8 @@ Speed: 1200
 Number of Cores: 10
 Idle Power Consumption: 161
 Max Power Consumption: 230
+//ARRIVAL RATE
+Arrival Rate: 1.665
 //INTERCONNECTION
 Eastern Interconnection
 //ISO REGION
@@ -17,7 +19,6 @@ Budget: 500
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 8.275
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -37,7 +38,6 @@ Budget: 500
 Num Clusters: 5
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 8.275
 //CLUSTER
 Total Cells: 5
 //CLUSTER

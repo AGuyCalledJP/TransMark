@@ -6,6 +6,8 @@ Speed: 1200
 Number of Cores: 10
 Idle Power Consumption: 161
 Max Power Consumption: 230
+//ARRIVAL RATE
+Arrival Rate: 0.13875
 //INTERCONNECTION
 Western Interconnection
 //ISO REGION
@@ -17,7 +19,6 @@ Budget: 500
 Num Clusters: 2
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 3.31
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -33,7 +34,6 @@ Budget: 700
 Num Clusters: 1
 Band Width Speed: 1
 Participation Rate: 150
-Arrival Rate: 1.655
 //CLUSTER
 Total Cells: 5
 //ISO REGION
@@ -44,8 +44,7 @@ OH
 Budget: 700
 Num Clusters: 3
 Band Width Speed: 2
-Participation Rate: 25
-Arrival Rate: 4.965
+Participation Rate: 100
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -61,7 +60,6 @@ Budget: 500
 Num Clusters: 4
 Band Width Speed: 2
 Participation Rate: 120
-Arrival Rate: 6.62
 //CLUSTER
 Total Cells: 5
 //CLUSTER
@@ -78,8 +76,7 @@ NY
 Budget: 100
 Num Clusters: 5
 Band Width Speed: 2
-Participation Rate: 15
-Arrival Rate: 8.275
+Participation Rate: 135
 //CLUSTER
 Total Cells: 5
 //CLUSTER

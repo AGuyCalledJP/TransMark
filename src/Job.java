@@ -57,7 +57,14 @@ public class Job implements Comparable<Job>{
         jobClass = t.toString();
         jobType = t.toString().substring(0,1);
         //How many total tasks do I contain> 1 -> 10
-        int numTasks = rand.nextInt(9) + 1;
+        int numTasks;
+        double numSplit = rand.nextDouble();
+        if (numSplit <= .9502) {
+            numTasks = 1;
+        }
+        else {
+            numTasks = rand.nextInt(8) + 2;
+        }
         for(int i = 0; i < numTasks; i++){
             tasks.add(new Task(t, Progress.idTask, id, speed));
             Progress.idTask++;

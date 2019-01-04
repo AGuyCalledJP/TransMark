@@ -9,7 +9,7 @@ public class Market {
     ArrayList<DataCenter> buyers = new ArrayList<>();
 
     //Cost incurred for transfering a job to a new center
-    private double transferCost = 0.03;
+    private double maxTransCost = 8;
 
     public Market() {}
 
@@ -33,8 +33,6 @@ public class Market {
      */
     public void silkRoad(DataCenter D) {
         int cpu = 0;
-        int ram = 1;
-        int disk = 2;
         int cost = 3;
         if (buyers.size() != 0) {
             //Get offload tuple
@@ -132,6 +130,7 @@ public class Market {
                             int start = jobs.get(jindex).getEstCompleteionTime();
                             int end = jobs.get(jindex).timeLeft();
                             double split = jobs.get(jindex).getRevenue();
+                            //Something is going negative right here
                             double even = (double) (end / start);
                             //Revenue sent away
                             double sen = split * even;
@@ -150,8 +149,9 @@ public class Market {
                             jobs.get(jindex).migPenalty(D.getBandwidth(), S.getBandwidth());
 
                             //Calculate cost to transfer
-                            double size = jobs.get(jindex).getTotalSize();
-                            D.addRev((size * -transferCost));
+                            double size = jobs.get(jindex).getMigrationTime();
+                            D.incurredCost((size * maxTransCost));
+                            D.addLogPrice(size * maxTransCost);
 
                             //Account for total weight of jobs
                             totalCore += jobs.get(jindex).getCoreCount();
@@ -162,7 +162,7 @@ public class Market {
                     }
                     jindex++;
                 }
-                S.transfer(sendEr, D.getId());
+                S.transfer(sendEr);
                 S.recalibrate(sendEr);
                 if (S.isWaiting()) {
                     buyers.remove(S);

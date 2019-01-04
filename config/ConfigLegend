@@ -8,6 +8,9 @@
 //Idle Power Consumption: y -> (watt hours)
 //Max Power Consumption: z -> (watt hours)
 
+//ARRIVAL RATE -> 1.665/12
+//Set lambda equal to the average number of tasks a single cluster should see on a per minute basis
+
 //INTERCONNECTION
 //Eastern Interconnection, Western Interconnection, ERCOT
 //ISO REGION

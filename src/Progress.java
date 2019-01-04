@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 /*
 Generator to run simulation. Also contains all reading and writing function.
@@ -22,12 +21,12 @@ public class Progress {
     public static int MaxPC;
     public static int select;
     public static int chunk;
-    public static int iter;
-    public static int avg;
     public static int year = 525600;
     public static int month = 44640;
     public static int week = 10080;
     public static int day = 24 * 60;
+    public static double lambda;
+    public static boolean set = false;
     public static int[] chunks = new int[]{day, week, month, year};
     private static ClockWork c;
     /*
@@ -204,6 +203,7 @@ public class Progress {
     Change config file name to select chosen config file
      */
     public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
+        //CONFIG FILE NAME
         String configFileName = "/config/sparse";
         String path = System.getProperty("user.dir") + configFileName;
         File file = new File(path);
@@ -249,6 +249,21 @@ public class Progress {
                     if (s.contains("Max Power Consumption:")) {
                        String[] hold = s.split(": ");
                        MaxPC = Integer.parseInt(hold[1]);
+                    }
+                }
+                line = inputFile.nextLine();
+                if (line.contains("//ARRIVAL RATE")) {
+                    line = inputFile.nextLine();
+                    if (line.contains("Arrival Rate:")) {
+                        String[] hold = line.split(": ");
+                        if (!hold[1].equals("null")) {
+                            lambda = Double.parseDouble(hold[1]);
+                            set = true;
+                        } else {
+                            lambda = 0;
+                        }
+                    } else {
+                        lambda = 0;
                     }
                 }
                 line = inputFile.nextLine();
@@ -308,18 +323,6 @@ public class Progress {
                                                 if (spec.contains("Participation Rate:")) {
                                                     String[] hold = spec.split(": ");
                                                     specs.add(Integer.parseInt(hold[1]));
-                                                } else {
-                                                    specs.add(null);
-                                                }
-                                                spec = inputFile.nextLine();
-                                                if (spec.contains("Arrival Rate:")) {
-                                                    String[] hold = spec.split(": ");
-                                                    if (!hold[1].equals("null")) {
-                                                        specs.add(Double.parseDouble(hold[1]));
-                                                    }
-                                                    else {
-                                                        specs.add(null);
-                                                    }
                                                 } else {
                                                     specs.add(null);
                                                 }
@@ -428,102 +431,3 @@ public class Progress {
         return bigDeal;
     }
 }
-
-//GRAVEYARD
-public static String condense(String fileName) throws IOException {
-//        ArrayList<ArrayList<Double>> average = new ArrayList<>();
-//        for (int i = 0; i < avg; i++) {
-//            ArrayList<Double> hold = new ArrayList<>();
-//            String a = fileName + i;
-//            Scanner scan = new Scanner(new File(a));
-//            while(scan.hasNext()) {
-//                String line = scan.nextLine();
-//                line = line.substring(1,line.length()-1);
-//                String[] S = line.split(", ");
-//                for (String s : S) {
-//                    hold.add(Double.parseDouble(s));
-//                }
-//            }
-//            average.add(hold);
-//        }
-//        int size = average.get(0).size();
-//        Double[] E = new Double[size];
-//        Double[] C = new Double[size];
-//        Double[] R = new Double[size];
-//        for (int x = 0; x < E.length; x++) {
-//            E[x] = 0.0;
-//            C[x] = 0.0;
-//            R[x] = 0.0;
-//        }
-//        for (int i = 0; i < average.size(); i++) {
-//            for (int j = 0; j < average.get(i).size(); j++) {
-//                if (i % 3 == 0) {
-//                    double total = E[j] + average.get(i).get(j);
-//                    E[j] = total;
-//                }
-//                else if (i % 3 == 1) {
-//                    double total = C[j] + average.get(i).get(j);
-//                    C[j] = total;
-//                }
-//                else {
-//                    double total = R[j] + average.get(i).get(j);
-//                    R[j] = total;
-//                }
-//            }
-//        }
-//        for (int l = 0; l < E.length; l++) {
-//            E[l] = E[l] / size;
-//            C[l] = C[l] / size;
-//            R[l] = R[l] / size;
-//        }
-//        String str = "";
-//        str += Arrays.toString(E) + "\n";
-//        str += Arrays.toString(C) + "\n";
-//        str += Arrays.toString(R) + "\n";
-//        return str;
-//    }
-//
-//    public static String fun(String fileName) throws IOException {
-//        ArrayList<ArrayList<Double>> average = new ArrayList<>();
-//        for (int i = 0; i < avg; i++) {
-//            ArrayList<Double> hold = new ArrayList<>();
-//            String a = fileName + Progress.iter;
-//            Scanner scan = new Scanner(new File(a));
-//            while(scan.hasNext()) {
-//                String line = scan.nextLine();
-//                line = line.substring(1,line.length()-1);
-//                String[] S = line.split(", ");
-//                for (String s : S) {
-//                    hold.add(Double.parseDouble(s));
-//                }
-//            }
-//            average.add(hold);
-//        }
-//        int size = average.get(0).size();
-//        Double[] T = new Double[size];
-//        Double[] F = new Double[size];
-//        for (int x = 0; x < T.length; x++) {
-//            T[x] = 0.0;
-//            F[x] = 0.0;
-//        }
-//        for (int i = 0; i < average.size(); i++) {
-//            for (int j = 0; j < average.get(i).size(); j++) {
-//                if (i % 2 == 0) {
-//                    double total = T[j] + average.get(i).get(j);
-//                    T[j] = total;
-//                }
-//                else {
-//                    double total = F[j] + average.get(i).get(j);
-//                    F[j] = total;
-//                }
-//            }
-//        }
-//        for (int l = 0; l < T.length; l++) {
-//            T[l] = T[l] / size;
-//            F[l] = F[l] / size;
-//        }
-//        String str = "";
-//        str += Arrays.toString(T) + "\n";
-//        str += Arrays.toString(F) + "\n";
-//        return str;
-//    }

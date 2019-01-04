@@ -144,7 +144,8 @@ public class  DataCenter {
         setJobWeights();
         double perShort = 0.9;
         //Job delivery factory
-        master = new JobMaster(speed, perShort, numClust, arrival);
+        lambda = arrival * numClust;
+        master = new JobMaster(speed, perShort, numClust, lambda);
     }
 
     //Second constructor for non-calculated arrival rate
@@ -243,7 +244,7 @@ public class  DataCenter {
     /*
     Accept and file transferred jobs into the system
      */
-    public void transfer(ArrayList<Job> j, int where) {
+    public void transfer(ArrayList<Job> j) {
         for (Job J : j) {
             detWeight(J);
         }
@@ -541,46 +542,6 @@ public class  DataCenter {
     }
 
     /*
-    PROJECTING FUTURE COSTS
-    */
-
-    /*
-    Calculate the total cost of running for a given time interval
-     */
-    public double projectedCost(int interval) {
-        double stress = completeUsage();
-        int project = interval;
-        double totalPrice = 0;
-        int index = 0;
-        double per = 0;
-        double accountForFail;
-        if (failureRate() != 0) {
-            accountForFail = failureRate();
-        }
-        else {
-            accountForFail = 2.0;
-        }
-        ArrayList<Job> hold = new ArrayList<>();
-        while (per < stress && index < inProgress.size()) {
-            per += inProgress.get(index).getCenterWeight();
-            totalPrice += inProgress.get(index).getRelCost();
-            hold.add(inProgress.get(index));
-            index++;
-        }
-        for (Job j : hold) {
-            if (j.timeLeft() - project <= 0) {
-                per = per - j.getCenterWeight();
-            }
-        }
-        while (per < stress && index < inProgress.size()) {
-            per += inProgress.get(index).getCenterWeight();
-            totalPrice += inProgress.get(index).getRelCost();
-            index++;
-        }
-        return ((totalPrice / accountForFail) * interval);
-    }
-
-    /*
     SETTING WHICH JOBS SHOULD BE OFFLOADED
      */
 
@@ -606,6 +567,40 @@ public class  DataCenter {
                 }
             }
         }
+    }
+
+     /*
+    PROJECTING FUTURE COSTS
+    */
+
+    /*
+    Calculate the total cost of running for a given time interval
+     */
+    public double projectedCost(int interval) {
+        double stress = completeUsage();
+        int project = interval;
+        double totalPrice = 0;
+        int index = 0;
+        double per = 0;
+        double accountForFail = 0.4;
+        ArrayList<Job> hold = new ArrayList<>();
+        while (per < stress && index < inProgress.size()) {
+            per += inProgress.get(index).getCenterWeight();
+            totalPrice += inProgress.get(index).getRelCost();
+            hold.add(inProgress.get(index));
+            index++;
+        }
+        for (Job j : hold) {
+            if (j.timeLeft() - project <= 0) {
+                per = per - j.getCenterWeight();
+            }
+        }
+        while (per < stress && index < inProgress.size()) {
+            per += inProgress.get(index).getCenterWeight();
+            totalPrice += inProgress.get(index).getRelCost();
+            index++;
+        }
+        return ((totalPrice * accountForFail) * interval);
     }
 
     //Method to recalculate a bid after buying jobs
@@ -785,6 +780,10 @@ public class  DataCenter {
 
     public void logPrice(double cost) {
         priceLog = cost;
+    }
+
+    public void addLogPrice(double cost) {
+        priceLog += cost;
     }
 
     public void logEnergyUse(double expended) {
@@ -980,4 +979,3 @@ public class  DataCenter {
         return str;
     }
 }
-

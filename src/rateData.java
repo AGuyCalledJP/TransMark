@@ -26,7 +26,7 @@ public class rateData {
            data = new double[672];
        }
        int index = 0;
-        File file = new File(path + iso + cat[month]);
+        File file = new File(path + iso + cat[month - 1]);
         try {
             Scanner inputFile = new Scanner(file);
             while (inputFile.hasNextDouble() && index < data.length - 1) {

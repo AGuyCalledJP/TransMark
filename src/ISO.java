@@ -18,7 +18,7 @@ public class ISO {
         //Associate rateData with the given ISO
         r = new rateData(iso);
         //Set start month
-        month = 0;
+        month = 1;
         //Pull rate data for the given month
         rates = r.genData(month);
     }
