@@ -1,0 +1,1159 @@
+//WORLD SETTINGS
+Length: 3
+Market/Non-Market: 1
+//GLOBAL CELL
+Speed: 1200
+Number of Cores: 10
+Idle Power Consumption: 161
+Max Power Consumption: 230
+//ARRIVAL RATE
+Arrival Rate: 0.13875
+//INTERCONNECTION
+Western Interconnection
+//ISO REGION
+CAISO
+//STATE
+CA
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 2
+Participation Rate: 150
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 125
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 90
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 55
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 2
+Participation Rate: 60
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 65
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 130
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 155
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1
+Participation Rate: 100
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 155
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: .5
+Participation Rate: 55
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1
+Participation Rate: 45
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 30
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: .5
+Participation Rate: 40
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 130
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//INTERCONNECTION
+Eastern Interconnection
+//ISO REGION
+NYISO
+//STATE
+NY
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: .5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1
+Participation Rate: 155
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1
+Participation Rate: 145
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 142
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 154
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: .5
+Participation Rate: 99
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1
+Participation Rate: 75
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 144
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 178
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: .5
+Participation Rate: 68
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1
+Participation Rate: 90
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 1.5
+Participation Rate: 20
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: .5
+Participation Rate: 30
+//CLUSTER
+Total Cells: 5
+//ISO REGION
+MISO
+//STATE
+MN
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 2
+Participation Rate: 56
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 156
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.5
+Participation Rate: 63
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+IA
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 74
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+MO
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+AR
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 122
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+LA
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1.5
+Participation Rate: 109
+//CLUSTER
+Total Cells: 5
+//STATE
+MS
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.5
+Participation Rate: 67
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+IL
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 100
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 60
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 30
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.25
+Participation Rate: 121
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 121
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 90
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+IN
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 95
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 135
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 2
+Participation Rate: 100
+//CLUSTER
+Total Cells: 5
+//STATE
+WI
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 55
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 100
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1
+Participation Rate: 47
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+MI
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1
+Participation Rate: 30
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 50
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 60
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 45
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 55
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//ISO REGION
+PJM
+//STATE
+OH
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 55
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 67
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 1.5
+Participation Rate: 25
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 66
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 45
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 155
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 45
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 60
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+KY
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//STATE
+WV
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+VA
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 100
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 140
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.5
+Participation Rate: 131
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1.5
+Participation Rate: 99
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 110
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 100
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+PA
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1.5
+Participation Rate: 151
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 190
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1.5
+Participation Rate: 90
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+NJ
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 1.5
+Participation Rate: 120
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+DE
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 90
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+MD
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 125
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 90
+//CLUSTER
+Total Cells: 5
+//ISO REGION
+SPP
+//STATE
+OK
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 1
+Participation Rate: 85
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+KS
+//DATA CENTER
+Budget: 500
+Num Clusters: 3
+Band Width Speed: 2
+Participation Rate: 70
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 4
+Band Width Speed: 2
+Participation Rate: 95
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//DATA CENTER
+Budget: 500
+Num Clusters: 5
+Band Width Speed: 2
+Participation Rate: 85
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+//STATE
+NE
+//DATA CENTER
+Budget: 500
+Num Clusters: 1
+Band Width Speed: 1
+Participation Rate: 44
+//CLUSTER
+Total Cells: 5
+//STATE
+SD
+//DATA CENTER
+Budget: 500
+Num Clusters: 2
+Band Width Speed: 2
+Participation Rate: 85
+//CLUSTER
+Total Cells: 5
+//CLUSTER
+Total Cells: 5
+%

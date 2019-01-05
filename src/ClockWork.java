@@ -126,10 +126,9 @@ public class ClockWork {
                             //Log energy usage totals for this data center
                             D.logEnergyUse(mWh);
 
-                            //Cost/Revenue accrued by given center
+                            //Cost accrued by given center
                             D.incurredCost(price * mWh);
                             D.logPrice(price * mWh);
-                            D.logProfit(D.getRevAtm());
 
                             //Offload any completed work
                             D.cleanHouse();
@@ -166,6 +165,8 @@ public class ClockWork {
                                     }
                                 }
                             }
+                            //Revenue accrued by center
+                            D.logProfit(D.getRevAtm());
                         }
                         //Manage time zone for given state
                         S.moveLocalTime();
@@ -244,6 +245,9 @@ public class ClockWork {
                                 System.out.print("\n");
                             }
 
+                            //Rev for the minute set to 0
+                            D.setRevAtm();
+
                             JobMaster jobMast = D.getMaster();
                             Queue<Job> hold = jobMast.genJobs();
                             D.addJobs(hold);
@@ -266,7 +270,6 @@ public class ClockWork {
                             //Cost/Revenue accrued by given center
                             D.incurredCost(price * mWh);
                             D.logPrice(price * mWh);
-                            D.logProfit(D.getRevAtm());
 
                             //Offload any completed work
                             D.cleanHouse();
@@ -275,6 +278,8 @@ public class ClockWork {
                             D.moveAlong();
 
                             D.tick();
+
+                            D.logProfit(D.getRevAtm());
                         }
                         S.moveLocalTime();
                     }

@@ -204,7 +204,7 @@ public class Progress {
      */
     public static ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList<ArrayList>>>>>>> loadConfig() {
         //CONFIG FILE NAME
-        String configFileName = "/config/sparse";
+        String configFileName = "/config/AccurateDist";
         String path = System.getProperty("user.dir") + configFileName;
         File file = new File(path);
         String save = "";

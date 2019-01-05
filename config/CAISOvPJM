@@ -1,5 +1,5 @@
 //WORLD SETTINGS
-Length: 2
+Length: 3
 Market/Non-Market: 0
 //GLOBAL CELL
 Speed: 1200
@@ -7,7 +7,7 @@ Number of Cores: 10
 Idle Power Consumption: 161
 Max Power Consumption: 230
 //ARRIVAL RATE
-Arrival Rate: 1.665
+Arrival Rate: 0.13875
 //INTERCONNECTION
 Western Interconnection
 //ISO REGION

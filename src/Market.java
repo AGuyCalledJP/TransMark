@@ -34,6 +34,7 @@ public class Market {
     public void silkRoad(DataCenter D) {
         int cpu = 0;
         int cost = 3;
+        double myTransCost = calcTrans(D);
         if (buyers.size() != 0) {
             //Get offload tuple
             ArrayList<Double> offload = D.getOffLoad();
@@ -57,7 +58,7 @@ public class Market {
                         weightOn = 1;
                     }
                     double comp = offload.get(cost) * weightOff;
-                    double onComp = avail.get(cost) * weightOn;
+                    double onComp = (avail.get(cost) * weightOn) + (myTransCost * weightOn);
                     //Compare cost ratio
                     if (comp > onComp) {
                         double d = comp - onComp;
@@ -130,7 +131,6 @@ public class Market {
                             int start = jobs.get(jindex).getEstCompleteionTime();
                             int end = jobs.get(jindex).timeLeft();
                             double split = jobs.get(jindex).getRevenue();
-                            //Something is going negative right here
                             double even = (double) (end / start);
                             //Revenue sent away
                             double sen = split * even;
@@ -198,5 +198,17 @@ public class Market {
         else {
             return false;
         }
+    }
+
+    public double calcTrans(DataCenter D) {
+        int[] avail = D.getMu();
+        ArrayList<Job> inProg = D.getInProgress();
+        double total = 0;
+        for (int i = 0; i < inProg.size(); i++) {
+            if (avail[i] == 1) {
+                total += inProg.get(i).getMigrationTime() * maxTransCost;
+            }
+        }
+        return total;
     }
 }
